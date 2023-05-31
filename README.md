@@ -1,6 +1,6 @@
 
 <p align="center" width="100%">
-    <img width="100%" src="logo.png"> 
+    <img width="75%" src="logo.png"> 
 </p>
 
 We use the recently discovered Eigenvalue-Eigenvector and Adjugate Identities to compute oscillation probabilities with minimal algorithmic steps.
