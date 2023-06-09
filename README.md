@@ -5,7 +5,7 @@
 
 Use Python to compute neutrino oscillation probabilities in vacuum and matter at the speed of C!
 
-We use the recently discovered Eigenvalue-Eigenvector and Adjugate Identities to compute oscillation probabilities with minimal algorithmic steps. Implemented in Cython to have the convenience of Python but the speed of C.
+We use the recently discovered Eigenvalue-Eigenvector and Adjugate Identities to compute oscillation probabilities with minimal algorithmic steps. Implemented using Cython to have the convenience of Python but the speed of C.
 
 # Installation
 
