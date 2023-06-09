@@ -1,0 +1,8 @@
+
+[demo]
+numpy
+matplotlib
+
+[dev]
+numpy
+matplotlibCython

@@ -1,6 +1,4 @@
-from functools import reduce
 import numpy as np
-
 from numpy.linalg import det
 
 def kroneckerdelta(i, j):
@@ -8,9 +6,6 @@ def kroneckerdelta(i, j):
         return 1
     else:
         return 0
-    
-def product(li):
-    return reduce(lambda x, y: x * y, li)
 
 def crct(*args): # index_correction
     return [ind - 1 for ind in args] if len(args) > 1 else args[0] - 1

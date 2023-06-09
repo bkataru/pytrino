@@ -1,6 +1,30 @@
 
 import numpy as np
-from pytrino.oscprobs import Identities
+from pytrino import oscprobs
+
+delmsq31 = 2e-3
+delmsq21 = 7.55e-5
+deltacp = 1.32 * np.pi
+theta13 = np.radians(4.4)
+theta12 = np.radians(33.2)
+theta23 = np.radians(46.1)
+
+constants = [delmsq21, delmsq31, deltacp, theta12, theta13, theta23]
+
+eigenprob = oscprobs.Eigen(*constants)
+cayleyprob = oscprobs.CayleyHamilton(*constants)
+identityprob = oscprobs.Identities(*constants)
+
+baseline = 1000
+energy = 1e-3
+V = 0
+
+m1 = eigenprob.probmatrix(baseline, energy, V)
+m2 = cayleyprob.probmatrix(baseline, energy, V)
+m3 = identityprob.probmatrix(baseline, energy, V)
+
+import sys
+sys.exit()
  
 a = 0.2 # fix this, change to V and delmsq21, delmsq31
 theta12 = np.radians(33.2)

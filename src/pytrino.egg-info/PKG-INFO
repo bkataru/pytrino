@@ -1,3 +1,46 @@
+Metadata-Version: 2.1
+Name: pytrino
+Version: 0.0.1
+Summary: Pytrino: A new way to numerically compute neutrino oscillations
+Home-page: https://github.com/BK-Modding/pytrino
+Download-URL: https://github.com/BK-Modding/pytrino
+Author: BKModding
+Author-email: <kavesbteja@gmail.com>
+License: MIT
+Keywords: neutrino oscillation,matter effects,constant density,linear algebra,Cython,scientific computing,physics,quantum mechanics,numerical simulations,mathematical modeling,computational physics,particle physics,MSW effect,probability,eigenvalue,eigenvector,identity
+Platform: Windows
+Platform: Linux
+Platform: Mac OS X
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Framework :: Matplotlib
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+Provides-Extra: demo
+License-File: LICENSE
+
 
 <p align="center" width="100%">
     <img width="75%" src="https://raw.githubusercontent.com/BK-Modding/pytrino/main/logo.png"> 
