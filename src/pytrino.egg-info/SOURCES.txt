@@ -4,6 +4,7 @@ README.md
 logo.png
 setup.py
 src/pytrino/__init__.py
+src/pytrino/__main__.py
 src/pytrino/three_flavor_matter.c
 src/pytrino/three_flavor_matter.pyx
 src/pytrino/two_flavor_matter.c

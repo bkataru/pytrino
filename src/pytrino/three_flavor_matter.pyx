@@ -15,56 +15,154 @@ cdef extern from "complex.h":
     double creal(double complex z)
 '''
 
+"""
+This module provides a Cython solver class for calculating the properties of neutrino oscillations in vacuum/matter.
+
+The class is called `ThreeFlavor` with the following properties and methods:
+
+* Properties:
+    * `delmsq21`: The 21 mass squared difference in vacuum, in eV^2.
+    * `delmsq31`: The 31 mass squared difference in vacuum, in eV^2.
+    * `deltacp`: The Dirac CP-violating phase in vacuum, in radians.
+    * `theta12`: The 12 mixing angle in vacuum, in radians.
+    * `theta13`: The 13 mixing angle in vacuum, in radians.
+    * `theta23`: The 23 mixing angle in vacuum, in radians.
+* Methods:
+    * `__cinit__()`: The constructor.
+    * `eigenvalues()`: Calculates the eigenvalues of the neutrino mass matrix in matter.
+    * `deltamsq_matter()`: Calculates the squared mass differences between the mass eigenstates in matter.
+    * `angles_phase_matter()`: Calculates the mixing angles and CP-violating phase in matter.
+    * `probability()`: Calculates the probability of a neutrino of a given flavor oscillating into another flavor.
+    * `probmatrix()`: Calculates the probability matrix for neutrino oscillations.
+
+The `ThreeFlavor` class can be used to calculate the probabilities of neutrino oscillations in matter for a wide range of parameters. Useful for studying neutrino oscillations and for testing neutrino oscillation models.
+"""
+
 cdef class ThreeFlavor:
+    """
+    Cython solver class to compute properties of the three-flavor neutrino oscillation model in vacuum/matter.
+    """
     cdef double _delmsq21, _delmsq31, _deltacp, _theta12, _theta13, _theta23
     cdef double alpha, s12, c12, s13, c13, s23, c23
 
     @property
-    def delmsq21(self): return self._delmsq21
+    def delmsq21(self):
+        """
+        Getter for the mass-squared difference between the second and first neutrino mass eigenstates in eV^2.
+
+        :returns: The value of delmsq21.
+        :rtype: float
+        """
+        return self._delmsq21
 
     @property
-    def delmsq31(self): return self._delmsq31
+    def delmsq31(self):
+        """
+        Getter for the mass-squared difference between the third and first neutrino mass eigenstates in eV^2.
+
+        :returns: The value of delmsq31.
+        :rtype: float
+        """
+        return self._delmsq31
 
     @property
-    def deltacp(self): return self._deltacp
+    def deltacp(self):
+        """
+        Getter for the CP-violating phase in the neutrino mixing matrix.
+
+        :returns: The value of deltacp.
+        :rtype: float
+        """
+        return self._deltacp
 
     @property
-    def theta12(self): return self._theta12
+    def theta12(self):
+        """
+        Getter for the mixing angle between the first and second neutrino flavor states in radians.
+
+        :returns: The value of theta12.
+        :rtype: float
+        """
+        return self._theta12
     
     @property
-    def theta13(self): return self._theta13
+    def theta13(self):
+        """
+        Getter for the mixing angle between the first and third neutrino flavor states in radians.
+
+        :returns: The value of theta13.
+        :rtype: float
+        """
+        return self._theta13
 
     @property
-    def theta23(self): return self._theta23
+    def theta23(self):
+        """
+        Getter for the mixing angle between the second and third neutrino flavor states in radians.
+
+        :returns: The value of theta23.
+        :rtype: float
+        """
+        return self._theta23
     
     @delmsq21.setter
-    def delmsq21(self, double val): 
+    def delmsq21(self, double val):
+        """
+        Setter for the mass-squared difference between the second and first neutrino mass eigenstates in eV^2.
+
+        :param float val: The value to set delmsq21 to.
+        """
         self._delmsq21 = val
         self.alpha = val / self._delmsq31
 
     @delmsq31.setter
     def delmsq31(self, double val):
+        """
+        Setter for the mass-squared difference between the third and first neutrino mass eigenstates in eV^2.
+
+        :param float val: The value to set delmsq31 to.
+        """
         self._delmsq31 = val
         self.alpha = self._delmsq21 / val
 
     @deltacp.setter
     def deltacp(self, double val):
+        """
+        Setter for the CP-violating phase in the neutrino mixing matrix.
+
+        :param float val: The value to set deltacp to.
+        """
         self._deltacp = val
 
     @theta12.setter
     def theta12(self, double val):
+        """
+        Setter for the mixing angle between the first and second neutrino flavor states in radians.
+
+        :param float val: The value to set theta12 to.
+        """
         self._theta12 = val
         self.s12 = sin(val)
         self.c12 = cos(val)
 
     @theta13.setter
     def theta13(self, double val):
+        """
+        Setter for the mixing angle between the first and third neutrino flavor states in radians.
+
+        :param float val: The value to set theta13 to.
+        """
         self._theta13 = val
         self.s13 = sin(val)
         self.c13 = cos(val)
 
     @theta23.setter
     def theta23(self, double val):
+        """
+        Setter for the mixing angle between the second and third neutrino flavor states in radians.
+
+        :param float val: The value to set theta23 to.
+        """
         self._theta23 = val
         self.s23 = sin(val)
         self.c23 = cos(val)
@@ -72,6 +170,16 @@ cdef class ThreeFlavor:
     # delmsq21 and delmsq31 in eV^2
     # all angles in radians
     def __cinit__(self, double delmsq21, double delmsq31, double deltacp, double theta12, double theta13, double theta23):
+        """
+        Initialize a ThreeFlavor solver with the specified parameters.
+
+        :param float delmsq21: Mass-squared difference between the second and first neutrino mass eigenstates in eV^2.
+        :param float delmsq31: Mass-squared difference between the third and first neutrino mass eigenstates in eV^2.
+        :param float deltacp: Dirac CP-violating phase in the neutrino mixing matrix.
+        :param float theta12: Mixing angle between the first and second neutrino flavor states in radians.
+        :param float theta13: Mixing angle between the first and third neutrino flavor states in radians.
+        :param float theta23: Mixing angle between the second and third neutrino flavor states in radians.
+        """
         self._delmsq21 = delmsq21
         self._delmsq31 = delmsq31
 
@@ -90,6 +198,15 @@ cdef class ThreeFlavor:
         self.c23 = cos(theta23)
 
     cdef (double, double, double) eigenvalues(self, double E, double V):
+        """
+        Compute the exact eigenvalues of the Hamiltonian in matter.
+
+        :param float E: Neutrino energy in GeV.
+        :param float V: Matter potential in eV.
+        :returns: The eigenvalues of the Hamiltonian in matter.
+        :rtype: Tuple[float, float, float]
+        """
+
         cdef double delmsq21 = self.delmsq21
         cdef double delmsq31 = self.delmsq31
 
@@ -118,6 +235,15 @@ cdef class ThreeFlavor:
     # E in GeV
     # V in eV
     cpdef (double, double, double) deltamsq_matter(self, double E, double V, bint antineutrinos = False):
+        """
+        Compute the effective mass-squared differences of the neutrinos in matter.
+
+        :param float E: Neutrino energy in GeV.
+        :param float V: Matter potential in eV.
+        :param bool antineutrinos: Flag indicating whether the neutrinos are antineutrinos (default is False).
+        :returns: The effective mass-squared differences of the neutrinos in matter.
+        :rtype: Tuple[float, float, float]
+        """
         if antineutrinos:
             V = -V
 
@@ -133,6 +259,16 @@ cdef class ThreeFlavor:
         return delmsq21mat, delmsq31mat, delmsq32mat
 
     cpdef (double, double, double, double) angles_phase_matter(self, double L, double E, double V, bint antineutrinos = False):
+        """
+        Compute the mixing angles and CP-violating phase in matter.
+
+        :param float L: Neutrino propagation distance in km.
+        :param float E: Neutrino energy in GeV.
+        :param float V: Matter potential in eV.
+        :param bool antineutrinos: Flag indicating whether the neutrinos are antineutrinos (default is False).
+        :returns: The mixing angles and CP-violating phase in matter.
+        :rtype: Tuple[float, float, float, float]
+        """
         cdef double delmsq31 = self.delmsq31
         cdef double alpha = self.alpha
 
@@ -195,6 +331,18 @@ cdef class ThreeFlavor:
 
     
     cpdef double probability(self, int alpha, int beta, double L, double E, double V, bint antineutrinos = False):
+        """
+        Compute transition and survival probabilities.
+
+        :param int alpha: Initial neutrino flavor (1, 2, or 3).
+        :param int beta: Final neutrino flavor (1, 2, or 3).
+        :param float L: Neutrino propagation distance in km.
+        :param float E: Neutrino energy in GeV.
+        :param float V: Matter potential in eV.
+        :param bool antineutrinos: Flag indicating whether the neutrinos are antineutrinos (default is False).
+        :returns: The transition probability.
+        :rtype: float
+        """
         cdef double delmsq31 = self.delmsq31
         
         cdef double deltacpmat, theta12mat, theta13mat, theta23mat
@@ -267,15 +415,43 @@ cdef class ThreeFlavor:
             return kd - 4 * firstsum + 2 * secondsum
 
     def probmatrix(self, double L, double E, double V, bint antineutrinos = False):
+        """
+        Compute the oscillation probability matrix.
+
+        :param float L: Neutrino propagation distance in km.
+        :param float E: Neutrino energy in GeV.
+        :param float V: Matter potential in eV.
+        :param bool antineutrinos: Flag indicating whether the neutrinos are antineutrinos (default is False).
+        :returns: The neutrino oscillation probability matrix.
+        :rtype: List[List[float]]
+        """
+
         cdef double[3][3] probarray
 
-        # TODO compute matrix more efficiently
+        cdef double Pemu = self.probability(1, 2, L, E, V, antineutrinos)
+        cdef double Pmutau = self.probability(2, 3, L, E, V, antineutrinos)
 
+        self.theta23 = self.theta23 + pi/2
+        cdef double _Pemu = self.probability(1, 2, L, E, V, antineutrinos)
+        cdef double _Pmutau = self.probability(2, 3, L, E, V, antineutrinos)
+        self.theta23 = self.theta23 - pi/2
+
+        cdef double Pee = 1 - (Pemu + _Pemu)
+        cdef double Petau = _Pemu
+        cdef double Pmue = Pemu - Pmutau + _Pmutau
+        cdef double Pmumu = 1 - Pemu - _Pmutau
+        cdef double Ptaue = _Pemu + Pmutau - _Pmutau
+        cdef double Ptaumu = _Pmutau
+        cdef double Ptautau = 1 - (_Pemu + Pmutau)
+
+        probarray = [[Pee, Pemu, Petau], [Pmue, Pmumu, Pmutau], [Ptaue, Ptaumu, Ptautau]]
+
+        '''
         cdef int i, j
         for i in range(0, 3):
             for j in range(0, 3):
                 probarray[i][j] = self.probability(i + 1, j + 1, L, E, V, antineutrinos)
         
+        '''
+
         return probarray
-
-

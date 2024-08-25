@@ -6,7 +6,7 @@
         "depends": [],
         "name": "pytrino.two_flavor_matter",
         "sources": [
-            "pytrino\\two_flavor_matter.pyx"
+            "src\\pytrino\\two_flavor_matter.pyx"
         ]
     },
     "module_name": "pytrino.two_flavor_matter"
@@ -969,51 +969,25 @@ static const char *__pyx_filename;
 
 static const char *__pyx_f[] = {
   "stringsource",
-  "pytrino\\two_flavor_matter.pyx",
+  "src\\pytrino\\two_flavor_matter.pyx",
 };
 
 /*--- Type declarations ---*/
 struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor;
-struct __pyx_ctuple_double__and_double;
-typedef struct __pyx_ctuple_double__and_double __pyx_ctuple_double__and_double;
-struct __pyx_opt_args_7pytrino_17two_flavor_matter_9TwoFlavor_probability;
-
-/* "pytrino/two_flavor_matter.pyx":30
- *     # L in km
- *     # V in eV
- *     cpdef (double, double) probability(self, double L, double E, double V = 0):             # <<<<<<<<<<<<<<
- *         cdef double delmsq = self.delmsq
- *         cdef double theta = self.theta
- */
-struct __pyx_ctuple_double__and_double {
-  double f0;
-  double f1;
-};
-struct __pyx_opt_args_7pytrino_17two_flavor_matter_9TwoFlavor_probability {
-  int __pyx_n;
-  double V;
-};
 
 /* "pytrino/two_flavor_matter.pyx":8
  *     double sqrt(double x)
  * 
  * cdef class TwoFlavor:             # <<<<<<<<<<<<<<
- *     cdef double _delmsq, _theta
- * 
+ *     """
+ *     Cython solver class to compute properties of a two-flavor neutrino oscillation model.
  */
 struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor {
   PyObject_HEAD
-  struct __pyx_vtabstruct_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_vtab;
   double _delmsq;
   double _theta;
 };
 
-
-
-struct __pyx_vtabstruct_7pytrino_17two_flavor_matter_TwoFlavor {
-  __pyx_ctuple_double__and_double (*probability)(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_7pytrino_17two_flavor_matter_9TwoFlavor_probability *__pyx_optional_args);
-};
-static struct __pyx_vtabstruct_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_vtabptr_7pytrino_17two_flavor_matter_TwoFlavor;
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1101,70 +1075,6 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
 
-/* PyDictVersioning.proto */
-#if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
-#define __PYX_DICT_VERSION_INIT  ((PY_UINT64_T) -1)
-#define __PYX_GET_DICT_VERSION(dict)  (((PyDictObject*)(dict))->ma_version_tag)
-#define __PYX_UPDATE_DICT_CACHE(dict, value, cache_var, version_var)\
-    (version_var) = __PYX_GET_DICT_VERSION(dict);\
-    (cache_var) = (value);
-#define __PYX_PY_DICT_LOOKUP_IF_MODIFIED(VAR, DICT, LOOKUP) {\
-    static PY_UINT64_T __pyx_dict_version = 0;\
-    static PyObject *__pyx_dict_cached_value = NULL;\
-    if (likely(__PYX_GET_DICT_VERSION(DICT) == __pyx_dict_version)) {\
-        (VAR) = __pyx_dict_cached_value;\
-    } else {\
-        (VAR) = __pyx_dict_cached_value = (LOOKUP);\
-        __pyx_dict_version = __PYX_GET_DICT_VERSION(DICT);\
-    }\
-}
-static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj);
-static CYTHON_INLINE PY_UINT64_T __Pyx_get_object_dict_version(PyObject *obj);
-static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UINT64_T tp_dict_version, PY_UINT64_T obj_dict_version);
-#else
-#define __PYX_GET_DICT_VERSION(dict)  (0)
-#define __PYX_UPDATE_DICT_CACHE(dict, value, cache_var, version_var)
-#define __PYX_PY_DICT_LOOKUP_IF_MODIFIED(VAR, DICT, LOOKUP)  (VAR) = (LOOKUP);
-#endif
-
-/* PyFunctionFastCall.proto */
-#if CYTHON_FAST_PYCALL
-#define __Pyx_PyFunction_FastCall(func, args, nargs)\
-    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
-#if 1 || PY_VERSION_HEX < 0x030600B1
-static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, Py_ssize_t nargs, PyObject *kwargs);
-#else
-#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
-#endif
-#define __Pyx_BUILD_ASSERT_EXPR(cond)\
-    (sizeof(char [1 - 2*!(cond)]) - 1)
-#ifndef Py_MEMBER_SIZE
-#define Py_MEMBER_SIZE(type, member) sizeof(((type *)0)->member)
-#endif
-#if CYTHON_FAST_PYCALL
-  static size_t __pyx_pyframe_localsplus_offset = 0;
-  #include "frameobject.h"
-#if PY_VERSION_HEX >= 0x030b00a6
-  #ifndef Py_BUILD_CORE
-    #define Py_BUILD_CORE 1
-  #endif
-  #include "internal/pycore_frame.h"
-#endif
-  #define __Pxy_PyFrame_Initialize_Offsets()\
-    ((void)__Pyx_BUILD_ASSERT_EXPR(sizeof(PyFrameObject) == offsetof(PyFrameObject, f_localsplus) + Py_MEMBER_SIZE(PyFrameObject, f_localsplus)),\
-     (void)(__pyx_pyframe_localsplus_offset = ((size_t)PyFrame_Type.tp_basicsize) - Py_MEMBER_SIZE(PyFrameObject, f_localsplus)))
-  #define __Pyx_PyFrame_GetLocalsplus(frame)\
-    (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
-#endif // CYTHON_FAST_PYCALL
-#endif
-
-/* PyCFunctionFastCall.proto */
-#if CYTHON_FAST_PYCCALL
-static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
-#else
-#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
-#endif
-
 /* PyObjectCall.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
@@ -1208,11 +1118,6 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 #define __Pyx_ErrFetch(type, value, tb)  PyErr_Fetch(type, value, tb)
 #endif
 
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
@@ -1230,9 +1135,6 @@ static PyObject* __Pyx_PyObject_GenericGetAttr(PyObject* obj, PyObject* attr_nam
 #define __Pyx_PyObject_GenericGetAttr PyObject_GenericGetAttr
 #endif
 
-/* SetVTable.proto */
-static int __Pyx_SetVtable(PyObject *dict, void *vtable);
-
 /* PyErrExceptionMatches.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyErr_ExceptionMatches(err) __Pyx_PyErr_ExceptionMatchesInState(__pyx_tstate, err)
@@ -1246,6 +1148,32 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStrNoError(PyObject* obj, P
 
 /* SetupReduce.proto */
 static int __Pyx_setup_reduce(PyObject* type_obj);
+
+/* PyDictVersioning.proto */
+#if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
+#define __PYX_DICT_VERSION_INIT  ((PY_UINT64_T) -1)
+#define __PYX_GET_DICT_VERSION(dict)  (((PyDictObject*)(dict))->ma_version_tag)
+#define __PYX_UPDATE_DICT_CACHE(dict, value, cache_var, version_var)\
+    (version_var) = __PYX_GET_DICT_VERSION(dict);\
+    (cache_var) = (value);
+#define __PYX_PY_DICT_LOOKUP_IF_MODIFIED(VAR, DICT, LOOKUP) {\
+    static PY_UINT64_T __pyx_dict_version = 0;\
+    static PyObject *__pyx_dict_cached_value = NULL;\
+    if (likely(__PYX_GET_DICT_VERSION(DICT) == __pyx_dict_version)) {\
+        (VAR) = __pyx_dict_cached_value;\
+    } else {\
+        (VAR) = __pyx_dict_cached_value = (LOOKUP);\
+        __pyx_dict_version = __PYX_GET_DICT_VERSION(DICT);\
+    }\
+}
+static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj);
+static CYTHON_INLINE PY_UINT64_T __Pyx_get_object_dict_version(PyObject *obj);
+static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UINT64_T tp_dict_version, PY_UINT64_T obj_dict_version);
+#else
+#define __PYX_GET_DICT_VERSION(dict)  (0)
+#define __PYX_UPDATE_DICT_CACHE(dict, value, cache_var, version_var)
+#define __PYX_PY_DICT_LOOKUP_IF_MODIFIED(VAR, DICT, LOOKUP)  (VAR) = (LOOKUP);
+#endif
 
 /* CLineInTraceback.proto */
 #ifdef CYTHON_CLINE_IN_TRACEBACK
@@ -1272,12 +1200,6 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object);
 /* AddTraceback.proto */
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
-
-/* FromPyCTupleUtility.proto */
-static __pyx_ctuple_double__and_double __pyx_convert__from_py___pyx_ctuple_double__and_double(PyObject *);
-
-/* ToPyCTupleUtility.proto */
-static PyObject* __pyx_convert__to_py___pyx_ctuple_double__and_double(__pyx_ctuple_double__and_double);
 
 /* GCCDiagnostics.proto */
 #if defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
@@ -1312,7 +1234,6 @@ static int __Pyx_check_binary_version(void);
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
-static __pyx_ctuple_double__and_double __pyx_f_7pytrino_17two_flavor_matter_9TwoFlavor_probability(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, double __pyx_v_L, double __pyx_v_E, int __pyx_skip_dispatch, struct __pyx_opt_args_7pytrino_17two_flavor_matter_9TwoFlavor_probability *__pyx_optional_args); /* proto*/
 
 /* Module declarations from 'pytrino.two_flavor_matter' */
 static PyTypeObject *__pyx_ptype_7pytrino_17two_flavor_matter_TwoFlavor = 0;
@@ -1336,8 +1257,7 @@ static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TwoFlavor[] = "TwoFlavor";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
-static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_probability[] = "probability";
+static const char __pyx_k_antineutrinos[] = "antineutrinos";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
@@ -1347,14 +1267,13 @@ static PyObject *__pyx_n_s_L;
 static PyObject *__pyx_n_s_TwoFlavor;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_V;
+static PyObject *__pyx_n_s_antineutrinos;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_delmsq;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
-static PyObject *__pyx_n_s_probability;
-static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
@@ -1367,7 +1286,7 @@ static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_6delmsq_2__set__(str
 static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_5theta___get__(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self); /* proto */
 static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_5theta_2__set__(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, double __pyx_v_val); /* proto */
 static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor___cinit__(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, double __pyx_v_delmsq, double __pyx_v_theta); /* proto */
-static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_2probability(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, double __pyx_v_L, double __pyx_v_E, double __pyx_v_V); /* proto */
+static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_2probability(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, double __pyx_v_L, double __pyx_v_E, double __pyx_v_V, int __pyx_v_antineutrinos); /* proto */
 static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_4__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_6__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_7pytrino_17two_flavor_matter_TwoFlavor(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -1375,12 +1294,12 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "pytrino/two_flavor_matter.pyx":12
+/* "pytrino/two_flavor_matter.pyx":16
  * 
  *     @property
- *     def delmsq(self): return self._delmsq             # <<<<<<<<<<<<<<
- *     @property
- *     def theta(self): return self._theta
+ *     def delmsq(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Get the value of delmsq in eV^2.
  */
 
 /* Python wrapper */
@@ -1404,12 +1323,28 @@ static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_6delmsq___get_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pytrino/two_flavor_matter.pyx":24
+ *         """
+ * 
+ *         return self._delmsq             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_delmsq); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_delmsq); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/two_flavor_matter.pyx":16
+ * 
+ *     @property
+ *     def delmsq(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Get the value of delmsq in eV^2.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
@@ -1422,12 +1357,12 @@ static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_6delmsq___get_
   return __pyx_r;
 }
 
-/* "pytrino/two_flavor_matter.pyx":17
+/* "pytrino/two_flavor_matter.pyx":37
  * 
  *     @delmsq.setter
- *     def delmsq(self, double val): self._delmsq = val             # <<<<<<<<<<<<<<
- *     @theta.setter
- *     def theta(self, double val): self._theta = val
+ *     def delmsq(self, double val):             # <<<<<<<<<<<<<<
+ *         """
+ *         Set the value of delmsq.
  */
 
 /* Python wrapper */
@@ -1441,7 +1376,7 @@ static int __pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_6delmsq_3__set__(PyO
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 17, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 37, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1460,7 +1395,23 @@ static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_6delmsq_2__set__(str
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
+
+  /* "pytrino/two_flavor_matter.pyx":44
+ *         :type val: float
+ *         """
+ *         self._delmsq = val             # <<<<<<<<<<<<<<
+ * 
+ *     @theta.setter
+ */
   __pyx_v_self->_delmsq = __pyx_v_val;
+
+  /* "pytrino/two_flavor_matter.pyx":37
+ * 
+ *     @delmsq.setter
+ *     def delmsq(self, double val):             # <<<<<<<<<<<<<<
+ *         """
+ *         Set the value of delmsq.
+ */
 
   /* function exit code */
   __pyx_r = 0;
@@ -1468,12 +1419,12 @@ static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_6delmsq_2__set__(str
   return __pyx_r;
 }
 
-/* "pytrino/two_flavor_matter.pyx":14
- *     def delmsq(self): return self._delmsq
- *     @property
- *     def theta(self): return self._theta             # <<<<<<<<<<<<<<
+/* "pytrino/two_flavor_matter.pyx":27
  * 
- *     @delmsq.setter
+ *     @property
+ *     def theta(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Get the value of theta in radians.
  */
 
 /* Python wrapper */
@@ -1497,12 +1448,28 @@ static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_5theta___get__
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pytrino/two_flavor_matter.pyx":34
+ *         :rtype: float
+ *         """
+ *         return self._theta             # <<<<<<<<<<<<<<
+ * 
+ *     @delmsq.setter
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_theta); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_theta); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/two_flavor_matter.pyx":27
+ * 
+ *     @property
+ *     def theta(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Get the value of theta in radians.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
@@ -1515,12 +1482,12 @@ static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_5theta___get__
   return __pyx_r;
 }
 
-/* "pytrino/two_flavor_matter.pyx":19
- *     def delmsq(self, double val): self._delmsq = val
- *     @theta.setter
- *     def theta(self, double val): self._theta = val             # <<<<<<<<<<<<<<
+/* "pytrino/two_flavor_matter.pyx":47
  * 
- *     # delmsq in eV^2
+ *     @theta.setter
+ *     def theta(self, double val):             # <<<<<<<<<<<<<<
+ *         """
+ *         Set the value of theta.
  */
 
 /* Python wrapper */
@@ -1534,7 +1501,7 @@ static int __pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_5theta_3__set__(PyOb
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 19, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1553,7 +1520,23 @@ static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_5theta_2__set__(stru
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
+
+  /* "pytrino/two_flavor_matter.pyx":54
+ *         :type val: float
+ *         """
+ *         self._theta = val             # <<<<<<<<<<<<<<
+ * 
+ *     # delmsq in eV^2
+ */
   __pyx_v_self->_theta = __pyx_v_val;
+
+  /* "pytrino/two_flavor_matter.pyx":47
+ * 
+ *     @theta.setter
+ *     def theta(self, double val):             # <<<<<<<<<<<<<<
+ *         """
+ *         Set the value of theta.
+ */
 
   /* function exit code */
   __pyx_r = 0;
@@ -1561,12 +1544,12 @@ static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_5theta_2__set__(stru
   return __pyx_r;
 }
 
-/* "pytrino/two_flavor_matter.pyx":23
+/* "pytrino/two_flavor_matter.pyx":58
  *     # delmsq in eV^2
  *     # theta in radians
  *     def __cinit__(self, double delmsq, double theta):             # <<<<<<<<<<<<<<
- *         self._delmsq = delmsq
- *         self._theta = theta
+ *         """
+ *         Initialize the TwoFlavor solver.
  */
 
 /* Python wrapper */
@@ -1603,11 +1586,11 @@ static int __pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_1__cinit__(PyObject 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_theta)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(1, 23, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(1, 58, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(1, 23, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(1, 58, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1615,12 +1598,12 @@ static int __pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_1__cinit__(PyObject 
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_delmsq = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_delmsq == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 23, __pyx_L3_error)
-    __pyx_v_theta = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 23, __pyx_L3_error)
+    __pyx_v_delmsq = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_delmsq == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 58, __pyx_L3_error)
+    __pyx_v_theta = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_theta == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 58, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 23, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 58, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pytrino.two_flavor_matter.TwoFlavor.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1638,17 +1621,17 @@ static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor___cinit__(struct __p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "pytrino/two_flavor_matter.pyx":24
- *     # theta in radians
- *     def __cinit__(self, double delmsq, double theta):
+  /* "pytrino/two_flavor_matter.pyx":67
+ *         :type theta: float
+ *         """
  *         self._delmsq = delmsq             # <<<<<<<<<<<<<<
  *         self._theta = theta
  * 
  */
   __pyx_v_self->_delmsq = __pyx_v_delmsq;
 
-  /* "pytrino/two_flavor_matter.pyx":25
- *     def __cinit__(self, double delmsq, double theta):
+  /* "pytrino/two_flavor_matter.pyx":68
+ *         """
  *         self._delmsq = delmsq
  *         self._theta = theta             # <<<<<<<<<<<<<<
  * 
@@ -1656,12 +1639,12 @@ static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor___cinit__(struct __p
  */
   __pyx_v_self->_theta = __pyx_v_theta;
 
-  /* "pytrino/two_flavor_matter.pyx":23
+  /* "pytrino/two_flavor_matter.pyx":58
  *     # delmsq in eV^2
  *     # theta in radians
  *     def __cinit__(self, double delmsq, double theta):             # <<<<<<<<<<<<<<
- *         self._delmsq = delmsq
- *         self._theta = theta
+ *         """
+ *         Initialize the TwoFlavor solver.
  */
 
   /* function exit code */
@@ -1670,307 +1653,22 @@ static int __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor___cinit__(struct __p
   return __pyx_r;
 }
 
-/* "pytrino/two_flavor_matter.pyx":30
+/* "pytrino/two_flavor_matter.pyx":73
  *     # L in km
  *     # V in eV
- *     cpdef (double, double) probability(self, double L, double E, double V = 0):             # <<<<<<<<<<<<<<
- *         cdef double delmsq = self.delmsq
- *         cdef double theta = self.theta
+ *     def probability(self, double L, double E, double V = 0, bint antineutrinos = False):             # <<<<<<<<<<<<<<
+ *         """
+ *         Calculate the two flavor neutrino oscillation probability in vacuum/matter.
  */
-
-static PyObject *__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static __pyx_ctuple_double__and_double __pyx_f_7pytrino_17two_flavor_matter_9TwoFlavor_probability(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, double __pyx_v_L, double __pyx_v_E, int __pyx_skip_dispatch, struct __pyx_opt_args_7pytrino_17two_flavor_matter_9TwoFlavor_probability *__pyx_optional_args) {
-  double __pyx_v_V = ((double)0.0);
-  double __pyx_v_delmsq;
-  double __pyx_v_theta;
-  double __pyx_v_sin2theta;
-  double __pyx_v_cos2theta;
-  double __pyx_v_A;
-  double __pyx_v_sin2theta_sq;
-  double __pyx_v_cos2theta_term_sq;
-  double __pyx_v_deltamat;
-  double __pyx_v_sin2thetam;
-  double __pyx_v_Pemu;
-  double __pyx_v_Pee;
-  __pyx_ctuple_double__and_double __pyx_r;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
-  int __pyx_t_8;
-  PyObject *__pyx_t_9 = NULL;
-  __pyx_ctuple_double__and_double __pyx_t_10;
-  double __pyx_t_11;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("probability", 0);
-  if (__pyx_optional_args) {
-    if (__pyx_optional_args->__pyx_n > 0) {
-      __pyx_v_V = __pyx_optional_args->V;
-    }
-  }
-  /* Check if called by wrapper */
-  if (unlikely(__pyx_skip_dispatch)) ;
-  /* Check if overridden in Python */
-  else if (unlikely((Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0) || (Py_TYPE(((PyObject *)__pyx_v_self))->tp_flags & (Py_TPFLAGS_IS_ABSTRACT | Py_TPFLAGS_HEAPTYPE)))) {
-    #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
-    static PY_UINT64_T __pyx_tp_dict_version = __PYX_DICT_VERSION_INIT, __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
-    if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
-      PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
-      #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_probability); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 30, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability)) {
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_L); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 30, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 30, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_V); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 30, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_5);
-        __Pyx_INCREF(__pyx_t_1);
-        __pyx_t_6 = __pyx_t_1; __pyx_t_7 = NULL;
-        __pyx_t_8 = 0;
-        if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_6))) {
-          __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_6);
-          if (likely(__pyx_t_7)) {
-            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-            __Pyx_INCREF(__pyx_t_7);
-            __Pyx_INCREF(function);
-            __Pyx_DECREF_SET(__pyx_t_6, function);
-            __pyx_t_8 = 1;
-          }
-        }
-        #if CYTHON_FAST_PYCALL
-        if (PyFunction_Check(__pyx_t_6)) {
-          PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_3, __pyx_t_4, __pyx_t_5};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 30, __pyx_L1_error)
-          __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-          __Pyx_GOTREF(__pyx_t_2);
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        } else
-        #endif
-        #if CYTHON_FAST_PYCCALL
-        if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
-          PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_3, __pyx_t_4, __pyx_t_5};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 30, __pyx_L1_error)
-          __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-          __Pyx_GOTREF(__pyx_t_2);
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        } else
-        #endif
-        {
-          __pyx_t_9 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(1, 30, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_9);
-          if (__pyx_t_7) {
-            __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __pyx_t_7 = NULL;
-          }
-          __Pyx_GIVEREF(__pyx_t_3);
-          PyTuple_SET_ITEM(__pyx_t_9, 0+__pyx_t_8, __pyx_t_3);
-          __Pyx_GIVEREF(__pyx_t_4);
-          PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_t_4);
-          __Pyx_GIVEREF(__pyx_t_5);
-          PyTuple_SET_ITEM(__pyx_t_9, 2+__pyx_t_8, __pyx_t_5);
-          __pyx_t_3 = 0;
-          __pyx_t_4 = 0;
-          __pyx_t_5 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 30, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_2);
-          __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        }
-        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_double__and_double(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 30, __pyx_L1_error)
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_r = __pyx_t_10;
-        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        goto __pyx_L0;
-      }
-      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
-      __pyx_tp_dict_version = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
-      __pyx_obj_dict_version = __Pyx_get_object_dict_version(((PyObject *)__pyx_v_self));
-      if (unlikely(__pyx_type_dict_guard != __pyx_tp_dict_version)) {
-        __pyx_tp_dict_version = __pyx_obj_dict_version = __PYX_DICT_VERSION_INIT;
-      }
-      #endif
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_PYTYPE_LOOKUP && CYTHON_USE_TYPE_SLOTS
-    }
-    #endif
-  }
-
-  /* "pytrino/two_flavor_matter.pyx":31
- *     # V in eV
- *     cpdef (double, double) probability(self, double L, double E, double V = 0):
- *         cdef double delmsq = self.delmsq             # <<<<<<<<<<<<<<
- *         cdef double theta = self.theta
- * 
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 31, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_delmsq = __pyx_t_11;
-
-  /* "pytrino/two_flavor_matter.pyx":32
- *     cpdef (double, double) probability(self, double L, double E, double V = 0):
- *         cdef double delmsq = self.delmsq
- *         cdef double theta = self.theta             # <<<<<<<<<<<<<<
- * 
- *         cdef double sin2theta = sin(2 * theta)
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_theta); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 32, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_theta = __pyx_t_11;
-
-  /* "pytrino/two_flavor_matter.pyx":34
- *         cdef double theta = self.theta
- * 
- *         cdef double sin2theta = sin(2 * theta)             # <<<<<<<<<<<<<<
- *         cdef double cos2theta = cos(2 * theta)
- *         cdef double A = (2 * 1e+9 * E * V) / delmsq
- */
-  __pyx_v_sin2theta = sin((2.0 * __pyx_v_theta));
-
-  /* "pytrino/two_flavor_matter.pyx":35
- * 
- *         cdef double sin2theta = sin(2 * theta)
- *         cdef double cos2theta = cos(2 * theta)             # <<<<<<<<<<<<<<
- *         cdef double A = (2 * 1e+9 * E * V) / delmsq
- *         cdef double sin2theta_sq = sin2theta ** 2
- */
-  __pyx_v_cos2theta = cos((2.0 * __pyx_v_theta));
-
-  /* "pytrino/two_flavor_matter.pyx":36
- *         cdef double sin2theta = sin(2 * theta)
- *         cdef double cos2theta = cos(2 * theta)
- *         cdef double A = (2 * 1e+9 * E * V) / delmsq             # <<<<<<<<<<<<<<
- *         cdef double sin2theta_sq = sin2theta ** 2
- *         cdef double cos2theta_term_sq = (cos2theta - A) ** 2
- */
-  __pyx_t_11 = (((2.0 * 1e+9) * __pyx_v_E) * __pyx_v_V);
-  if (unlikely(__pyx_v_delmsq == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(1, 36, __pyx_L1_error)
-  }
-  __pyx_v_A = (__pyx_t_11 / __pyx_v_delmsq);
-
-  /* "pytrino/two_flavor_matter.pyx":37
- *         cdef double cos2theta = cos(2 * theta)
- *         cdef double A = (2 * 1e+9 * E * V) / delmsq
- *         cdef double sin2theta_sq = sin2theta ** 2             # <<<<<<<<<<<<<<
- *         cdef double cos2theta_term_sq = (cos2theta - A) ** 2
- * 
- */
-  __pyx_v_sin2theta_sq = pow(__pyx_v_sin2theta, 2.0);
-
-  /* "pytrino/two_flavor_matter.pyx":38
- *         cdef double A = (2 * 1e+9 * E * V) / delmsq
- *         cdef double sin2theta_sq = sin2theta ** 2
- *         cdef double cos2theta_term_sq = (cos2theta - A) ** 2             # <<<<<<<<<<<<<<
- * 
- *         cdef double deltamat = ((1.267 * delmsq * L) / E) * sqrt(sin2theta_sq + cos2theta_term_sq)
- */
-  __pyx_v_cos2theta_term_sq = pow((__pyx_v_cos2theta - __pyx_v_A), 2.0);
-
-  /* "pytrino/two_flavor_matter.pyx":40
- *         cdef double cos2theta_term_sq = (cos2theta - A) ** 2
- * 
- *         cdef double deltamat = ((1.267 * delmsq * L) / E) * sqrt(sin2theta_sq + cos2theta_term_sq)             # <<<<<<<<<<<<<<
- *         cdef double sin2thetam = sin2theta / sqrt(sin2theta_sq + cos2theta_term_sq)
- * 
- */
-  __pyx_t_11 = ((1.267 * __pyx_v_delmsq) * __pyx_v_L);
-  if (unlikely(__pyx_v_E == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(1, 40, __pyx_L1_error)
-  }
-  __pyx_v_deltamat = ((__pyx_t_11 / __pyx_v_E) * sqrt((__pyx_v_sin2theta_sq + __pyx_v_cos2theta_term_sq)));
-
-  /* "pytrino/two_flavor_matter.pyx":41
- * 
- *         cdef double deltamat = ((1.267 * delmsq * L) / E) * sqrt(sin2theta_sq + cos2theta_term_sq)
- *         cdef double sin2thetam = sin2theta / sqrt(sin2theta_sq + cos2theta_term_sq)             # <<<<<<<<<<<<<<
- * 
- *         cdef double Pemu = sin2thetam ** 2 * sin(deltamat) ** 2
- */
-  __pyx_t_11 = sqrt((__pyx_v_sin2theta_sq + __pyx_v_cos2theta_term_sq));
-  if (unlikely(__pyx_t_11 == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(1, 41, __pyx_L1_error)
-  }
-  __pyx_v_sin2thetam = (__pyx_v_sin2theta / __pyx_t_11);
-
-  /* "pytrino/two_flavor_matter.pyx":43
- *         cdef double sin2thetam = sin2theta / sqrt(sin2theta_sq + cos2theta_term_sq)
- * 
- *         cdef double Pemu = sin2thetam ** 2 * sin(deltamat) ** 2             # <<<<<<<<<<<<<<
- *         cdef double Pee = 1 - Pemu
- * 
- */
-  __pyx_v_Pemu = (pow(__pyx_v_sin2thetam, 2.0) * pow(sin(__pyx_v_deltamat), 2.0));
-
-  /* "pytrino/two_flavor_matter.pyx":44
- * 
- *         cdef double Pemu = sin2thetam ** 2 * sin(deltamat) ** 2
- *         cdef double Pee = 1 - Pemu             # <<<<<<<<<<<<<<
- * 
- *         return Pee, Pemu
- */
-  __pyx_v_Pee = (1.0 - __pyx_v_Pemu);
-
-  /* "pytrino/two_flavor_matter.pyx":46
- *         cdef double Pee = 1 - Pemu
- * 
- *         return Pee, Pemu             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_t_10.f0 = __pyx_v_Pee;
-  __pyx_t_10.f1 = __pyx_v_Pemu;
-  __pyx_r = __pyx_t_10;
-  goto __pyx_L0;
-
-  /* "pytrino/two_flavor_matter.pyx":30
- *     # L in km
- *     # V in eV
- *     cpdef (double, double) probability(self, double L, double E, double V = 0):             # <<<<<<<<<<<<<<
- *         cdef double delmsq = self.delmsq
- *         cdef double theta = self.theta
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_WriteUnraisable("pytrino.two_flavor_matter.TwoFlavor.probability", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __Pyx_pretend_to_initialize(&__pyx_r);
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7pytrino_17two_flavor_matter_9TwoFlavor_2probability[] = "\n        Calculate the two flavor neutrino oscillation probability in vacuum/matter.\n\n        :param L: The distance traveled by the neutrino in km.\n        :type L: float\n        :param E: The neutrino beam energy in GeV.\n        :type E: float\n        :param V: The effective (constant) matter potential in eV. Default is 0.\n        :type V: float\n        :param antineutrinos: Whether to compute for antineutrinos (True) or neutrinos (False). Default is False.\n        :type antineutrinos: bool\n        :return: The probabilities (Pee, Pemu) of oscillations. Note that the other two probabilities can be computed using these as Pmue = Pemu and Pmumu = Pee\n        :rtype: Tuple[float, float]\n        ";
 static PyObject *__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   double __pyx_v_L;
   double __pyx_v_E;
   double __pyx_v_V;
+  int __pyx_v_antineutrinos;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1978,12 +1676,14 @@ static PyObject *__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability(P
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("probability (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_L,&__pyx_n_s_E,&__pyx_n_s_V,0};
-    PyObject* values[3] = {0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_L,&__pyx_n_s_E,&__pyx_n_s_V,&__pyx_n_s_antineutrinos,0};
+    PyObject* values[4] = {0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -2002,7 +1702,7 @@ static PyObject *__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability(P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_E)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("probability", 0, 2, 3, 1); __PYX_ERR(1, 30, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("probability", 0, 2, 4, 1); __PYX_ERR(1, 73, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -2010,12 +1710,20 @@ static PyObject *__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability(P
           PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_V);
           if (value) { values[2] = value; kw_args--; }
         }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_antineutrinos);
+          if (value) { values[3] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "probability") < 0)) __PYX_ERR(1, 30, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "probability") < 0)) __PYX_ERR(1, 73, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -2024,52 +1732,245 @@ static PyObject *__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability(P
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_L = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_L == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 30, __pyx_L3_error)
-    __pyx_v_E = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 30, __pyx_L3_error)
+    __pyx_v_L = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_L == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 73, __pyx_L3_error)
+    __pyx_v_E = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 73, __pyx_L3_error)
     if (values[2]) {
-      __pyx_v_V = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 30, __pyx_L3_error)
+      __pyx_v_V = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 73, __pyx_L3_error)
     } else {
       __pyx_v_V = ((double)0.0);
+    }
+    if (values[3]) {
+      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 73, __pyx_L3_error)
+    } else {
+      __pyx_v_antineutrinos = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("probability", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 30, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("probability", 0, 2, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 73, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pytrino.two_flavor_matter.TwoFlavor.probability", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_2probability(((struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *)__pyx_v_self), __pyx_v_L, __pyx_v_E, __pyx_v_V);
+  __pyx_r = __pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_2probability(((struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *)__pyx_v_self), __pyx_v_L, __pyx_v_E, __pyx_v_V, __pyx_v_antineutrinos);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_2probability(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, double __pyx_v_L, double __pyx_v_E, double __pyx_v_V) {
+static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_2probability(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *__pyx_v_self, double __pyx_v_L, double __pyx_v_E, double __pyx_v_V, int __pyx_v_antineutrinos) {
+  double __pyx_v_delmsq;
+  double __pyx_v_theta;
+  double __pyx_v_sin2theta;
+  double __pyx_v_cos2theta;
+  double __pyx_v_A;
+  double __pyx_v_sin2theta_sq;
+  double __pyx_v_cos2theta_term_sq;
+  double __pyx_v_deltamat;
+  double __pyx_v_sin2thetam;
+  double __pyx_v_Pemu;
+  double __pyx_v_Pee;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  __pyx_ctuple_double__and_double __pyx_t_1;
-  struct __pyx_opt_args_7pytrino_17two_flavor_matter_9TwoFlavor_probability __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  double __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("probability", 0);
+
+  /* "pytrino/two_flavor_matter.pyx":88
+ *         :rtype: Tuple[float, float]
+ *         """
+ *         if antineutrinos:             # <<<<<<<<<<<<<<
+ *             V = -V
+ * 
+ */
+  __pyx_t_1 = (__pyx_v_antineutrinos != 0);
+  if (__pyx_t_1) {
+
+    /* "pytrino/two_flavor_matter.pyx":89
+ *         """
+ *         if antineutrinos:
+ *             V = -V             # <<<<<<<<<<<<<<
+ * 
+ *         cdef double delmsq = self.delmsq
+ */
+    __pyx_v_V = (-__pyx_v_V);
+
+    /* "pytrino/two_flavor_matter.pyx":88
+ *         :rtype: Tuple[float, float]
+ *         """
+ *         if antineutrinos:             # <<<<<<<<<<<<<<
+ *             V = -V
+ * 
+ */
+  }
+
+  /* "pytrino/two_flavor_matter.pyx":91
+ *             V = -V
+ * 
+ *         cdef double delmsq = self.delmsq             # <<<<<<<<<<<<<<
+ *         cdef double theta = self.theta
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 91, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 91, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_delmsq = __pyx_t_3;
+
+  /* "pytrino/two_flavor_matter.pyx":92
+ * 
+ *         cdef double delmsq = self.delmsq
+ *         cdef double theta = self.theta             # <<<<<<<<<<<<<<
+ * 
+ *         cdef double sin2theta = sin(2 * theta)
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_theta); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_3 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 92, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_theta = __pyx_t_3;
+
+  /* "pytrino/two_flavor_matter.pyx":94
+ *         cdef double theta = self.theta
+ * 
+ *         cdef double sin2theta = sin(2 * theta)             # <<<<<<<<<<<<<<
+ *         cdef double cos2theta = cos(2 * theta)
+ *         cdef double A = (2 * 1e+9 * E * V) / delmsq
+ */
+  __pyx_v_sin2theta = sin((2.0 * __pyx_v_theta));
+
+  /* "pytrino/two_flavor_matter.pyx":95
+ * 
+ *         cdef double sin2theta = sin(2 * theta)
+ *         cdef double cos2theta = cos(2 * theta)             # <<<<<<<<<<<<<<
+ *         cdef double A = (2 * 1e+9 * E * V) / delmsq
+ * 
+ */
+  __pyx_v_cos2theta = cos((2.0 * __pyx_v_theta));
+
+  /* "pytrino/two_flavor_matter.pyx":96
+ *         cdef double sin2theta = sin(2 * theta)
+ *         cdef double cos2theta = cos(2 * theta)
+ *         cdef double A = (2 * 1e+9 * E * V) / delmsq             # <<<<<<<<<<<<<<
+ * 
+ *         cdef double sin2theta_sq = sin2theta ** 2
+ */
+  __pyx_t_3 = (((2.0 * 1e+9) * __pyx_v_E) * __pyx_v_V);
+  if (unlikely(__pyx_v_delmsq == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(1, 96, __pyx_L1_error)
+  }
+  __pyx_v_A = (__pyx_t_3 / __pyx_v_delmsq);
+
+  /* "pytrino/two_flavor_matter.pyx":98
+ *         cdef double A = (2 * 1e+9 * E * V) / delmsq
+ * 
+ *         cdef double sin2theta_sq = sin2theta ** 2             # <<<<<<<<<<<<<<
+ *         cdef double cos2theta_term_sq = (cos2theta - A) ** 2
+ * 
+ */
+  __pyx_v_sin2theta_sq = pow(__pyx_v_sin2theta, 2.0);
+
+  /* "pytrino/two_flavor_matter.pyx":99
+ * 
+ *         cdef double sin2theta_sq = sin2theta ** 2
+ *         cdef double cos2theta_term_sq = (cos2theta - A) ** 2             # <<<<<<<<<<<<<<
+ * 
+ *         cdef double deltamat = ((1.267 * delmsq * L) / E) * sqrt(sin2theta_sq + cos2theta_term_sq)
+ */
+  __pyx_v_cos2theta_term_sq = pow((__pyx_v_cos2theta - __pyx_v_A), 2.0);
+
+  /* "pytrino/two_flavor_matter.pyx":101
+ *         cdef double cos2theta_term_sq = (cos2theta - A) ** 2
+ * 
+ *         cdef double deltamat = ((1.267 * delmsq * L) / E) * sqrt(sin2theta_sq + cos2theta_term_sq)             # <<<<<<<<<<<<<<
+ *         cdef double sin2thetam = sin2theta / sqrt(sin2theta_sq + cos2theta_term_sq)
+ * 
+ */
+  __pyx_t_3 = ((1.267 * __pyx_v_delmsq) * __pyx_v_L);
+  if (unlikely(__pyx_v_E == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(1, 101, __pyx_L1_error)
+  }
+  __pyx_v_deltamat = ((__pyx_t_3 / __pyx_v_E) * sqrt((__pyx_v_sin2theta_sq + __pyx_v_cos2theta_term_sq)));
+
+  /* "pytrino/two_flavor_matter.pyx":102
+ * 
+ *         cdef double deltamat = ((1.267 * delmsq * L) / E) * sqrt(sin2theta_sq + cos2theta_term_sq)
+ *         cdef double sin2thetam = sin2theta / sqrt(sin2theta_sq + cos2theta_term_sq)             # <<<<<<<<<<<<<<
+ * 
+ *         cdef double Pemu = sin2thetam ** 2 * sin(deltamat) ** 2
+ */
+  __pyx_t_3 = sqrt((__pyx_v_sin2theta_sq + __pyx_v_cos2theta_term_sq));
+  if (unlikely(__pyx_t_3 == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(1, 102, __pyx_L1_error)
+  }
+  __pyx_v_sin2thetam = (__pyx_v_sin2theta / __pyx_t_3);
+
+  /* "pytrino/two_flavor_matter.pyx":104
+ *         cdef double sin2thetam = sin2theta / sqrt(sin2theta_sq + cos2theta_term_sq)
+ * 
+ *         cdef double Pemu = sin2thetam ** 2 * sin(deltamat) ** 2             # <<<<<<<<<<<<<<
+ *         cdef double Pee = 1 - Pemu
+ * 
+ */
+  __pyx_v_Pemu = (pow(__pyx_v_sin2thetam, 2.0) * pow(sin(__pyx_v_deltamat), 2.0));
+
+  /* "pytrino/two_flavor_matter.pyx":105
+ * 
+ *         cdef double Pemu = sin2thetam ** 2 * sin(deltamat) ** 2
+ *         cdef double Pee = 1 - Pemu             # <<<<<<<<<<<<<<
+ * 
+ *         return Pee, Pemu
+ */
+  __pyx_v_Pee = (1.0 - __pyx_v_Pemu);
+
+  /* "pytrino/two_flavor_matter.pyx":107
+ *         cdef double Pee = 1 - Pemu
+ * 
+ *         return Pee, Pemu             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2.__pyx_n = 1;
-  __pyx_t_2.V = __pyx_v_V;
-  __pyx_t_1 = __pyx_vtabptr_7pytrino_17two_flavor_matter_TwoFlavor->probability(__pyx_v_self, __pyx_v_L, __pyx_v_E, 1, &__pyx_t_2); 
-  __pyx_t_3 = __pyx_convert__to_py___pyx_ctuple_double__and_double(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_r = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_Pee); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_Pemu); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_4);
+  PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4);
+  __pyx_t_2 = 0;
+  __pyx_t_4 = 0;
+  __pyx_r = __pyx_t_5;
+  __pyx_t_5 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/two_flavor_matter.pyx":73
+ *     # L in km
+ *     # V in eV
+ *     def probability(self, double L, double E, double V = 0, bint antineutrinos = False):             # <<<<<<<<<<<<<<
+ *         """
+ *         Calculate the two flavor neutrino oscillation probability in vacuum/matter.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_AddTraceback("pytrino.two_flavor_matter.TwoFlavor.probability", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -2190,10 +2091,8 @@ static PyObject *__pyx_pf_7pytrino_17two_flavor_matter_9TwoFlavor_6__setstate_cy
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
-static struct __pyx_vtabstruct_7pytrino_17two_flavor_matter_TwoFlavor __pyx_vtable_7pytrino_17two_flavor_matter_TwoFlavor;
 
 static PyObject *__pyx_tp_new_7pytrino_17two_flavor_matter_TwoFlavor(PyTypeObject *t, PyObject *a, PyObject *k) {
-  struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *p;
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -2201,8 +2100,6 @@ static PyObject *__pyx_tp_new_7pytrino_17two_flavor_matter_TwoFlavor(PyTypeObjec
     o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
   }
   if (unlikely(!o)) return 0;
-  p = ((struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *)o);
-  p->__pyx_vtab = __pyx_vtabptr_7pytrino_17two_flavor_matter_TwoFlavor;
   if (unlikely(__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_1__cinit__(o, a, k) < 0)) goto bad;
   return o;
   bad:
@@ -2248,15 +2145,15 @@ static int __pyx_setprop_7pytrino_17two_flavor_matter_9TwoFlavor_theta(PyObject 
 }
 
 static PyMethodDef __pyx_methods_7pytrino_17two_flavor_matter_TwoFlavor[] = {
-  {"probability", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability, METH_VARARGS|METH_KEYWORDS, 0},
+  {"probability", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_3probability, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7pytrino_17two_flavor_matter_9TwoFlavor_2probability},
   {"__reduce_cython__", (PyCFunction)__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_5__reduce_cython__, METH_NOARGS, 0},
   {"__setstate_cython__", (PyCFunction)__pyx_pw_7pytrino_17two_flavor_matter_9TwoFlavor_7__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
 static struct PyGetSetDef __pyx_getsets_7pytrino_17two_flavor_matter_TwoFlavor[] = {
-  {(char *)"delmsq", __pyx_getprop_7pytrino_17two_flavor_matter_9TwoFlavor_delmsq, __pyx_setprop_7pytrino_17two_flavor_matter_9TwoFlavor_delmsq, (char *)0, 0},
-  {(char *)"theta", __pyx_getprop_7pytrino_17two_flavor_matter_9TwoFlavor_theta, __pyx_setprop_7pytrino_17two_flavor_matter_9TwoFlavor_theta, (char *)0, 0},
+  {(char *)"delmsq", __pyx_getprop_7pytrino_17two_flavor_matter_9TwoFlavor_delmsq, __pyx_setprop_7pytrino_17two_flavor_matter_9TwoFlavor_delmsq, (char *)"\n        Get the value of delmsq in eV^2.\n\n        :return: The value of delmsq.\n        :rtype: float\n        ", 0},
+  {(char *)"theta", __pyx_getprop_7pytrino_17two_flavor_matter_9TwoFlavor_theta, __pyx_setprop_7pytrino_17two_flavor_matter_9TwoFlavor_theta, (char *)"\n        Get the value of theta in radians.\n\n        :return: The value of theta.\n        :rtype: float\n        ", 0},
   {0, 0, 0, 0, 0}
 };
 
@@ -2291,7 +2188,7 @@ static PyTypeObject __pyx_type_7pytrino_17two_flavor_matter_TwoFlavor = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  0, /*tp_doc*/
+  "\n    Cython solver class to compute properties of a two-flavor neutrino oscillation model.\n    ", /*tp_doc*/
   0, /*tp_traverse*/
   0, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -2383,14 +2280,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_TwoFlavor, __pyx_k_TwoFlavor, sizeof(__pyx_k_TwoFlavor), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_n_s_V, __pyx_k_V, sizeof(__pyx_k_V), 0, 0, 1, 1},
+  {&__pyx_n_s_antineutrinos, __pyx_k_antineutrinos, sizeof(__pyx_k_antineutrinos), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_delmsq, __pyx_k_delmsq, sizeof(__pyx_k_delmsq), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
-  {&__pyx_n_s_probability, __pyx_k_probability, sizeof(__pyx_k_probability), 0, 0, 1, 1},
-  {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
@@ -2482,8 +2378,6 @@ static int __Pyx_modinit_type_init_code(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  __pyx_vtabptr_7pytrino_17two_flavor_matter_TwoFlavor = &__pyx_vtable_7pytrino_17two_flavor_matter_TwoFlavor;
-  __pyx_vtable_7pytrino_17two_flavor_matter_TwoFlavor.probability = (__pyx_ctuple_double__and_double (*)(struct __pyx_obj_7pytrino_17two_flavor_matter_TwoFlavor *, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_7pytrino_17two_flavor_matter_9TwoFlavor_probability *__pyx_optional_args))__pyx_f_7pytrino_17two_flavor_matter_9TwoFlavor_probability;
   if (PyType_Ready(&__pyx_type_7pytrino_17two_flavor_matter_TwoFlavor) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_7pytrino_17two_flavor_matter_TwoFlavor.tp_print = 0;
@@ -2491,7 +2385,6 @@ static int __Pyx_modinit_type_init_code(void) {
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7pytrino_17two_flavor_matter_TwoFlavor.tp_dictoffset && __pyx_type_7pytrino_17two_flavor_matter_TwoFlavor.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7pytrino_17two_flavor_matter_TwoFlavor.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_7pytrino_17two_flavor_matter_TwoFlavor.tp_dict, __pyx_vtabptr_7pytrino_17two_flavor_matter_TwoFlavor) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s_TwoFlavor, (PyObject *)&__pyx_type_7pytrino_17two_flavor_matter_TwoFlavor) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7pytrino_17two_flavor_matter_TwoFlavor) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   __pyx_ptype_7pytrino_17two_flavor_matter_TwoFlavor = &__pyx_type_7pytrino_17two_flavor_matter_TwoFlavor;
@@ -2948,174 +2841,6 @@ bad:
     return -1;
 }
 
-/* PyDictVersioning */
-#if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
-static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj) {
-    PyObject *dict = Py_TYPE(obj)->tp_dict;
-    return likely(dict) ? __PYX_GET_DICT_VERSION(dict) : 0;
-}
-static CYTHON_INLINE PY_UINT64_T __Pyx_get_object_dict_version(PyObject *obj) {
-    PyObject **dictptr = NULL;
-    Py_ssize_t offset = Py_TYPE(obj)->tp_dictoffset;
-    if (offset) {
-#if CYTHON_COMPILING_IN_CPYTHON
-        dictptr = (likely(offset > 0)) ? (PyObject **) ((char *)obj + offset) : _PyObject_GetDictPtr(obj);
-#else
-        dictptr = _PyObject_GetDictPtr(obj);
-#endif
-    }
-    return (dictptr && *dictptr) ? __PYX_GET_DICT_VERSION(*dictptr) : 0;
-}
-static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UINT64_T tp_dict_version, PY_UINT64_T obj_dict_version) {
-    PyObject *dict = Py_TYPE(obj)->tp_dict;
-    if (unlikely(!dict) || unlikely(tp_dict_version != __PYX_GET_DICT_VERSION(dict)))
-        return 0;
-    return obj_dict_version == __Pyx_get_object_dict_version(obj);
-}
-#endif
-
-/* PyFunctionFastCall */
-#if CYTHON_FAST_PYCALL
-static PyObject* __Pyx_PyFunction_FastCallNoKw(PyCodeObject *co, PyObject **args, Py_ssize_t na,
-                                               PyObject *globals) {
-    PyFrameObject *f;
-    PyThreadState *tstate = __Pyx_PyThreadState_Current;
-    PyObject **fastlocals;
-    Py_ssize_t i;
-    PyObject *result;
-    assert(globals != NULL);
-    /* XXX Perhaps we should create a specialized
-       PyFrame_New() that doesn't take locals, but does
-       take builtins without sanity checking them.
-       */
-    assert(tstate != NULL);
-    f = PyFrame_New(tstate, co, globals, NULL);
-    if (f == NULL) {
-        return NULL;
-    }
-    fastlocals = __Pyx_PyFrame_GetLocalsplus(f);
-    for (i = 0; i < na; i++) {
-        Py_INCREF(*args);
-        fastlocals[i] = *args++;
-    }
-    result = PyEval_EvalFrameEx(f,0);
-    ++tstate->recursion_depth;
-    Py_DECREF(f);
-    --tstate->recursion_depth;
-    return result;
-}
-#if 1 || PY_VERSION_HEX < 0x030600B1
-static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, Py_ssize_t nargs, PyObject *kwargs) {
-    PyCodeObject *co = (PyCodeObject *)PyFunction_GET_CODE(func);
-    PyObject *globals = PyFunction_GET_GLOBALS(func);
-    PyObject *argdefs = PyFunction_GET_DEFAULTS(func);
-    PyObject *closure;
-#if PY_MAJOR_VERSION >= 3
-    PyObject *kwdefs;
-#endif
-    PyObject *kwtuple, **k;
-    PyObject **d;
-    Py_ssize_t nd;
-    Py_ssize_t nk;
-    PyObject *result;
-    assert(kwargs == NULL || PyDict_Check(kwargs));
-    nk = kwargs ? PyDict_Size(kwargs) : 0;
-    if (Py_EnterRecursiveCall((char*)" while calling a Python object")) {
-        return NULL;
-    }
-    if (
-#if PY_MAJOR_VERSION >= 3
-            co->co_kwonlyargcount == 0 &&
-#endif
-            likely(kwargs == NULL || nk == 0) &&
-            co->co_flags == (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)) {
-        if (argdefs == NULL && co->co_argcount == nargs) {
-            result = __Pyx_PyFunction_FastCallNoKw(co, args, nargs, globals);
-            goto done;
-        }
-        else if (nargs == 0 && argdefs != NULL
-                 && co->co_argcount == Py_SIZE(argdefs)) {
-            /* function called with no arguments, but all parameters have
-               a default value: use default values as arguments .*/
-            args = &PyTuple_GET_ITEM(argdefs, 0);
-            result =__Pyx_PyFunction_FastCallNoKw(co, args, Py_SIZE(argdefs), globals);
-            goto done;
-        }
-    }
-    if (kwargs != NULL) {
-        Py_ssize_t pos, i;
-        kwtuple = PyTuple_New(2 * nk);
-        if (kwtuple == NULL) {
-            result = NULL;
-            goto done;
-        }
-        k = &PyTuple_GET_ITEM(kwtuple, 0);
-        pos = i = 0;
-        while (PyDict_Next(kwargs, &pos, &k[i], &k[i+1])) {
-            Py_INCREF(k[i]);
-            Py_INCREF(k[i+1]);
-            i += 2;
-        }
-        nk = i / 2;
-    }
-    else {
-        kwtuple = NULL;
-        k = NULL;
-    }
-    closure = PyFunction_GET_CLOSURE(func);
-#if PY_MAJOR_VERSION >= 3
-    kwdefs = PyFunction_GET_KW_DEFAULTS(func);
-#endif
-    if (argdefs != NULL) {
-        d = &PyTuple_GET_ITEM(argdefs, 0);
-        nd = Py_SIZE(argdefs);
-    }
-    else {
-        d = NULL;
-        nd = 0;
-    }
-#if PY_MAJOR_VERSION >= 3
-    result = PyEval_EvalCodeEx((PyObject*)co, globals, (PyObject *)NULL,
-                               args, (int)nargs,
-                               k, (int)nk,
-                               d, (int)nd, kwdefs, closure);
-#else
-    result = PyEval_EvalCodeEx(co, globals, (PyObject *)NULL,
-                               args, (int)nargs,
-                               k, (int)nk,
-                               d, (int)nd, closure);
-#endif
-    Py_XDECREF(kwtuple);
-done:
-    Py_LeaveRecursiveCall();
-    return result;
-}
-#endif
-#endif
-
-/* PyCFunctionFastCall */
-#if CYTHON_FAST_PYCCALL
-static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
-    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
-    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
-    PyObject *self = PyCFunction_GET_SELF(func);
-    int flags = PyCFunction_GET_FLAGS(func);
-    assert(PyCFunction_Check(func));
-    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS | METH_STACKLESS)));
-    assert(nargs >= 0);
-    assert(nargs == 0 || args != NULL);
-    /* _PyCFunction_FastCallDict() must not be called with an exception set,
-       because it may clear it (directly or indirectly) and so the
-       caller loses its exception */
-    assert(!PyErr_Occurred());
-    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
-        return (*((__Pyx_PyCFunctionFastWithKeywords)(void*)meth)) (self, args, nargs, NULL);
-    } else {
-        return (*((__Pyx_PyCFunctionFast)(void*)meth)) (self, args, nargs);
-    }
-}
-#endif
-
 /* PyObjectCall */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
@@ -3159,46 +2884,6 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
     tstate->curexc_traceback = 0;
 }
 #endif
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-    else state = (PyGILState_STATE)0;
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
-}
 
 /* RaiseException */
 #if PY_MAJOR_VERSION < 3
@@ -3409,24 +3094,6 @@ static PyObject* __Pyx_PyObject_GenericGetAttr(PyObject* obj, PyObject* attr_nam
 }
 #endif
 
-/* SetVTable */
-static int __Pyx_SetVtable(PyObject *dict, void *vtable) {
-#if PY_VERSION_HEX >= 0x02070000
-    PyObject *ob = PyCapsule_New(vtable, 0, 0);
-#else
-    PyObject *ob = PyCObject_FromVoidPtr(vtable, 0);
-#endif
-    if (!ob)
-        goto bad;
-    if (PyDict_SetItem(dict, __pyx_n_s_pyx_vtable, ob) < 0)
-        goto bad;
-    Py_DECREF(ob);
-    return 0;
-bad:
-    Py_XDECREF(ob);
-    return -1;
-}
-
 /* PyErrExceptionMatches */
 #if CYTHON_FAST_THREAD_STATE
 static int __Pyx_PyErr_ExceptionMatchesTuple(PyObject *exc_type, PyObject *tuple) {
@@ -3577,6 +3244,32 @@ __PYX_GOOD:
     Py_XDECREF(setstate_cython);
     return ret;
 }
+
+/* PyDictVersioning */
+#if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE PY_UINT64_T __Pyx_get_tp_dict_version(PyObject *obj) {
+    PyObject *dict = Py_TYPE(obj)->tp_dict;
+    return likely(dict) ? __PYX_GET_DICT_VERSION(dict) : 0;
+}
+static CYTHON_INLINE PY_UINT64_T __Pyx_get_object_dict_version(PyObject *obj) {
+    PyObject **dictptr = NULL;
+    Py_ssize_t offset = Py_TYPE(obj)->tp_dictoffset;
+    if (offset) {
+#if CYTHON_COMPILING_IN_CPYTHON
+        dictptr = (likely(offset > 0)) ? (PyObject **) ((char *)obj + offset) : _PyObject_GetDictPtr(obj);
+#else
+        dictptr = _PyObject_GetDictPtr(obj);
+#endif
+    }
+    return (dictptr && *dictptr) ? __PYX_GET_DICT_VERSION(*dictptr) : 0;
+}
+static CYTHON_INLINE int __Pyx_object_dict_version_matches(PyObject* obj, PY_UINT64_T tp_dict_version, PY_UINT64_T obj_dict_version) {
+    PyObject *dict = Py_TYPE(obj)->tp_dict;
+    if (unlikely(!dict) || unlikely(tp_dict_version != __PYX_GET_DICT_VERSION(dict)))
+        return 0;
+    return obj_dict_version == __Pyx_get_object_dict_version(obj);
+}
+#endif
 
 /* CLineInTraceback */
 #ifndef CYTHON_CLINE_IN_TRACEBACK
@@ -3805,54 +3498,6 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 bad:
     Py_XDECREF(py_code);
     Py_XDECREF(py_frame);
-}
-
-/* FromPyCTupleUtility */
-static __pyx_ctuple_double__and_double __pyx_convert__from_py___pyx_ctuple_double__and_double(PyObject * o) {
-    __pyx_ctuple_double__and_double result;
-    if (!PyTuple_Check(o) || PyTuple_GET_SIZE(o) != 2) {
-        PyErr_Format(PyExc_TypeError, "Expected %.16s of size %d, got %.200s", "a tuple", 2, Py_TYPE(o)->tp_name);
-        goto bad;
-    }
-#if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        result.f0 = __pyx_PyFloat_AsDouble(PyTuple_GET_ITEM(o, 0));
-        if ((result.f0 == (double)-1) && PyErr_Occurred()) goto bad;
-        result.f1 = __pyx_PyFloat_AsDouble(PyTuple_GET_ITEM(o, 1));
-        if ((result.f1 == (double)-1) && PyErr_Occurred()) goto bad;
-#else
-    {
-        PyObject *item;
-        item = PySequence_ITEM(o, 0);  if (unlikely(!item)) goto bad;
-        result.f0 = __pyx_PyFloat_AsDouble(item);
-        Py_DECREF(item);
-        if ((result.f0 == (double)-1) && PyErr_Occurred()) goto bad;
-        item = PySequence_ITEM(o, 1);  if (unlikely(!item)) goto bad;
-        result.f1 = __pyx_PyFloat_AsDouble(item);
-        Py_DECREF(item);
-        if ((result.f1 == (double)-1) && PyErr_Occurred()) goto bad;
-    }
-#endif
-    return result;
-bad:
-    return result;
-}
-
-/* ToPyCTupleUtility */
-static PyObject* __pyx_convert__to_py___pyx_ctuple_double__and_double(__pyx_ctuple_double__and_double value) {
-    PyObject* item = NULL;
-    PyObject* result = PyTuple_New(2);
-    if (!result) goto bad;
-        item = PyFloat_FromDouble(value.f0);
-        if (!item) goto bad;
-        PyTuple_SET_ITEM(result, 0, item);
-        item = PyFloat_FromDouble(value.f1);
-        if (!item) goto bad;
-        PyTuple_SET_ITEM(result, 1, item);
-    return result;
-bad:
-    Py_XDECREF(item);
-    Py_XDECREF(result);
-    return NULL;
 }
 
 /* CIntToPy */

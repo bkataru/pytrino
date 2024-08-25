@@ -6,7 +6,7 @@
         "depends": [],
         "name": "pytrino.three_flavor_matter",
         "sources": [
-            "pytrino\\three_flavor_matter.pyx"
+            "src\\pytrino\\three_flavor_matter.pyx"
         ]
     },
     "module_name": "pytrino.three_flavor_matter"
@@ -990,7 +990,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "pytrino\\three_flavor_matter.pyx",
+  "src\\pytrino\\three_flavor_matter.pyx",
   "stringsource",
 };
 /* Declarations.proto */
@@ -1016,12 +1016,12 @@ typedef struct __pyx_ctuple_double__and_double__and_double__and_double __pyx_ctu
 struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_angles_phase_matter;
 struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_probability;
 
-/* "pytrino/three_flavor_matter.pyx":92
+/* "pytrino/three_flavor_matter.pyx":200
  *         self.c23 = cos(theta23)
  * 
  *     cdef (double, double, double) eigenvalues(self, double E, double V):             # <<<<<<<<<<<<<<
- *         cdef double delmsq21 = self.delmsq21
- *         cdef double delmsq31 = self.delmsq31
+ *         """
+ *         Compute the exact eigenvalues of the Hamiltonian in matter.
  */
 struct __pyx_ctuple_double__and_double__and_double {
   double f0;
@@ -1029,24 +1029,24 @@ struct __pyx_ctuple_double__and_double__and_double {
   double f2;
 };
 
-/* "pytrino/three_flavor_matter.pyx":120
+/* "pytrino/three_flavor_matter.pyx":237
  *     # E in GeV
  *     # V in eV
  *     cpdef (double, double, double) deltamsq_matter(self, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         if antineutrinos:
- *             V = -V
+ *         """
+ *         Compute the effective mass-squared differences of the neutrinos in matter.
  */
 struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_deltamsq_matter {
   int __pyx_n;
   int antineutrinos;
 };
 
-/* "pytrino/three_flavor_matter.pyx":135
+/* "pytrino/three_flavor_matter.pyx":261
  *         return delmsq21mat, delmsq31mat, delmsq32mat
  * 
  *     cpdef (double, double, double, double) angles_phase_matter(self, double L, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         cdef double delmsq31 = self.delmsq31
- *         cdef double alpha = self.alpha
+ *         """
+ *         Compute the mixing angles and CP-violating phase in matter.
  */
 struct __pyx_ctuple_double__and_double__and_double__and_double {
   double f0;
@@ -1059,24 +1059,24 @@ struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_angles_phase_
   int antineutrinos;
 };
 
-/* "pytrino/three_flavor_matter.pyx":197
+/* "pytrino/three_flavor_matter.pyx":333
  * 
  * 
  *     cpdef double probability(self, int alpha, int beta, double L, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         cdef double delmsq31 = self.delmsq31
- * 
+ *         """
+ *         Compute transition and survival probabilities.
  */
 struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_probability {
   int __pyx_n;
   int antineutrinos;
 };
 
-/* "pytrino/three_flavor_matter.pyx":18
- * '''
+/* "pytrino/three_flavor_matter.pyx":41
+ * """
  * 
  * cdef class ThreeFlavor:             # <<<<<<<<<<<<<<
- *     cdef double _delmsq21, _delmsq31, _deltacp, _theta12, _theta13, _theta23
- *     cdef double alpha, s12, c12, s13, c13, s23, c23
+ *     """
+ *     Cython solver class to compute properties of the three-flavor neutrino oscillation model in vacuum/matter.
  */
 struct __pyx_obj_7pytrino_19three_flavor_matter_ThreeFlavor {
   PyObject_HEAD
@@ -1349,6 +1349,15 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
 
 /* IncludeStringH.proto */
 #include <string.h>
+
+/* PyObjectSetAttrStr.proto */
+#if CYTHON_USE_TYPE_SLOTS
+#define __Pyx_PyObject_DelAttrStr(o,n) __Pyx_PyObject_SetAttrStr(o, n, NULL)
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value);
+#else
+#define __Pyx_PyObject_DelAttrStr(o,n)   PyObject_DelAttr(o,n)
+#define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
+#endif
 
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
@@ -1648,12 +1657,12 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "pytrino/three_flavor_matter.pyx":23
+/* "pytrino/three_flavor_matter.pyx":49
  * 
  *     @property
- *     def delmsq21(self): return self._delmsq21             # <<<<<<<<<<<<<<
- * 
- *     @property
+ *     def delmsq21(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mass-squared difference between the second and first neutrino mass eigenstates in eV^2.
  */
 
 /* Python wrapper */
@@ -1677,12 +1686,28 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq21
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pytrino/three_flavor_matter.pyx":56
+ *         :rtype: float
+ *         """
+ *         return self._delmsq21             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_delmsq21); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_delmsq21); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/three_flavor_matter.pyx":49
+ * 
+ *     @property
+ *     def delmsq21(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mass-squared difference between the second and first neutrino mass eigenstates in eV^2.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
@@ -1695,12 +1720,12 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq21
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":41
+/* "pytrino/three_flavor_matter.pyx":109
  * 
  *     @delmsq21.setter
  *     def delmsq21(self, double val):             # <<<<<<<<<<<<<<
- *         self._delmsq21 = val
- *         self.alpha = val / self._delmsq31
+ *         """
+ *         Setter for the mass-squared difference between the second and first neutrino mass eigenstates in eV^2.
  */
 
 /* Python wrapper */
@@ -1714,7 +1739,7 @@ static int __pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq21_3__se
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 41, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1737,17 +1762,17 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq21_2__se
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":42
- *     @delmsq21.setter
- *     def delmsq21(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":115
+ *         :param float val: The value to set delmsq21 to.
+ *         """
  *         self._delmsq21 = val             # <<<<<<<<<<<<<<
  *         self.alpha = val / self._delmsq31
  * 
  */
   __pyx_v_self->_delmsq21 = __pyx_v_val;
 
-  /* "pytrino/three_flavor_matter.pyx":43
- *     def delmsq21(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":116
+ *         """
  *         self._delmsq21 = val
  *         self.alpha = val / self._delmsq31             # <<<<<<<<<<<<<<
  * 
@@ -1755,16 +1780,16 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq21_2__se
  */
   if (unlikely(__pyx_v_self->_delmsq31 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 43, __pyx_L1_error)
+    __PYX_ERR(0, 116, __pyx_L1_error)
   }
   __pyx_v_self->alpha = (__pyx_v_val / __pyx_v_self->_delmsq31);
 
-  /* "pytrino/three_flavor_matter.pyx":41
+  /* "pytrino/three_flavor_matter.pyx":109
  * 
  *     @delmsq21.setter
  *     def delmsq21(self, double val):             # <<<<<<<<<<<<<<
- *         self._delmsq21 = val
- *         self.alpha = val / self._delmsq31
+ *         """
+ *         Setter for the mass-squared difference between the second and first neutrino mass eigenstates in eV^2.
  */
 
   /* function exit code */
@@ -1778,12 +1803,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq21_2__se
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":26
+/* "pytrino/three_flavor_matter.pyx":59
  * 
  *     @property
- *     def delmsq31(self): return self._delmsq31             # <<<<<<<<<<<<<<
- * 
- *     @property
+ *     def delmsq31(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mass-squared difference between the third and first neutrino mass eigenstates in eV^2.
  */
 
 /* Python wrapper */
@@ -1807,12 +1832,28 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq31
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pytrino/three_flavor_matter.pyx":66
+ *         :rtype: float
+ *         """
+ *         return self._delmsq31             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/three_flavor_matter.pyx":59
+ * 
+ *     @property
+ *     def delmsq31(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mass-squared difference between the third and first neutrino mass eigenstates in eV^2.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
@@ -1825,12 +1866,12 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq31
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":46
+/* "pytrino/three_flavor_matter.pyx":119
  * 
  *     @delmsq31.setter
  *     def delmsq31(self, double val):             # <<<<<<<<<<<<<<
- *         self._delmsq31 = val
- *         self.alpha = self._delmsq21 / val
+ *         """
+ *         Setter for the mass-squared difference between the third and first neutrino mass eigenstates in eV^2.
  */
 
 /* Python wrapper */
@@ -1844,7 +1885,7 @@ static int __pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq31_3__se
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 119, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1867,17 +1908,17 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq31_2__se
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":47
- *     @delmsq31.setter
- *     def delmsq31(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":125
+ *         :param float val: The value to set delmsq31 to.
+ *         """
  *         self._delmsq31 = val             # <<<<<<<<<<<<<<
  *         self.alpha = self._delmsq21 / val
  * 
  */
   __pyx_v_self->_delmsq31 = __pyx_v_val;
 
-  /* "pytrino/three_flavor_matter.pyx":48
- *     def delmsq31(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":126
+ *         """
  *         self._delmsq31 = val
  *         self.alpha = self._delmsq21 / val             # <<<<<<<<<<<<<<
  * 
@@ -1885,16 +1926,16 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq31_2__se
  */
   if (unlikely(__pyx_v_val == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 48, __pyx_L1_error)
+    __PYX_ERR(0, 126, __pyx_L1_error)
   }
   __pyx_v_self->alpha = (__pyx_v_self->_delmsq21 / __pyx_v_val);
 
-  /* "pytrino/three_flavor_matter.pyx":46
+  /* "pytrino/three_flavor_matter.pyx":119
  * 
  *     @delmsq31.setter
  *     def delmsq31(self, double val):             # <<<<<<<<<<<<<<
- *         self._delmsq31 = val
- *         self.alpha = self._delmsq21 / val
+ *         """
+ *         Setter for the mass-squared difference between the third and first neutrino mass eigenstates in eV^2.
  */
 
   /* function exit code */
@@ -1908,12 +1949,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8delmsq31_2__se
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":29
+/* "pytrino/three_flavor_matter.pyx":69
  * 
  *     @property
- *     def deltacp(self): return self._deltacp             # <<<<<<<<<<<<<<
- * 
- *     @property
+ *     def deltacp(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the CP-violating phase in the neutrino mixing matrix.
  */
 
 /* Python wrapper */
@@ -1937,12 +1978,28 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7deltacp_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pytrino/three_flavor_matter.pyx":76
+ *         :rtype: float
+ *         """
+ *         return self._deltacp             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_deltacp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_deltacp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/three_flavor_matter.pyx":69
+ * 
+ *     @property
+ *     def deltacp(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the CP-violating phase in the neutrino mixing matrix.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
@@ -1955,12 +2012,12 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7deltacp_
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":51
+/* "pytrino/three_flavor_matter.pyx":129
  * 
  *     @deltacp.setter
  *     def deltacp(self, double val):             # <<<<<<<<<<<<<<
- *         self._deltacp = val
- * 
+ *         """
+ *         Setter for the CP-violating phase in the neutrino mixing matrix.
  */
 
 /* Python wrapper */
@@ -1974,7 +2031,7 @@ static int __pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7deltacp_3__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 129, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -1994,21 +2051,21 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7deltacp_2__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":52
- *     @deltacp.setter
- *     def deltacp(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":135
+ *         :param float val: The value to set deltacp to.
+ *         """
  *         self._deltacp = val             # <<<<<<<<<<<<<<
  * 
  *     @theta12.setter
  */
   __pyx_v_self->_deltacp = __pyx_v_val;
 
-  /* "pytrino/three_flavor_matter.pyx":51
+  /* "pytrino/three_flavor_matter.pyx":129
  * 
  *     @deltacp.setter
  *     def deltacp(self, double val):             # <<<<<<<<<<<<<<
- *         self._deltacp = val
- * 
+ *         """
+ *         Setter for the CP-violating phase in the neutrino mixing matrix.
  */
 
   /* function exit code */
@@ -2017,12 +2074,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7deltacp_2__set
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":32
+/* "pytrino/three_flavor_matter.pyx":79
  * 
  *     @property
- *     def theta12(self): return self._theta12             # <<<<<<<<<<<<<<
- * 
- *     @property
+ *     def theta12(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mixing angle between the first and second neutrino flavor states in radians.
  */
 
 /* Python wrapper */
@@ -2046,12 +2103,28 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta12_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pytrino/three_flavor_matter.pyx":86
+ *         :rtype: float
+ *         """
+ *         return self._theta12             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_theta12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_theta12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/three_flavor_matter.pyx":79
+ * 
+ *     @property
+ *     def theta12(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mixing angle between the first and second neutrino flavor states in radians.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
@@ -2064,12 +2137,12 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta12_
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":55
+/* "pytrino/three_flavor_matter.pyx":138
  * 
  *     @theta12.setter
  *     def theta12(self, double val):             # <<<<<<<<<<<<<<
- *         self._theta12 = val
- *         self.s12 = sin(val)
+ *         """
+ *         Setter for the mixing angle between the first and second neutrino flavor states in radians.
  */
 
 /* Python wrapper */
@@ -2083,7 +2156,7 @@ static int __pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta12_3__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 55, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2103,17 +2176,17 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta12_2__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":56
- *     @theta12.setter
- *     def theta12(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":144
+ *         :param float val: The value to set theta12 to.
+ *         """
  *         self._theta12 = val             # <<<<<<<<<<<<<<
  *         self.s12 = sin(val)
  *         self.c12 = cos(val)
  */
   __pyx_v_self->_theta12 = __pyx_v_val;
 
-  /* "pytrino/three_flavor_matter.pyx":57
- *     def theta12(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":145
+ *         """
  *         self._theta12 = val
  *         self.s12 = sin(val)             # <<<<<<<<<<<<<<
  *         self.c12 = cos(val)
@@ -2121,7 +2194,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta12_2__set
  */
   __pyx_v_self->s12 = sin(__pyx_v_val);
 
-  /* "pytrino/three_flavor_matter.pyx":58
+  /* "pytrino/three_flavor_matter.pyx":146
  *         self._theta12 = val
  *         self.s12 = sin(val)
  *         self.c12 = cos(val)             # <<<<<<<<<<<<<<
@@ -2130,12 +2203,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta12_2__set
  */
   __pyx_v_self->c12 = cos(__pyx_v_val);
 
-  /* "pytrino/three_flavor_matter.pyx":55
+  /* "pytrino/three_flavor_matter.pyx":138
  * 
  *     @theta12.setter
  *     def theta12(self, double val):             # <<<<<<<<<<<<<<
- *         self._theta12 = val
- *         self.s12 = sin(val)
+ *         """
+ *         Setter for the mixing angle between the first and second neutrino flavor states in radians.
  */
 
   /* function exit code */
@@ -2144,12 +2217,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta12_2__set
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":35
+/* "pytrino/three_flavor_matter.pyx":89
  * 
  *     @property
- *     def theta13(self): return self._theta13             # <<<<<<<<<<<<<<
- * 
- *     @property
+ *     def theta13(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mixing angle between the first and third neutrino flavor states in radians.
  */
 
 /* Python wrapper */
@@ -2173,12 +2246,28 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta13_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pytrino/three_flavor_matter.pyx":96
+ *         :rtype: float
+ *         """
+ *         return self._theta13             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_theta13); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_theta13); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/three_flavor_matter.pyx":89
+ * 
+ *     @property
+ *     def theta13(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mixing angle between the first and third neutrino flavor states in radians.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
@@ -2191,12 +2280,12 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta13_
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":61
+/* "pytrino/three_flavor_matter.pyx":149
  * 
  *     @theta13.setter
  *     def theta13(self, double val):             # <<<<<<<<<<<<<<
- *         self._theta13 = val
- *         self.s13 = sin(val)
+ *         """
+ *         Setter for the mixing angle between the first and third neutrino flavor states in radians.
  */
 
 /* Python wrapper */
@@ -2210,7 +2299,7 @@ static int __pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta13_3__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2230,17 +2319,17 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta13_2__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":62
- *     @theta13.setter
- *     def theta13(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":155
+ *         :param float val: The value to set theta13 to.
+ *         """
  *         self._theta13 = val             # <<<<<<<<<<<<<<
  *         self.s13 = sin(val)
  *         self.c13 = cos(val)
  */
   __pyx_v_self->_theta13 = __pyx_v_val;
 
-  /* "pytrino/three_flavor_matter.pyx":63
- *     def theta13(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":156
+ *         """
  *         self._theta13 = val
  *         self.s13 = sin(val)             # <<<<<<<<<<<<<<
  *         self.c13 = cos(val)
@@ -2248,7 +2337,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta13_2__set
  */
   __pyx_v_self->s13 = sin(__pyx_v_val);
 
-  /* "pytrino/three_flavor_matter.pyx":64
+  /* "pytrino/three_flavor_matter.pyx":157
  *         self._theta13 = val
  *         self.s13 = sin(val)
  *         self.c13 = cos(val)             # <<<<<<<<<<<<<<
@@ -2257,12 +2346,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta13_2__set
  */
   __pyx_v_self->c13 = cos(__pyx_v_val);
 
-  /* "pytrino/three_flavor_matter.pyx":61
+  /* "pytrino/three_flavor_matter.pyx":149
  * 
  *     @theta13.setter
  *     def theta13(self, double val):             # <<<<<<<<<<<<<<
- *         self._theta13 = val
- *         self.s13 = sin(val)
+ *         """
+ *         Setter for the mixing angle between the first and third neutrino flavor states in radians.
  */
 
   /* function exit code */
@@ -2271,12 +2360,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta13_2__set
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":38
+/* "pytrino/three_flavor_matter.pyx":99
  * 
  *     @property
- *     def theta23(self): return self._theta23             # <<<<<<<<<<<<<<
- * 
- *     @delmsq21.setter
+ *     def theta23(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mixing angle between the second and third neutrino flavor states in radians.
  */
 
 /* Python wrapper */
@@ -2300,12 +2389,28 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta23_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "pytrino/three_flavor_matter.pyx":106
+ *         :rtype: float
+ *         """
+ *         return self._theta23             # <<<<<<<<<<<<<<
+ * 
+ *     @delmsq21.setter
+ */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_theta23); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_theta23); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
+
+  /* "pytrino/three_flavor_matter.pyx":99
+ * 
+ *     @property
+ *     def theta23(self):             # <<<<<<<<<<<<<<
+ *         """
+ *         Getter for the mixing angle between the second and third neutrino flavor states in radians.
+ */
 
   /* function exit code */
   __pyx_L1_error:;
@@ -2318,12 +2423,12 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta23_
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":67
+/* "pytrino/three_flavor_matter.pyx":160
  * 
  *     @theta23.setter
  *     def theta23(self, double val):             # <<<<<<<<<<<<<<
- *         self._theta23 = val
- *         self.s23 = sin(val)
+ *         """
+ *         Setter for the mixing angle between the second and third neutrino flavor states in radians.
  */
 
 /* Python wrapper */
@@ -2337,7 +2442,7 @@ static int __pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta23_3__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_val); {
-    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 67, __pyx_L3_error)
+    __pyx_v_val = __pyx_PyFloat_AsDouble(__pyx_arg_val); if (unlikely((__pyx_v_val == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2357,17 +2462,17 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta23_2__set
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":68
- *     @theta23.setter
- *     def theta23(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":166
+ *         :param float val: The value to set theta23 to.
+ *         """
  *         self._theta23 = val             # <<<<<<<<<<<<<<
  *         self.s23 = sin(val)
  *         self.c23 = cos(val)
  */
   __pyx_v_self->_theta23 = __pyx_v_val;
 
-  /* "pytrino/three_flavor_matter.pyx":69
- *     def theta23(self, double val):
+  /* "pytrino/three_flavor_matter.pyx":167
+ *         """
  *         self._theta23 = val
  *         self.s23 = sin(val)             # <<<<<<<<<<<<<<
  *         self.c23 = cos(val)
@@ -2375,7 +2480,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta23_2__set
  */
   __pyx_v_self->s23 = sin(__pyx_v_val);
 
-  /* "pytrino/three_flavor_matter.pyx":70
+  /* "pytrino/three_flavor_matter.pyx":168
  *         self._theta23 = val
  *         self.s23 = sin(val)
  *         self.c23 = cos(val)             # <<<<<<<<<<<<<<
@@ -2384,12 +2489,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta23_2__set
  */
   __pyx_v_self->c23 = cos(__pyx_v_val);
 
-  /* "pytrino/three_flavor_matter.pyx":67
+  /* "pytrino/three_flavor_matter.pyx":160
  * 
  *     @theta23.setter
  *     def theta23(self, double val):             # <<<<<<<<<<<<<<
- *         self._theta23 = val
- *         self.s23 = sin(val)
+ *         """
+ *         Setter for the mixing angle between the second and third neutrino flavor states in radians.
  */
 
   /* function exit code */
@@ -2398,12 +2503,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_7theta23_2__set
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":74
+/* "pytrino/three_flavor_matter.pyx":172
  *     # delmsq21 and delmsq31 in eV^2
  *     # all angles in radians
  *     def __cinit__(self, double delmsq21, double delmsq31, double deltacp, double theta12, double theta13, double theta23):             # <<<<<<<<<<<<<<
- *         self._delmsq21 = delmsq21
- *         self._delmsq31 = delmsq31
+ *         """
+ *         Initialize a ThreeFlavor solver with the specified parameters.
  */
 
 /* Python wrapper */
@@ -2452,35 +2557,35 @@ static int __pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_1__cinit__(PyOb
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_delmsq31)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 1); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 1); __PYX_ERR(0, 172, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_deltacp)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 2); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 2); __PYX_ERR(0, 172, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_theta12)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 3); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 3); __PYX_ERR(0, 172, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_theta13)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 4); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 4); __PYX_ERR(0, 172, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_theta23)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 5); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, 5); __PYX_ERR(0, 172, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 74, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 172, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
       goto __pyx_L5_argtuple_error;
@@ -2492,16 +2597,16 @@ static int __pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_1__cinit__(PyOb
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
       values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
     }
-    __pyx_v_delmsq21 = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_delmsq21 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
-    __pyx_v_delmsq31 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_delmsq31 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
-    __pyx_v_deltacp = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_deltacp == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
-    __pyx_v_theta12 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
-    __pyx_v_theta13 = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_theta13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
-    __pyx_v_theta23 = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_theta23 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
+    __pyx_v_delmsq21 = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_delmsq21 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
+    __pyx_v_delmsq31 = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_delmsq31 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
+    __pyx_v_deltacp = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_deltacp == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
+    __pyx_v_theta12 = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_theta12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
+    __pyx_v_theta13 = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_theta13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
+    __pyx_v_theta23 = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_theta23 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 172, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 74, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 172, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pytrino.three_flavor_matter.ThreeFlavor.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2522,17 +2627,17 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":75
- *     # all angles in radians
- *     def __cinit__(self, double delmsq21, double delmsq31, double deltacp, double theta12, double theta13, double theta23):
+  /* "pytrino/three_flavor_matter.pyx":183
+ *         :param float theta23: Mixing angle between the second and third neutrino flavor states in radians.
+ *         """
  *         self._delmsq21 = delmsq21             # <<<<<<<<<<<<<<
  *         self._delmsq31 = delmsq31
  * 
  */
   __pyx_v_self->_delmsq21 = __pyx_v_delmsq21;
 
-  /* "pytrino/three_flavor_matter.pyx":76
- *     def __cinit__(self, double delmsq21, double delmsq31, double deltacp, double theta12, double theta13, double theta23):
+  /* "pytrino/three_flavor_matter.pyx":184
+ *         """
  *         self._delmsq21 = delmsq21
  *         self._delmsq31 = delmsq31             # <<<<<<<<<<<<<<
  * 
@@ -2540,7 +2645,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->_delmsq31 = __pyx_v_delmsq31;
 
-  /* "pytrino/three_flavor_matter.pyx":78
+  /* "pytrino/three_flavor_matter.pyx":186
  *         self._delmsq31 = delmsq31
  * 
  *         self._deltacp = deltacp             # <<<<<<<<<<<<<<
@@ -2549,7 +2654,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->_deltacp = __pyx_v_deltacp;
 
-  /* "pytrino/three_flavor_matter.pyx":79
+  /* "pytrino/three_flavor_matter.pyx":187
  * 
  *         self._deltacp = deltacp
  *         self._theta12 = theta12             # <<<<<<<<<<<<<<
@@ -2558,7 +2663,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->_theta12 = __pyx_v_theta12;
 
-  /* "pytrino/three_flavor_matter.pyx":80
+  /* "pytrino/three_flavor_matter.pyx":188
  *         self._deltacp = deltacp
  *         self._theta12 = theta12
  *         self._theta13 = theta13             # <<<<<<<<<<<<<<
@@ -2567,7 +2672,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->_theta13 = __pyx_v_theta13;
 
-  /* "pytrino/three_flavor_matter.pyx":81
+  /* "pytrino/three_flavor_matter.pyx":189
  *         self._theta12 = theta12
  *         self._theta13 = theta13
  *         self._theta23 = theta23             # <<<<<<<<<<<<<<
@@ -2576,7 +2681,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->_theta23 = __pyx_v_theta23;
 
-  /* "pytrino/three_flavor_matter.pyx":83
+  /* "pytrino/three_flavor_matter.pyx":191
  *         self._theta23 = theta23
  * 
  *         self.alpha = delmsq21 / delmsq31             # <<<<<<<<<<<<<<
@@ -2585,11 +2690,11 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   if (unlikely(__pyx_v_delmsq31 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 83, __pyx_L1_error)
+    __PYX_ERR(0, 191, __pyx_L1_error)
   }
   __pyx_v_self->alpha = (__pyx_v_delmsq21 / __pyx_v_delmsq31);
 
-  /* "pytrino/three_flavor_matter.pyx":85
+  /* "pytrino/three_flavor_matter.pyx":193
  *         self.alpha = delmsq21 / delmsq31
  * 
  *         self.s12 = sin(theta12)             # <<<<<<<<<<<<<<
@@ -2598,7 +2703,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->s12 = sin(__pyx_v_theta12);
 
-  /* "pytrino/three_flavor_matter.pyx":86
+  /* "pytrino/three_flavor_matter.pyx":194
  * 
  *         self.s12 = sin(theta12)
  *         self.c12 = cos(theta12)             # <<<<<<<<<<<<<<
@@ -2607,7 +2712,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->c12 = cos(__pyx_v_theta12);
 
-  /* "pytrino/three_flavor_matter.pyx":87
+  /* "pytrino/three_flavor_matter.pyx":195
  *         self.s12 = sin(theta12)
  *         self.c12 = cos(theta12)
  *         self.s13 = sin(theta13)             # <<<<<<<<<<<<<<
@@ -2616,7 +2721,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->s13 = sin(__pyx_v_theta13);
 
-  /* "pytrino/three_flavor_matter.pyx":88
+  /* "pytrino/three_flavor_matter.pyx":196
  *         self.c12 = cos(theta12)
  *         self.s13 = sin(theta13)
  *         self.c13 = cos(theta13)             # <<<<<<<<<<<<<<
@@ -2625,7 +2730,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->c13 = cos(__pyx_v_theta13);
 
-  /* "pytrino/three_flavor_matter.pyx":89
+  /* "pytrino/three_flavor_matter.pyx":197
  *         self.s13 = sin(theta13)
  *         self.c13 = cos(theta13)
  *         self.s23 = sin(theta23)             # <<<<<<<<<<<<<<
@@ -2634,7 +2739,7 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->s23 = sin(__pyx_v_theta23);
 
-  /* "pytrino/three_flavor_matter.pyx":90
+  /* "pytrino/three_flavor_matter.pyx":198
  *         self.c13 = cos(theta13)
  *         self.s23 = sin(theta23)
  *         self.c23 = cos(theta23)             # <<<<<<<<<<<<<<
@@ -2643,12 +2748,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
  */
   __pyx_v_self->c23 = cos(__pyx_v_theta23);
 
-  /* "pytrino/three_flavor_matter.pyx":74
+  /* "pytrino/three_flavor_matter.pyx":172
  *     # delmsq21 and delmsq31 in eV^2
  *     # all angles in radians
  *     def __cinit__(self, double delmsq21, double delmsq31, double deltacp, double theta12, double theta13, double theta23):             # <<<<<<<<<<<<<<
- *         self._delmsq21 = delmsq21
- *         self._delmsq31 = delmsq31
+ *         """
+ *         Initialize a ThreeFlavor solver with the specified parameters.
  */
 
   /* function exit code */
@@ -2662,12 +2767,12 @@ static int __pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor___cinit__(struc
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":92
+/* "pytrino/three_flavor_matter.pyx":200
  *         self.c23 = cos(theta23)
  * 
  *     cdef (double, double, double) eigenvalues(self, double E, double V):             # <<<<<<<<<<<<<<
- *         cdef double delmsq21 = self.delmsq21
- *         cdef double delmsq31 = self.delmsq31
+ *         """
+ *         Compute the exact eigenvalues of the Hamiltonian in matter.
  */
 
 static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_eigenvalues(struct __pyx_obj_7pytrino_19three_flavor_matter_ThreeFlavor *__pyx_v_self, double __pyx_v_E, double __pyx_v_V) {
@@ -2697,33 +2802,33 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eigenvalues", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":93
+  /* "pytrino/three_flavor_matter.pyx":210
+ *         """
  * 
- *     cdef (double, double, double) eigenvalues(self, double E, double V):
  *         cdef double delmsq21 = self.delmsq21             # <<<<<<<<<<<<<<
  *         cdef double delmsq31 = self.delmsq31
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq21); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq21); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_delmsq21 = __pyx_t_2;
 
-  /* "pytrino/three_flavor_matter.pyx":94
- *     cdef (double, double, double) eigenvalues(self, double E, double V):
+  /* "pytrino/three_flavor_matter.pyx":211
+ * 
  *         cdef double delmsq21 = self.delmsq21
  *         cdef double delmsq31 = self.delmsq31             # <<<<<<<<<<<<<<
  * 
  *         cdef double s12 = self.s12
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 211, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_delmsq31 = __pyx_t_2;
 
-  /* "pytrino/three_flavor_matter.pyx":96
+  /* "pytrino/three_flavor_matter.pyx":213
  *         cdef double delmsq31 = self.delmsq31
  * 
  *         cdef double s12 = self.s12             # <<<<<<<<<<<<<<
@@ -2733,7 +2838,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   __pyx_t_2 = __pyx_v_self->s12;
   __pyx_v_s12 = __pyx_t_2;
 
-  /* "pytrino/three_flavor_matter.pyx":97
+  /* "pytrino/three_flavor_matter.pyx":214
  * 
  *         cdef double s12 = self.s12
  *         cdef double c12 = self.c12             # <<<<<<<<<<<<<<
@@ -2743,7 +2848,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   __pyx_t_2 = __pyx_v_self->c12;
   __pyx_v_c12 = __pyx_t_2;
 
-  /* "pytrino/three_flavor_matter.pyx":98
+  /* "pytrino/three_flavor_matter.pyx":215
  *         cdef double s12 = self.s12
  *         cdef double c12 = self.c12
  *         cdef double c13 = self.c13             # <<<<<<<<<<<<<<
@@ -2753,26 +2858,26 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   __pyx_t_2 = __pyx_v_self->c13;
   __pyx_v_c13 = __pyx_t_2;
 
-  /* "pytrino/three_flavor_matter.pyx":100
+  /* "pytrino/three_flavor_matter.pyx":217
  *         cdef double c13 = self.c13
  * 
  *         cdef double A = (2 * 1e+9 * E * V) / self.delmsq31             # <<<<<<<<<<<<<<
  * 
  *         cdef double X = delmsq21 + delmsq31 + (A * delmsq31)
  */
-  __pyx_t_1 = PyFloat_FromDouble((((2.0 * 1e+9) * __pyx_v_E) * __pyx_v_V)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((((2.0 * 1e+9) * __pyx_v_E) * __pyx_v_V)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_2 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 217, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_A = __pyx_t_2;
 
-  /* "pytrino/three_flavor_matter.pyx":102
+  /* "pytrino/three_flavor_matter.pyx":219
  *         cdef double A = (2 * 1e+9 * E * V) / self.delmsq31
  * 
  *         cdef double X = delmsq21 + delmsq31 + (A * delmsq31)             # <<<<<<<<<<<<<<
@@ -2781,7 +2886,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_X = ((__pyx_v_delmsq21 + __pyx_v_delmsq31) + (__pyx_v_A * __pyx_v_delmsq31));
 
-  /* "pytrino/three_flavor_matter.pyx":103
+  /* "pytrino/three_flavor_matter.pyx":220
  * 
  *         cdef double X = delmsq21 + delmsq31 + (A * delmsq31)
  *         cdef double Y = delmsq21 * delmsq31 + (A * delmsq31) * (delmsq31 * c13**2 + delmsq21 * (1 - c13**2 * s12**2))             # <<<<<<<<<<<<<<
@@ -2790,7 +2895,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_Y = ((__pyx_v_delmsq21 * __pyx_v_delmsq31) + ((__pyx_v_A * __pyx_v_delmsq31) * ((__pyx_v_delmsq31 * pow(__pyx_v_c13, 2.0)) + (__pyx_v_delmsq21 * (1.0 - (pow(__pyx_v_c13, 2.0) * pow(__pyx_v_s12, 2.0)))))));
 
-  /* "pytrino/three_flavor_matter.pyx":104
+  /* "pytrino/three_flavor_matter.pyx":221
  *         cdef double X = delmsq21 + delmsq31 + (A * delmsq31)
  *         cdef double Y = delmsq21 * delmsq31 + (A * delmsq31) * (delmsq31 * c13**2 + delmsq21 * (1 - c13**2 * s12**2))
  *         cdef double Z = (A * delmsq31) * delmsq21 * delmsq31 * c13**2 * c12**2             # <<<<<<<<<<<<<<
@@ -2799,7 +2904,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_Z = (((((__pyx_v_A * __pyx_v_delmsq31) * __pyx_v_delmsq21) * __pyx_v_delmsq31) * pow(__pyx_v_c13, 2.0)) * pow(__pyx_v_c12, 2.0));
 
-  /* "pytrino/three_flavor_matter.pyx":105
+  /* "pytrino/three_flavor_matter.pyx":222
  *         cdef double Y = delmsq21 * delmsq31 + (A * delmsq31) * (delmsq31 * c13**2 + delmsq21 * (1 - c13**2 * s12**2))
  *         cdef double Z = (A * delmsq31) * delmsq21 * delmsq31 * c13**2 * c12**2
  *         cdef double W = cos((1/3) * acos((2 * X**3 - 9 * X * Y + 27 * Z)/(2 * (X**2 - 3 * Y)**(3/2))))             # <<<<<<<<<<<<<<
@@ -2810,11 +2915,11 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   __pyx_t_5 = (2.0 * pow((pow(__pyx_v_X, 2.0) - (3.0 * __pyx_v_Y)), (3.0 / 2.0)));
   if (unlikely(__pyx_t_5 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 105, __pyx_L1_error)
+    __PYX_ERR(0, 222, __pyx_L1_error)
   }
   __pyx_v_W = cos(((1.0 / 3.0) * acos((__pyx_t_2 / __pyx_t_5))));
 
-  /* "pytrino/three_flavor_matter.pyx":107
+  /* "pytrino/three_flavor_matter.pyx":224
  *         cdef double W = cos((1/3) * acos((2 * X**3 - 9 * X * Y + 27 * Z)/(2 * (X**2 - 3 * Y)**(3/2))))
  * 
  *         cdef double lda1 = (X/3) - (1/3) * sqrt(X**2 - 3 * Y) * (W + sqrt(3 * (1 - W**2)))             # <<<<<<<<<<<<<<
@@ -2823,7 +2928,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_lda1 = ((__pyx_v_X / 3.0) - (((1.0 / 3.0) * sqrt((pow(__pyx_v_X, 2.0) - (3.0 * __pyx_v_Y)))) * (__pyx_v_W + sqrt((3.0 * (1.0 - pow(__pyx_v_W, 2.0)))))));
 
-  /* "pytrino/three_flavor_matter.pyx":108
+  /* "pytrino/three_flavor_matter.pyx":225
  * 
  *         cdef double lda1 = (X/3) - (1/3) * sqrt(X**2 - 3 * Y) * (W + sqrt(3 * (1 - W**2)))
  *         cdef double lda2 = (X/3) - (1/3) * sqrt(X**2 - 3 * Y) * (W - sqrt(3 * (1 - W**2)))             # <<<<<<<<<<<<<<
@@ -2832,7 +2937,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_lda2 = ((__pyx_v_X / 3.0) - (((1.0 / 3.0) * sqrt((pow(__pyx_v_X, 2.0) - (3.0 * __pyx_v_Y)))) * (__pyx_v_W - sqrt((3.0 * (1.0 - pow(__pyx_v_W, 2.0)))))));
 
-  /* "pytrino/three_flavor_matter.pyx":109
+  /* "pytrino/three_flavor_matter.pyx":226
  *         cdef double lda1 = (X/3) - (1/3) * sqrt(X**2 - 3 * Y) * (W + sqrt(3 * (1 - W**2)))
  *         cdef double lda2 = (X/3) - (1/3) * sqrt(X**2 - 3 * Y) * (W - sqrt(3 * (1 - W**2)))
  *         cdef double lda3 = (X/3) + (2/3) * sqrt(X**2 - 3 * Y) * W             # <<<<<<<<<<<<<<
@@ -2841,7 +2946,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_lda3 = ((__pyx_v_X / 3.0) + (((2.0 / 3.0) * sqrt((pow(__pyx_v_X, 2.0) - (3.0 * __pyx_v_Y)))) * __pyx_v_W));
 
-  /* "pytrino/three_flavor_matter.pyx":111
+  /* "pytrino/three_flavor_matter.pyx":228
  *         cdef double lda3 = (X/3) + (2/3) * sqrt(X**2 - 3 * Y) * W
  * 
  *         lda1 = lda1 / delmsq31  # document this TODO             # <<<<<<<<<<<<<<
@@ -2850,11 +2955,11 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   if (unlikely(__pyx_v_delmsq31 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 111, __pyx_L1_error)
+    __PYX_ERR(0, 228, __pyx_L1_error)
   }
   __pyx_v_lda1 = (__pyx_v_lda1 / __pyx_v_delmsq31);
 
-  /* "pytrino/three_flavor_matter.pyx":112
+  /* "pytrino/three_flavor_matter.pyx":229
  * 
  *         lda1 = lda1 / delmsq31  # document this TODO
  *         lda2 = lda2 / delmsq31             # <<<<<<<<<<<<<<
@@ -2863,11 +2968,11 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   if (unlikely(__pyx_v_delmsq31 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 112, __pyx_L1_error)
+    __PYX_ERR(0, 229, __pyx_L1_error)
   }
   __pyx_v_lda2 = (__pyx_v_lda2 / __pyx_v_delmsq31);
 
-  /* "pytrino/three_flavor_matter.pyx":113
+  /* "pytrino/three_flavor_matter.pyx":230
  *         lda1 = lda1 / delmsq31  # document this TODO
  *         lda2 = lda2 / delmsq31
  *         lda3 = lda3 / delmsq31             # <<<<<<<<<<<<<<
@@ -2876,11 +2981,11 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   if (unlikely(__pyx_v_delmsq31 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 113, __pyx_L1_error)
+    __PYX_ERR(0, 230, __pyx_L1_error)
   }
   __pyx_v_lda3 = (__pyx_v_lda3 / __pyx_v_delmsq31);
 
-  /* "pytrino/three_flavor_matter.pyx":115
+  /* "pytrino/three_flavor_matter.pyx":232
  *         lda3 = lda3 / delmsq31
  * 
  *         return lda1, lda2, lda3             # <<<<<<<<<<<<<<
@@ -2893,12 +2998,12 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   __pyx_r = __pyx_t_6;
   goto __pyx_L0;
 
-  /* "pytrino/three_flavor_matter.pyx":92
+  /* "pytrino/three_flavor_matter.pyx":200
  *         self.c23 = cos(theta23)
  * 
  *     cdef (double, double, double) eigenvalues(self, double E, double V):             # <<<<<<<<<<<<<<
- *         cdef double delmsq21 = self.delmsq21
- *         cdef double delmsq31 = self.delmsq31
+ *         """
+ *         Compute the exact eigenvalues of the Hamiltonian in matter.
  */
 
   /* function exit code */
@@ -2913,12 +3018,12 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":120
+/* "pytrino/three_flavor_matter.pyx":237
  *     # E in GeV
  *     # V in eV
  *     cpdef (double, double, double) deltamsq_matter(self, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         if antineutrinos:
- *             V = -V
+ *         """
+ *         Compute the effective mass-squared differences of the neutrinos in matter.
  */
 
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq_matter(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
@@ -2965,14 +3070,14 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_deltamsq_matter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_deltamsq_matter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 237, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq_matter)) {
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 120, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 237, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_V); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 120, __pyx_L1_error)
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_V); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 237, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = __Pyx_PyBool_FromLong(__pyx_v_antineutrinos); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 120, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyBool_FromLong(__pyx_v_antineutrinos); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 237, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_6 = __pyx_t_1; __pyx_t_7 = NULL;
@@ -2990,7 +3095,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_6)) {
           PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_3, __pyx_t_4, __pyx_t_5};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 237, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3001,7 +3106,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
           PyObject *__pyx_temp[4] = {__pyx_t_7, __pyx_t_3, __pyx_t_4, __pyx_t_5};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_8, 3+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 237, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3010,7 +3115,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
         } else
         #endif
         {
-          __pyx_t_9 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 120, __pyx_L1_error)
+          __pyx_t_9 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 237, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           if (__pyx_t_7) {
             __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -3024,12 +3129,12 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
           __pyx_t_3 = 0;
           __pyx_t_4 = 0;
           __pyx_t_5 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 237, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         }
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_double__and_double__and_double(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L1_error)
+        __pyx_t_10 = __pyx_convert__from_py___pyx_ctuple_double__and_double__and_double(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 237, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_10;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3048,9 +3153,9 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
     #endif
   }
 
-  /* "pytrino/three_flavor_matter.pyx":121
- *     # V in eV
- *     cpdef (double, double, double) deltamsq_matter(self, double E, double V, bint antineutrinos = False):
+  /* "pytrino/three_flavor_matter.pyx":247
+ *         :rtype: Tuple[float, float, float]
+ *         """
  *         if antineutrinos:             # <<<<<<<<<<<<<<
  *             V = -V
  * 
@@ -3058,8 +3163,8 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   __pyx_t_11 = (__pyx_v_antineutrinos != 0);
   if (__pyx_t_11) {
 
-    /* "pytrino/three_flavor_matter.pyx":122
- *     cpdef (double, double, double) deltamsq_matter(self, double E, double V, bint antineutrinos = False):
+    /* "pytrino/three_flavor_matter.pyx":248
+ *         """
  *         if antineutrinos:
  *             V = -V             # <<<<<<<<<<<<<<
  * 
@@ -3067,29 +3172,29 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
     __pyx_v_V = (-__pyx_v_V);
 
-    /* "pytrino/three_flavor_matter.pyx":121
- *     # V in eV
- *     cpdef (double, double, double) deltamsq_matter(self, double E, double V, bint antineutrinos = False):
+    /* "pytrino/three_flavor_matter.pyx":247
+ *         :rtype: Tuple[float, float, float]
+ *         """
  *         if antineutrinos:             # <<<<<<<<<<<<<<
  *             V = -V
  * 
  */
   }
 
-  /* "pytrino/three_flavor_matter.pyx":124
+  /* "pytrino/three_flavor_matter.pyx":250
  *             V = -V
  * 
  *         cdef double delmsq31 = self.delmsq31             # <<<<<<<<<<<<<<
  * 
  *         cdef double lda1, lda2, lda3
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_delmsq31 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":127
+  /* "pytrino/three_flavor_matter.pyx":253
  * 
  *         cdef double lda1, lda2, lda3
  *         lda1, lda2, lda3 = self.eigenvalues(E, V)             # <<<<<<<<<<<<<<
@@ -3104,7 +3209,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   __pyx_v_lda2 = __pyx_t_13;
   __pyx_v_lda3 = __pyx_t_14;
 
-  /* "pytrino/three_flavor_matter.pyx":129
+  /* "pytrino/three_flavor_matter.pyx":255
  *         lda1, lda2, lda3 = self.eigenvalues(E, V)
  * 
  *         cdef double delmsq21mat = delmsq31 * (lda2 - lda1)             # <<<<<<<<<<<<<<
@@ -3113,7 +3218,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_delmsq21mat = (__pyx_v_delmsq31 * (__pyx_v_lda2 - __pyx_v_lda1));
 
-  /* "pytrino/three_flavor_matter.pyx":130
+  /* "pytrino/three_flavor_matter.pyx":256
  * 
  *         cdef double delmsq21mat = delmsq31 * (lda2 - lda1)
  *         cdef double delmsq31mat = delmsq31 * (lda3 - lda1)             # <<<<<<<<<<<<<<
@@ -3122,7 +3227,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_delmsq31mat = (__pyx_v_delmsq31 * (__pyx_v_lda3 - __pyx_v_lda1));
 
-  /* "pytrino/three_flavor_matter.pyx":131
+  /* "pytrino/three_flavor_matter.pyx":257
  *         cdef double delmsq21mat = delmsq31 * (lda2 - lda1)
  *         cdef double delmsq31mat = delmsq31 * (lda3 - lda1)
  *         cdef double delmsq32mat = delmsq31 * (lda3 - lda2)             # <<<<<<<<<<<<<<
@@ -3131,7 +3236,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
  */
   __pyx_v_delmsq32mat = (__pyx_v_delmsq31 * (__pyx_v_lda3 - __pyx_v_lda2));
 
-  /* "pytrino/three_flavor_matter.pyx":133
+  /* "pytrino/three_flavor_matter.pyx":259
  *         cdef double delmsq32mat = delmsq31 * (lda3 - lda2)
  * 
  *         return delmsq21mat, delmsq31mat, delmsq32mat             # <<<<<<<<<<<<<<
@@ -3144,12 +3249,12 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
   __pyx_r = __pyx_t_10;
   goto __pyx_L0;
 
-  /* "pytrino/three_flavor_matter.pyx":120
+  /* "pytrino/three_flavor_matter.pyx":237
  *     # E in GeV
  *     # V in eV
  *     cpdef (double, double, double) deltamsq_matter(self, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         if antineutrinos:
- *             V = -V
+ *         """
+ *         Compute the effective mass-squared differences of the neutrinos in matter.
  */
 
   /* function exit code */
@@ -3171,6 +3276,7 @@ static __pyx_ctuple_double__and_double__and_double __pyx_f_7pytrino_19three_flav
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq_matter(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7pytrino_19three_flavor_matter_11ThreeFlavor_2deltamsq_matter[] = "\n        Compute the effective mass-squared differences of the neutrinos in matter.\n\n        :param float E: Neutrino energy in GeV.\n        :param float V: Matter potential in eV.\n        :param bool antineutrinos: Flag indicating whether the neutrinos are antineutrinos (default is False).\n        :returns: The effective mass-squared differences of the neutrinos in matter.\n        :rtype: Tuple[float, float, float]\n        ";
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq_matter(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   double __pyx_v_E;
   double __pyx_v_V;
@@ -3206,7 +3312,7 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_V)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("deltamsq_matter", 0, 2, 3, 1); __PYX_ERR(0, 120, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("deltamsq_matter", 0, 2, 3, 1); __PYX_ERR(0, 237, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -3216,7 +3322,7 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "deltamsq_matter") < 0)) __PYX_ERR(0, 120, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "deltamsq_matter") < 0)) __PYX_ERR(0, 237, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3228,17 +3334,17 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_E = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L3_error)
-    __pyx_v_V = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L3_error)
+    __pyx_v_E = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 237, __pyx_L3_error)
+    __pyx_v_V = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 237, __pyx_L3_error)
     if (values[2]) {
-      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L3_error)
+      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 237, __pyx_L3_error)
     } else {
       __pyx_v_antineutrinos = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("deltamsq_matter", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 120, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("deltamsq_matter", 0, 2, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 237, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pytrino.three_flavor_matter.ThreeFlavor.deltamsq_matter", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3265,7 +3371,7 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_2deltamsq
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.antineutrinos = __pyx_v_antineutrinos;
   __pyx_t_1 = __pyx_vtabptr_7pytrino_19three_flavor_matter_ThreeFlavor->deltamsq_matter(__pyx_v_self, __pyx_v_E, __pyx_v_V, 1, &__pyx_t_2); 
-  __pyx_t_3 = __pyx_convert__to_py___pyx_ctuple_double__and_double__and_double(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_3 = __pyx_convert__to_py___pyx_ctuple_double__and_double__and_double(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
@@ -3282,12 +3388,12 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_2deltamsq
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":135
+/* "pytrino/three_flavor_matter.pyx":261
  *         return delmsq21mat, delmsq31mat, delmsq32mat
  * 
  *     cpdef (double, double, double, double) angles_phase_matter(self, double L, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         cdef double delmsq31 = self.delmsq31
- *         cdef double alpha = self.alpha
+ *         """
+ *         Compute the mixing angles and CP-violating phase in matter.
  */
 
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_phase_matter(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
@@ -3365,16 +3471,16 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_angles_phase_matter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_angles_phase_matter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_phase_matter)) {
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_L); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_L); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 261, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_V); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
+        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_V); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = __Pyx_PyBool_FromLong(__pyx_v_antineutrinos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 135, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyBool_FromLong(__pyx_v_antineutrinos); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 261, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_7 = __pyx_t_1; __pyx_t_8 = NULL;
@@ -3392,7 +3498,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_7)) {
           PyObject *__pyx_temp[5] = {__pyx_t_8, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 4+__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 4+__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3404,7 +3510,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_7)) {
           PyObject *__pyx_temp[5] = {__pyx_t_8, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 4+__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_7, __pyx_temp+1-__pyx_t_9, 4+__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -3414,7 +3520,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
         } else
         #endif
         {
-          __pyx_t_10 = PyTuple_New(4+__pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 135, __pyx_L1_error)
+          __pyx_t_10 = PyTuple_New(4+__pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 261, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_10);
           if (__pyx_t_8) {
             __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_8); __pyx_t_8 = NULL;
@@ -3431,12 +3537,12 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
           __pyx_t_4 = 0;
           __pyx_t_5 = 0;
           __pyx_t_6 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_10, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_t_10, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 261, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         }
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __pyx_t_11 = __pyx_convert__from_py___pyx_ctuple_double__and_double__and_double__and_double(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L1_error)
+        __pyx_t_11 = __pyx_convert__from_py___pyx_ctuple_double__and_double__and_double__and_double(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 261, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_11;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3455,21 +3561,21 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
     #endif
   }
 
-  /* "pytrino/three_flavor_matter.pyx":136
- * 
- *     cpdef (double, double, double, double) angles_phase_matter(self, double L, double E, double V, bint antineutrinos = False):
+  /* "pytrino/three_flavor_matter.pyx":272
+ *         :rtype: Tuple[float, float, float, float]
+ *         """
  *         cdef double delmsq31 = self.delmsq31             # <<<<<<<<<<<<<<
  *         cdef double alpha = self.alpha
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 272, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 272, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_delmsq31 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":137
- *     cpdef (double, double, double, double) angles_phase_matter(self, double L, double E, double V, bint antineutrinos = False):
+  /* "pytrino/three_flavor_matter.pyx":273
+ *         """
  *         cdef double delmsq31 = self.delmsq31
  *         cdef double alpha = self.alpha             # <<<<<<<<<<<<<<
  * 
@@ -3478,7 +3584,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_12 = __pyx_v_self->alpha;
   __pyx_v_alpha = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":140
+  /* "pytrino/three_flavor_matter.pyx":276
  * 
  *         cdef double deltacp
  *         if antineutrinos:             # <<<<<<<<<<<<<<
@@ -3488,7 +3594,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_13 = (__pyx_v_antineutrinos != 0);
   if (__pyx_t_13) {
 
-    /* "pytrino/three_flavor_matter.pyx":141
+    /* "pytrino/three_flavor_matter.pyx":277
  *         cdef double deltacp
  *         if antineutrinos:
  *             V = -V             # <<<<<<<<<<<<<<
@@ -3497,23 +3603,23 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
     __pyx_v_V = (-__pyx_v_V);
 
-    /* "pytrino/three_flavor_matter.pyx":142
+    /* "pytrino/three_flavor_matter.pyx":278
  *         if antineutrinos:
  *             V = -V
  *             deltacp = -self.deltacp             # <<<<<<<<<<<<<<
  *         else:
  *             deltacp = self.deltacp
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_deltacp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_deltacp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 278, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Negative(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 278, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 278, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_deltacp = __pyx_t_12;
 
-    /* "pytrino/three_flavor_matter.pyx":140
+    /* "pytrino/three_flavor_matter.pyx":276
  * 
  *         cdef double deltacp
  *         if antineutrinos:             # <<<<<<<<<<<<<<
@@ -3523,7 +3629,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
     goto __pyx_L3;
   }
 
-  /* "pytrino/three_flavor_matter.pyx":144
+  /* "pytrino/three_flavor_matter.pyx":280
  *             deltacp = -self.deltacp
  *         else:
  *             deltacp = self.deltacp             # <<<<<<<<<<<<<<
@@ -3531,28 +3637,28 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  *         cdef double theta23 = self.theta23
  */
   /*else*/ {
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_deltacp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_deltacp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 280, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 144, __pyx_L1_error)
+    __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 280, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_deltacp = __pyx_t_12;
   }
   __pyx_L3:;
 
-  /* "pytrino/three_flavor_matter.pyx":146
+  /* "pytrino/three_flavor_matter.pyx":282
  *             deltacp = self.deltacp
  * 
  *         cdef double theta23 = self.theta23             # <<<<<<<<<<<<<<
  * 
  *         cdef double s12 = self.s12
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_theta23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_theta23); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_12 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_12 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_theta23 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":148
+  /* "pytrino/three_flavor_matter.pyx":284
  *         cdef double theta23 = self.theta23
  * 
  *         cdef double s12 = self.s12             # <<<<<<<<<<<<<<
@@ -3562,7 +3668,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_12 = __pyx_v_self->s12;
   __pyx_v_s12 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":149
+  /* "pytrino/three_flavor_matter.pyx":285
  * 
  *         cdef double s12 = self.s12
  *         cdef double c12 = self.c12             # <<<<<<<<<<<<<<
@@ -3572,7 +3678,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_12 = __pyx_v_self->c12;
   __pyx_v_c12 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":150
+  /* "pytrino/three_flavor_matter.pyx":286
  *         cdef double s12 = self.s12
  *         cdef double c12 = self.c12
  *         cdef double s13 = self.s13             # <<<<<<<<<<<<<<
@@ -3582,7 +3688,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_12 = __pyx_v_self->s13;
   __pyx_v_s13 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":151
+  /* "pytrino/three_flavor_matter.pyx":287
  *         cdef double c12 = self.c12
  *         cdef double s13 = self.s13
  *         cdef double c13 = self.c13             # <<<<<<<<<<<<<<
@@ -3592,7 +3698,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_12 = __pyx_v_self->c13;
   __pyx_v_c13 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":152
+  /* "pytrino/three_flavor_matter.pyx":288
  *         cdef double s13 = self.s13
  *         cdef double c13 = self.c13
  *         cdef double s23 = self.s23             # <<<<<<<<<<<<<<
@@ -3602,7 +3708,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_12 = __pyx_v_self->s23;
   __pyx_v_s23 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":153
+  /* "pytrino/three_flavor_matter.pyx":289
  *         cdef double c13 = self.c13
  *         cdef double s23 = self.s23
  *         cdef double c23 = self.c23             # <<<<<<<<<<<<<<
@@ -3612,7 +3718,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_12 = __pyx_v_self->c23;
   __pyx_v_c23 = __pyx_t_12;
 
-  /* "pytrino/three_flavor_matter.pyx":156
+  /* "pytrino/three_flavor_matter.pyx":292
  * 
  *         cdef double lda1, lda2, lda3
  *         lda1, lda2, lda3 = self.eigenvalues(E, V)             # <<<<<<<<<<<<<<
@@ -3627,26 +3733,26 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_v_lda2 = __pyx_t_15;
   __pyx_v_lda3 = __pyx_t_16;
 
-  /* "pytrino/three_flavor_matter.pyx":158
+  /* "pytrino/three_flavor_matter.pyx":294
  *         lda1, lda2, lda3 = self.eigenvalues(E, V)
  * 
  *         cdef double A = (2 * 1e+9 * E * V) / self.delmsq31             # <<<<<<<<<<<<<<
  * 
  *         cdef double M_ee = A + s13**2 + c13**2 * s12**2 * alpha
  */
-  __pyx_t_2 = PyFloat_FromDouble((((2.0 * 1e+9) * __pyx_v_E) * __pyx_v_V)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((((2.0 * 1e+9) * __pyx_v_E) * __pyx_v_V)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 294, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_t_7); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 294, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_A = __pyx_t_16;
 
-  /* "pytrino/three_flavor_matter.pyx":160
+  /* "pytrino/three_flavor_matter.pyx":296
  *         cdef double A = (2 * 1e+9 * E * V) / self.delmsq31
  * 
  *         cdef double M_ee = A + s13**2 + c13**2 * s12**2 * alpha             # <<<<<<<<<<<<<<
@@ -3655,7 +3761,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_M_ee = ((__pyx_v_A + pow(__pyx_v_s13, 2.0)) + ((pow(__pyx_v_c13, 2.0) * pow(__pyx_v_s12, 2.0)) * __pyx_v_alpha));
 
-  /* "pytrino/three_flavor_matter.pyx":161
+  /* "pytrino/three_flavor_matter.pyx":297
  * 
  *         cdef double M_ee = A + s13**2 + c13**2 * s12**2 * alpha
  *         cdef double M_emu = c12 * c13 * s12 * alpha             # <<<<<<<<<<<<<<
@@ -3664,7 +3770,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_M_emu = (((__pyx_v_c12 * __pyx_v_c13) * __pyx_v_s12) * __pyx_v_alpha);
 
-  /* "pytrino/three_flavor_matter.pyx":162
+  /* "pytrino/three_flavor_matter.pyx":298
  *         cdef double M_ee = A + s13**2 + c13**2 * s12**2 * alpha
  *         cdef double M_emu = c12 * c13 * s12 * alpha
  *         cdef double M_etau = c13 * s13 * (1 - s12**2 * alpha)             # <<<<<<<<<<<<<<
@@ -3673,7 +3779,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_M_etau = ((__pyx_v_c13 * __pyx_v_s13) * (1.0 - (pow(__pyx_v_s12, 2.0) * __pyx_v_alpha)));
 
-  /* "pytrino/three_flavor_matter.pyx":164
+  /* "pytrino/three_flavor_matter.pyx":300
  *         cdef double M_etau = c13 * s13 * (1 - s12**2 * alpha)
  * 
  *         cdef double M_mumu = c12**2 * alpha             # <<<<<<<<<<<<<<
@@ -3682,7 +3788,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_M_mumu = (pow(__pyx_v_c12, 2.0) * __pyx_v_alpha);
 
-  /* "pytrino/three_flavor_matter.pyx":165
+  /* "pytrino/three_flavor_matter.pyx":301
  * 
  *         cdef double M_mumu = c12**2 * alpha
  *         cdef double M_mutau = -c12 * s12 * s13 * alpha             # <<<<<<<<<<<<<<
@@ -3691,7 +3797,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_M_mutau = ((((-__pyx_v_c12) * __pyx_v_s12) * __pyx_v_s13) * __pyx_v_alpha);
 
-  /* "pytrino/three_flavor_matter.pyx":167
+  /* "pytrino/three_flavor_matter.pyx":303
  *         cdef double M_mutau = -c12 * s12 * s13 * alpha
  * 
  *         cdef double M_tautau = c13**2 + s12**2 * s13**2 * alpha             # <<<<<<<<<<<<<<
@@ -3700,7 +3806,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_M_tautau = (pow(__pyx_v_c13, 2.0) + ((pow(__pyx_v_s12, 2.0) * pow(__pyx_v_s13, 2.0)) * __pyx_v_alpha));
 
-  /* "pytrino/three_flavor_matter.pyx":169
+  /* "pytrino/three_flavor_matter.pyx":305
  *         cdef double M_tautau = c13**2 + s12**2 * s13**2 * alpha
  * 
  *         cdef double sub_e_sum = M_mumu + M_tautau             # <<<<<<<<<<<<<<
@@ -3709,7 +3815,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_sub_e_sum = (__pyx_v_M_mumu + __pyx_v_M_tautau);
 
-  /* "pytrino/three_flavor_matter.pyx":170
+  /* "pytrino/three_flavor_matter.pyx":306
  * 
  *         cdef double sub_e_sum = M_mumu + M_tautau
  *         cdef double sub_e_prod = M_mumu * M_tautau - M_mutau**2             # <<<<<<<<<<<<<<
@@ -3718,7 +3824,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_sub_e_prod = ((__pyx_v_M_mumu * __pyx_v_M_tautau) - pow(__pyx_v_M_mutau, 2.0));
 
-  /* "pytrino/three_flavor_matter.pyx":172
+  /* "pytrino/three_flavor_matter.pyx":308
  *         cdef double sub_e_prod = M_mumu * M_tautau - M_mutau**2
  * 
  *         cdef double sub_mu_sum = M_ee + c23**2 * M_tautau + M_mumu * s23**2 - 2 * c23 * M_mutau * s23 * cos(deltacp)             # <<<<<<<<<<<<<<
@@ -3727,21 +3833,21 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_sub_mu_sum = (((__pyx_v_M_ee + (pow(__pyx_v_c23, 2.0) * __pyx_v_M_tautau)) + (__pyx_v_M_mumu * pow(__pyx_v_s23, 2.0))) - ((((2.0 * __pyx_v_c23) * __pyx_v_M_mutau) * __pyx_v_s23) * cos(__pyx_v_deltacp)));
 
-  /* "pytrino/three_flavor_matter.pyx":173
+  /* "pytrino/three_flavor_matter.pyx":309
  * 
  *         cdef double sub_mu_sum = M_ee + c23**2 * M_tautau + M_mumu * s23**2 - 2 * c23 * M_mutau * s23 * cos(deltacp)
  *         cdef double sub_mu_prod = M_ee * (c23**2 * M_tautau + M_mumu * s23**2 - 2 * c23 * M_mutau * s23 * cos(deltacp)) - abs(c23 * cexp(-1j * deltacp) * M_etau - M_emu * s23)**2             # <<<<<<<<<<<<<<
  * 
  *         cdef double s13matsq = (lda3**2 - sub_e_sum * lda3 + sub_e_prod)/((lda3 - lda1) * (lda3 - lda2))
  */
-  __pyx_t_7 = PyFloat_FromDouble((__pyx_v_M_ee * (((pow(__pyx_v_c23, 2.0) * __pyx_v_M_tautau) + (__pyx_v_M_mumu * pow(__pyx_v_s23, 2.0))) - ((((2.0 * __pyx_v_c23) * __pyx_v_M_mutau) * __pyx_v_s23) * cos(__pyx_v_deltacp))))); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_7 = PyFloat_FromDouble((__pyx_v_M_ee * (((pow(__pyx_v_c23, 2.0) * __pyx_v_M_tautau) + (__pyx_v_M_mumu * pow(__pyx_v_s23, 2.0))) - ((((2.0 * __pyx_v_c23) * __pyx_v_M_mutau) * __pyx_v_s23) * cos(__pyx_v_deltacp))))); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c23); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_c23); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_cexp); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_n_s_cexp); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_t_17 = __Pyx_c_prod_double(__Pyx_c_neg_double(__pyx_t_double_complex_from_parts(0, 1.0)), __pyx_t_double_complex_from_parts(__pyx_v_deltacp, 0));
-  __pyx_t_6 = __pyx_PyComplex_FromComplex(__pyx_t_17); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyComplex_FromComplex(__pyx_t_17); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_10))) {
@@ -3756,40 +3862,40 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_10, __pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_10 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_M_etau); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_M_etau); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyNumber_Multiply(__pyx_t_10, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Multiply(__pyx_t_10, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_M_emu * __pyx_v_s23)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_M_emu * __pyx_v_s23)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_10 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_10 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyNumber_Absolute(__pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyNumber_Absolute(__pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = PyNumber_Power(__pyx_t_2, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_10 = PyNumber_Power(__pyx_t_2, __pyx_int_2, Py_None); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Subtract(__pyx_t_7, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Subtract(__pyx_t_7, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 173, __pyx_L1_error)
+  __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_sub_mu_prod = __pyx_t_16;
 
-  /* "pytrino/three_flavor_matter.pyx":175
+  /* "pytrino/three_flavor_matter.pyx":311
  *         cdef double sub_mu_prod = M_ee * (c23**2 * M_tautau + M_mumu * s23**2 - 2 * c23 * M_mutau * s23 * cos(deltacp)) - abs(c23 * cexp(-1j * deltacp) * M_etau - M_emu * s23)**2
  * 
  *         cdef double s13matsq = (lda3**2 - sub_e_sum * lda3 + sub_e_prod)/((lda3 - lda1) * (lda3 - lda2))             # <<<<<<<<<<<<<<
@@ -3800,11 +3906,11 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_15 = ((__pyx_v_lda3 - __pyx_v_lda1) * (__pyx_v_lda3 - __pyx_v_lda2));
   if (unlikely(__pyx_t_15 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 175, __pyx_L1_error)
+    __PYX_ERR(0, 311, __pyx_L1_error)
   }
   __pyx_v_s13matsq = (__pyx_t_16 / __pyx_t_15);
 
-  /* "pytrino/three_flavor_matter.pyx":176
+  /* "pytrino/three_flavor_matter.pyx":312
  * 
  *         cdef double s13matsq = (lda3**2 - sub_e_sum * lda3 + sub_e_prod)/((lda3 - lda1) * (lda3 - lda2))
  *         cdef double c13matsq = 1 - s13matsq             # <<<<<<<<<<<<<<
@@ -3813,7 +3919,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_c13matsq = (1.0 - __pyx_v_s13matsq);
 
-  /* "pytrino/three_flavor_matter.pyx":178
+  /* "pytrino/three_flavor_matter.pyx":314
  *         cdef double c13matsq = 1 - s13matsq
  * 
  *         cdef double s12matsq = ((1/c13matsq) * ((lda2**2 - sub_e_sum * lda2 + sub_e_prod)/((lda2 - lda3) * (lda2 - lda1))))             # <<<<<<<<<<<<<<
@@ -3822,17 +3928,17 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   if (unlikely(__pyx_v_c13matsq == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 178, __pyx_L1_error)
+    __PYX_ERR(0, 314, __pyx_L1_error)
   }
   __pyx_t_15 = ((pow(__pyx_v_lda2, 2.0) - (__pyx_v_sub_e_sum * __pyx_v_lda2)) + __pyx_v_sub_e_prod);
   __pyx_t_16 = ((__pyx_v_lda2 - __pyx_v_lda3) * (__pyx_v_lda2 - __pyx_v_lda1));
   if (unlikely(__pyx_t_16 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 178, __pyx_L1_error)
+    __PYX_ERR(0, 314, __pyx_L1_error)
   }
   __pyx_v_s12matsq = ((1.0 / __pyx_v_c13matsq) * (__pyx_t_15 / __pyx_t_16));
 
-  /* "pytrino/three_flavor_matter.pyx":179
+  /* "pytrino/three_flavor_matter.pyx":315
  * 
  *         cdef double s12matsq = ((1/c13matsq) * ((lda2**2 - sub_e_sum * lda2 + sub_e_prod)/((lda2 - lda3) * (lda2 - lda1))))
  *         cdef double s23matsq = ((1/c13matsq) * ((lda3**2 - sub_mu_sum * lda3 + sub_mu_prod)/((lda3 - lda1) * (lda3 - lda2))))             # <<<<<<<<<<<<<<
@@ -3841,17 +3947,17 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   if (unlikely(__pyx_v_c13matsq == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 179, __pyx_L1_error)
+    __PYX_ERR(0, 315, __pyx_L1_error)
   }
   __pyx_t_16 = ((pow(__pyx_v_lda3, 2.0) - (__pyx_v_sub_mu_sum * __pyx_v_lda3)) + __pyx_v_sub_mu_prod);
   __pyx_t_15 = ((__pyx_v_lda3 - __pyx_v_lda1) * (__pyx_v_lda3 - __pyx_v_lda2));
   if (unlikely(__pyx_t_15 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 179, __pyx_L1_error)
+    __PYX_ERR(0, 315, __pyx_L1_error)
   }
   __pyx_v_s23matsq = ((1.0 / __pyx_v_c13matsq) * (__pyx_t_16 / __pyx_t_15));
 
-  /* "pytrino/three_flavor_matter.pyx":181
+  /* "pytrino/three_flavor_matter.pyx":317
  *         cdef double s23matsq = ((1/c13matsq) * ((lda3**2 - sub_mu_sum * lda3 + sub_mu_prod)/((lda3 - lda1) * (lda3 - lda2))))
  * 
  *         cdef double theta12mat = asin(sqrt(s12matsq))             # <<<<<<<<<<<<<<
@@ -3860,7 +3966,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_theta12mat = asin(sqrt(__pyx_v_s12matsq));
 
-  /* "pytrino/three_flavor_matter.pyx":182
+  /* "pytrino/three_flavor_matter.pyx":318
  * 
  *         cdef double theta12mat = asin(sqrt(s12matsq))
  *         cdef double theta13mat = asin(sqrt(s13matsq))             # <<<<<<<<<<<<<<
@@ -3869,7 +3975,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_theta13mat = asin(sqrt(__pyx_v_s13matsq));
 
-  /* "pytrino/three_flavor_matter.pyx":183
+  /* "pytrino/three_flavor_matter.pyx":319
  *         cdef double theta12mat = asin(sqrt(s12matsq))
  *         cdef double theta13mat = asin(sqrt(s13matsq))
  *         cdef double theta23mat = asin(sqrt(s23matsq))             # <<<<<<<<<<<<<<
@@ -3878,7 +3984,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_theta23mat = asin(sqrt(__pyx_v_s23matsq));
 
-  /* "pytrino/three_flavor_matter.pyx":185
+  /* "pytrino/three_flavor_matter.pyx":321
  *         cdef double theta23mat = asin(sqrt(s23matsq))
  * 
  *         cdef double Umu1modsq = (lda1**2 - sub_mu_sum * lda1 + sub_mu_prod)/((lda1 - lda2) * (lda1 - lda3))             # <<<<<<<<<<<<<<
@@ -3889,11 +3995,11 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_16 = ((__pyx_v_lda1 - __pyx_v_lda2) * (__pyx_v_lda1 - __pyx_v_lda3));
   if (unlikely(__pyx_t_16 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 185, __pyx_L1_error)
+    __PYX_ERR(0, 321, __pyx_L1_error)
   }
   __pyx_v_Umu1modsq = (__pyx_t_15 / __pyx_t_16);
 
-  /* "pytrino/three_flavor_matter.pyx":187
+  /* "pytrino/three_flavor_matter.pyx":323
  *         cdef double Umu1modsq = (lda1**2 - sub_mu_sum * lda1 + sub_mu_prod)/((lda1 - lda2) * (lda1 - lda3))
  * 
  *         cdef double sdcp = (sin(2 * theta23)/sin(2 * theta23mat)) * sin(deltacp)             # <<<<<<<<<<<<<<
@@ -3904,11 +4010,11 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_15 = sin((2.0 * __pyx_v_theta23mat));
   if (unlikely(__pyx_t_15 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 187, __pyx_L1_error)
+    __PYX_ERR(0, 323, __pyx_L1_error)
   }
   __pyx_v_sdcp = ((__pyx_t_16 / __pyx_t_15) * sin(__pyx_v_deltacp));
 
-  /* "pytrino/three_flavor_matter.pyx":188
+  /* "pytrino/three_flavor_matter.pyx":324
  * 
  *         cdef double sdcp = (sin(2 * theta23)/sin(2 * theta23mat)) * sin(deltacp)
  *         cdef double cdcp = (Umu1modsq - s12**2 * c23**2 - c12**2 * s13**2 * s23**2)/(2 * s12 * c12 * s13 * s23 * c23)             # <<<<<<<<<<<<<<
@@ -3919,11 +4025,11 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_16 = (((((2.0 * __pyx_v_s12) * __pyx_v_c12) * __pyx_v_s13) * __pyx_v_s23) * __pyx_v_c23);
   if (unlikely(__pyx_t_16 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 188, __pyx_L1_error)
+    __PYX_ERR(0, 324, __pyx_L1_error)
   }
   __pyx_v_cdcp = (__pyx_t_15 / __pyx_t_16);
 
-  /* "pytrino/three_flavor_matter.pyx":190
+  /* "pytrino/three_flavor_matter.pyx":326
  *         cdef double cdcp = (Umu1modsq - s12**2 * c23**2 - c12**2 * s13**2 * s23**2)/(2 * s12 * c12 * s13 * s23 * c23)
  * 
  *         cdef double deltacpmat = atan2(sdcp, cdcp) # sus             # <<<<<<<<<<<<<<
@@ -3932,7 +4038,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   __pyx_v_deltacpmat = atan2(__pyx_v_sdcp, __pyx_v_cdcp);
 
-  /* "pytrino/three_flavor_matter.pyx":191
+  /* "pytrino/three_flavor_matter.pyx":327
  * 
  *         cdef double deltacpmat = atan2(sdcp, cdcp) # sus
  *         if deltacpmat < 0:             # <<<<<<<<<<<<<<
@@ -3942,7 +4048,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_t_13 = ((__pyx_v_deltacpmat < 0.0) != 0);
   if (__pyx_t_13) {
 
-    /* "pytrino/three_flavor_matter.pyx":192
+    /* "pytrino/three_flavor_matter.pyx":328
  *         cdef double deltacpmat = atan2(sdcp, cdcp) # sus
  *         if deltacpmat < 0:
  *             deltacpmat += 2 * pi             # <<<<<<<<<<<<<<
@@ -3951,7 +4057,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
     __pyx_v_deltacpmat = (__pyx_v_deltacpmat + (2.0 * M_PI));
 
-    /* "pytrino/three_flavor_matter.pyx":191
+    /* "pytrino/three_flavor_matter.pyx":327
  * 
  *         cdef double deltacpmat = atan2(sdcp, cdcp) # sus
  *         if deltacpmat < 0:             # <<<<<<<<<<<<<<
@@ -3960,7 +4066,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
  */
   }
 
-  /* "pytrino/three_flavor_matter.pyx":194
+  /* "pytrino/three_flavor_matter.pyx":330
  *             deltacpmat += 2 * pi
  * 
  *         return deltacpmat, theta12mat, theta13mat, theta23mat             # <<<<<<<<<<<<<<
@@ -3974,12 +4080,12 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
   __pyx_r = __pyx_t_11;
   goto __pyx_L0;
 
-  /* "pytrino/three_flavor_matter.pyx":135
+  /* "pytrino/three_flavor_matter.pyx":261
  *         return delmsq21mat, delmsq31mat, delmsq32mat
  * 
  *     cpdef (double, double, double, double) angles_phase_matter(self, double L, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         cdef double delmsq31 = self.delmsq31
- *         cdef double alpha = self.alpha
+ *         """
+ *         Compute the mixing angles and CP-violating phase in matter.
  */
 
   /* function exit code */
@@ -4002,6 +4108,7 @@ static __pyx_ctuple_double__and_double__and_double__and_double __pyx_f_7pytrino_
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_phase_matter(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7pytrino_19three_flavor_matter_11ThreeFlavor_4angles_phase_matter[] = "\n        Compute the mixing angles and CP-violating phase in matter.\n\n        :param float L: Neutrino propagation distance in km.\n        :param float E: Neutrino energy in GeV.\n        :param float V: Matter potential in eV.\n        :param bool antineutrinos: Flag indicating whether the neutrinos are antineutrinos (default is False).\n        :returns: The mixing angles and CP-violating phase in matter.\n        :rtype: Tuple[float, float, float, float]\n        ";
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_phase_matter(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   double __pyx_v_L;
   double __pyx_v_E;
@@ -4040,13 +4147,13 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_E)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("angles_phase_matter", 0, 3, 4, 1); __PYX_ERR(0, 135, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("angles_phase_matter", 0, 3, 4, 1); __PYX_ERR(0, 261, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_V)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("angles_phase_matter", 0, 3, 4, 2); __PYX_ERR(0, 135, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("angles_phase_matter", 0, 3, 4, 2); __PYX_ERR(0, 261, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -4056,7 +4163,7 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_p
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "angles_phase_matter") < 0)) __PYX_ERR(0, 135, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "angles_phase_matter") < 0)) __PYX_ERR(0, 261, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -4069,18 +4176,18 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_p
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_L = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_L == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
-    __pyx_v_E = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
-    __pyx_v_V = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+    __pyx_v_L = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_L == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 261, __pyx_L3_error)
+    __pyx_v_E = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 261, __pyx_L3_error)
+    __pyx_v_V = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 261, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 135, __pyx_L3_error)
+      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 261, __pyx_L3_error)
     } else {
       __pyx_v_antineutrinos = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("angles_phase_matter", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 135, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("angles_phase_matter", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 261, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pytrino.three_flavor_matter.ThreeFlavor.angles_phase_matter", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4107,7 +4214,7 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_4angles_p
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.antineutrinos = __pyx_v_antineutrinos;
   __pyx_t_1 = __pyx_vtabptr_7pytrino_19three_flavor_matter_ThreeFlavor->angles_phase_matter(__pyx_v_self, __pyx_v_L, __pyx_v_E, __pyx_v_V, 1, &__pyx_t_2); 
-  __pyx_t_3 = __pyx_convert__to_py___pyx_ctuple_double__and_double__and_double__and_double(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_3 = __pyx_convert__to_py___pyx_ctuple_double__and_double__and_double__and_double(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 261, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
@@ -4124,12 +4231,12 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_4angles_p
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":197
+/* "pytrino/three_flavor_matter.pyx":333
  * 
  * 
  *     cpdef double probability(self, int alpha, int beta, double L, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         cdef double delmsq31 = self.delmsq31
- * 
+ *         """
+ *         Compute transition and survival probabilities.
  */
 
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probability(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
@@ -4209,20 +4316,20 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_type_dict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_probability); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_probability); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probability)) {
-        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_alpha); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_alpha); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 333, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_beta); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_beta); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 333, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_L); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_5 = PyFloat_FromDouble(__pyx_v_L); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 333, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_6 = PyFloat_FromDouble(__pyx_v_E); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 333, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_7 = PyFloat_FromDouble(__pyx_v_V); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_7 = PyFloat_FromDouble(__pyx_v_V); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 333, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_8 = __Pyx_PyBool_FromLong(__pyx_v_antineutrinos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_8 = __Pyx_PyBool_FromLong(__pyx_v_antineutrinos); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 333, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_9 = __pyx_t_1; __pyx_t_10 = NULL;
@@ -4240,7 +4347,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_9)) {
           PyObject *__pyx_temp[7] = {__pyx_t_10, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_11, 6+__pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_11, 6+__pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 333, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4254,7 +4361,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_9)) {
           PyObject *__pyx_temp[7] = {__pyx_t_10, __pyx_t_3, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7, __pyx_t_8};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_11, 6+__pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_11, 6+__pyx_t_11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 333, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4266,7 +4373,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
         } else
         #endif
         {
-          __pyx_t_12 = PyTuple_New(6+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 197, __pyx_L1_error)
+          __pyx_t_12 = PyTuple_New(6+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 333, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_12);
           if (__pyx_t_10) {
             __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -4289,12 +4396,12 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
           __pyx_t_6 = 0;
           __pyx_t_7 = 0;
           __pyx_t_8 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_12, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_12, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 333, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         }
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_13 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L1_error)
+        __pyx_t_13 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_13;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4313,20 +4420,20 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
     #endif
   }
 
-  /* "pytrino/three_flavor_matter.pyx":198
- * 
- *     cpdef double probability(self, int alpha, int beta, double L, double E, double V, bint antineutrinos = False):
+  /* "pytrino/three_flavor_matter.pyx":346
+ *         :rtype: float
+ *         """
  *         cdef double delmsq31 = self.delmsq31             # <<<<<<<<<<<<<<
  * 
  *         cdef double deltacpmat, theta12mat, theta13mat, theta23mat
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_delmsq31); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_13 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 198, __pyx_L1_error)
+  __pyx_t_13 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_13 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_delmsq31 = __pyx_t_13;
 
-  /* "pytrino/three_flavor_matter.pyx":201
+  /* "pytrino/three_flavor_matter.pyx":349
  * 
  *         cdef double deltacpmat, theta12mat, theta13mat, theta23mat
  *         deltacpmat, theta12mat, theta13mat, theta23mat = self.angles_phase_matter(L, E, V, antineutrinos)             # <<<<<<<<<<<<<<
@@ -4345,19 +4452,19 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_v_theta13mat = __pyx_t_17;
   __pyx_v_theta23mat = __pyx_t_18;
 
-  /* "pytrino/three_flavor_matter.pyx":207
+  /* "pytrino/three_flavor_matter.pyx":355
  *                 cos(theta12mat) * cos(theta13mat),
  *                 sin(theta12mat) * cos(theta13mat),
  *                 sin(theta13mat) * cexp(-1j * deltacpmat)             # <<<<<<<<<<<<<<
  *             ],
  *             [
  */
-  __pyx_t_1 = PyFloat_FromDouble(sin(__pyx_v_theta13mat)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(sin(__pyx_v_theta13mat)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_cexp); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_cexp); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __pyx_t_19 = __Pyx_c_prod_double(__Pyx_c_neg_double(__pyx_t_double_complex_from_parts(0, 1.0)), __pyx_t_double_complex_from_parts(__pyx_v_deltacpmat, 0));
-  __pyx_t_12 = __pyx_PyComplex_FromComplex(__pyx_t_19); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_12 = __pyx_PyComplex_FromComplex(__pyx_t_19); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __pyx_t_8 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_9))) {
@@ -4372,17 +4479,17 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_2 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_9, __pyx_t_8, __pyx_t_12) : __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_12);
   __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_9 = PyNumber_Multiply(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_19 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_9); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_9); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "pytrino/three_flavor_matter.pyx":204
+  /* "pytrino/three_flavor_matter.pyx":352
  * 
  *         cdef double complex[3][3] Umat = [
  *             [             # <<<<<<<<<<<<<<
@@ -4393,21 +4500,21 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_20[1] = __pyx_t_double_complex_from_parts((sin(__pyx_v_theta12mat) * cos(__pyx_v_theta13mat)), 0);
   __pyx_t_20[2] = __pyx_t_19;
 
-  /* "pytrino/three_flavor_matter.pyx":210
+  /* "pytrino/three_flavor_matter.pyx":358
  *             ],
  *             [
  *                 -sin(theta12mat) * cos(theta23mat) - cos(theta12mat) * sin(theta23mat) * sin(theta13mat) * cexp(1j * deltacpmat),             # <<<<<<<<<<<<<<
  *                 cos(theta12mat) * cos(theta23mat) - sin(theta12mat) * sin(theta23mat) * sin(theta13mat) * cexp(1j * deltacpmat),
  *                 sin(theta23mat) * cos(theta13mat)
  */
-  __pyx_t_9 = PyFloat_FromDouble(((-sin(__pyx_v_theta12mat)) * cos(__pyx_v_theta23mat))); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_9 = PyFloat_FromDouble(((-sin(__pyx_v_theta12mat)) * cos(__pyx_v_theta23mat))); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_2 = PyFloat_FromDouble(((cos(__pyx_v_theta12mat) * sin(__pyx_v_theta23mat)) * sin(__pyx_v_theta13mat))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((cos(__pyx_v_theta12mat) * sin(__pyx_v_theta23mat)) * sin(__pyx_v_theta13mat))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_n_s_cexp); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_n_s_cexp); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __pyx_t_19 = __Pyx_c_prod_double(__pyx_t_double_complex_from_parts(0, 1.0), __pyx_t_double_complex_from_parts(__pyx_v_deltacpmat, 0));
-  __pyx_t_8 = __pyx_PyComplex_FromComplex(__pyx_t_19); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyComplex_FromComplex(__pyx_t_19); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_12))) {
@@ -4422,35 +4529,35 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_1 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_12, __pyx_t_7, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_8);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyNumber_Multiply(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Multiply(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Subtract(__pyx_t_9, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Subtract(__pyx_t_9, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_19 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pytrino/three_flavor_matter.pyx":211
+  /* "pytrino/three_flavor_matter.pyx":359
  *             [
  *                 -sin(theta12mat) * cos(theta23mat) - cos(theta12mat) * sin(theta23mat) * sin(theta13mat) * cexp(1j * deltacpmat),
  *                 cos(theta12mat) * cos(theta23mat) - sin(theta12mat) * sin(theta23mat) * sin(theta13mat) * cexp(1j * deltacpmat),             # <<<<<<<<<<<<<<
  *                 sin(theta23mat) * cos(theta13mat)
  *             ],
  */
-  __pyx_t_1 = PyFloat_FromDouble((cos(__pyx_v_theta12mat) * cos(__pyx_v_theta23mat))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((cos(__pyx_v_theta12mat) * cos(__pyx_v_theta23mat))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_12 = PyFloat_FromDouble(((sin(__pyx_v_theta12mat) * sin(__pyx_v_theta23mat)) * sin(__pyx_v_theta13mat))); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(((sin(__pyx_v_theta12mat) * sin(__pyx_v_theta23mat)) * sin(__pyx_v_theta13mat))); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cexp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cexp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_21 = __Pyx_c_prod_double(__pyx_t_double_complex_from_parts(0, 1.0), __pyx_t_double_complex_from_parts(__pyx_v_deltacpmat, 0));
-  __pyx_t_8 = __pyx_PyComplex_FromComplex(__pyx_t_21); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyComplex_FromComplex(__pyx_t_21); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -4465,21 +4572,21 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_9 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_7, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_8);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 211, __pyx_L1_error)
+  if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_12, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_12, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_9 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_21 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_9); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_9); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 359, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "pytrino/three_flavor_matter.pyx":209
+  /* "pytrino/three_flavor_matter.pyx":357
  *                 sin(theta13mat) * cexp(-1j * deltacpmat)
  *             ],
  *             [             # <<<<<<<<<<<<<<
@@ -4490,21 +4597,21 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_22[1] = __pyx_t_21;
   __pyx_t_22[2] = __pyx_t_double_complex_from_parts((sin(__pyx_v_theta23mat) * cos(__pyx_v_theta13mat)), 0);
 
-  /* "pytrino/three_flavor_matter.pyx":215
+  /* "pytrino/three_flavor_matter.pyx":363
  *             ],
  *             [
  *                 sin(theta12mat) * sin(theta23mat) - cos(theta12mat) * cos(theta23mat) * sin(theta13mat) * cexp(1j * deltacpmat),             # <<<<<<<<<<<<<<
  *                 -cos(theta12mat) * sin(theta23mat) - sin(theta12mat) * cos(theta23mat) * sin(theta13mat) * cexp(1j * deltacpmat),
  *                 cos(theta23mat) * cos(theta13mat)
  */
-  __pyx_t_9 = PyFloat_FromDouble((sin(__pyx_v_theta12mat) * sin(__pyx_v_theta23mat))); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_9 = PyFloat_FromDouble((sin(__pyx_v_theta12mat) * sin(__pyx_v_theta23mat))); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_2 = PyFloat_FromDouble(((cos(__pyx_v_theta12mat) * cos(__pyx_v_theta23mat)) * sin(__pyx_v_theta13mat))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(((cos(__pyx_v_theta12mat) * cos(__pyx_v_theta23mat)) * sin(__pyx_v_theta13mat))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_n_s_cexp); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_12, __pyx_n_s_cexp); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __pyx_t_21 = __Pyx_c_prod_double(__pyx_t_double_complex_from_parts(0, 1.0), __pyx_t_double_complex_from_parts(__pyx_v_deltacpmat, 0));
-  __pyx_t_8 = __pyx_PyComplex_FromComplex(__pyx_t_21); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyComplex_FromComplex(__pyx_t_21); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_12))) {
@@ -4519,35 +4626,35 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_1 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_12, __pyx_t_7, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_8);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyNumber_Multiply(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_12 = PyNumber_Multiply(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Subtract(__pyx_t_9, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Subtract(__pyx_t_9, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_21 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "pytrino/three_flavor_matter.pyx":216
+  /* "pytrino/three_flavor_matter.pyx":364
  *             [
  *                 sin(theta12mat) * sin(theta23mat) - cos(theta12mat) * cos(theta23mat) * sin(theta13mat) * cexp(1j * deltacpmat),
  *                 -cos(theta12mat) * sin(theta23mat) - sin(theta12mat) * cos(theta23mat) * sin(theta13mat) * cexp(1j * deltacpmat),             # <<<<<<<<<<<<<<
  *                 cos(theta23mat) * cos(theta13mat)
  *             ]
  */
-  __pyx_t_1 = PyFloat_FromDouble(((-cos(__pyx_v_theta12mat)) * sin(__pyx_v_theta23mat))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(((-cos(__pyx_v_theta12mat)) * sin(__pyx_v_theta23mat))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_12 = PyFloat_FromDouble(((sin(__pyx_v_theta12mat) * cos(__pyx_v_theta23mat)) * sin(__pyx_v_theta13mat))); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_12 = PyFloat_FromDouble(((sin(__pyx_v_theta12mat) * cos(__pyx_v_theta23mat)) * sin(__pyx_v_theta13mat))); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cexp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_cexp); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_19 = __Pyx_c_prod_double(__pyx_t_double_complex_from_parts(0, 1.0), __pyx_t_double_complex_from_parts(__pyx_v_deltacpmat, 0));
-  __pyx_t_8 = __pyx_PyComplex_FromComplex(__pyx_t_19); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyComplex_FromComplex(__pyx_t_19); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -4562,21 +4669,21 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_9 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_7, __pyx_t_8) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_8);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 216, __pyx_L1_error)
+  if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_12, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_12, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_9 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_19 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_9); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_19 = __Pyx_PyComplex_As___pyx_t_double_complex(__pyx_t_9); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 364, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-  /* "pytrino/three_flavor_matter.pyx":214
+  /* "pytrino/three_flavor_matter.pyx":362
  *                 sin(theta23mat) * cos(theta13mat)
  *             ],
  *             [             # <<<<<<<<<<<<<<
@@ -4587,7 +4694,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_23[1] = __pyx_t_19;
   __pyx_t_23[2] = __pyx_t_double_complex_from_parts((cos(__pyx_v_theta23mat) * cos(__pyx_v_theta13mat)), 0);
 
-  /* "pytrino/three_flavor_matter.pyx":203
+  /* "pytrino/three_flavor_matter.pyx":351
  *         deltacpmat, theta12mat, theta13mat, theta23mat = self.angles_phase_matter(L, E, V, antineutrinos)
  * 
  *         cdef double complex[3][3] Umat = [             # <<<<<<<<<<<<<<
@@ -4599,7 +4706,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   memcpy(&(__pyx_t_24[2]), __pyx_t_23, sizeof(__pyx_t_24[0]));
   memcpy(&(__pyx_v_Umat[0]), __pyx_t_24, sizeof(__pyx_v_Umat[0]) * (3));
 
-  /* "pytrino/three_flavor_matter.pyx":222
+  /* "pytrino/three_flavor_matter.pyx":370
  * 
  *         cdef double delmsq21mat, delmsq31mat, delmsq32mat
  *         delmsq21mat, delmsq31mat, delmsq32mat = self.deltamsq_matter(E, V, antineutrinos)             # <<<<<<<<<<<<<<
@@ -4616,7 +4723,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_v_delmsq31mat = __pyx_t_17;
   __pyx_v_delmsq32mat = __pyx_t_16;
 
-  /* "pytrino/three_flavor_matter.pyx":224
+  /* "pytrino/three_flavor_matter.pyx":372
  *         delmsq21mat, delmsq31mat, delmsq32mat = self.deltamsq_matter(E, V, antineutrinos)
  * 
  *         delmsq21mat = delmsq21mat / delmsq31             # <<<<<<<<<<<<<<
@@ -4625,11 +4732,11 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
   if (unlikely(__pyx_v_delmsq31 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 224, __pyx_L1_error)
+    __PYX_ERR(0, 372, __pyx_L1_error)
   }
   __pyx_v_delmsq21mat = (__pyx_v_delmsq21mat / __pyx_v_delmsq31);
 
-  /* "pytrino/three_flavor_matter.pyx":225
+  /* "pytrino/three_flavor_matter.pyx":373
  * 
  *         delmsq21mat = delmsq21mat / delmsq31
  *         delmsq31mat = delmsq31mat / delmsq31             # <<<<<<<<<<<<<<
@@ -4638,11 +4745,11 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
   if (unlikely(__pyx_v_delmsq31 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 225, __pyx_L1_error)
+    __PYX_ERR(0, 373, __pyx_L1_error)
   }
   __pyx_v_delmsq31mat = (__pyx_v_delmsq31mat / __pyx_v_delmsq31);
 
-  /* "pytrino/three_flavor_matter.pyx":226
+  /* "pytrino/three_flavor_matter.pyx":374
  *         delmsq21mat = delmsq21mat / delmsq31
  *         delmsq31mat = delmsq31mat / delmsq31
  *         delmsq32mat = delmsq32mat / delmsq31             # <<<<<<<<<<<<<<
@@ -4651,11 +4758,11 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
   if (unlikely(__pyx_v_delmsq31 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 226, __pyx_L1_error)
+    __PYX_ERR(0, 374, __pyx_L1_error)
   }
   __pyx_v_delmsq32mat = (__pyx_v_delmsq32mat / __pyx_v_delmsq31);
 
-  /* "pytrino/three_flavor_matter.pyx":228
+  /* "pytrino/three_flavor_matter.pyx":376
  *         delmsq32mat = delmsq32mat / delmsq31
  * 
  *         cdef double delta = (1.267 * delmsq31 * L)/E             # <<<<<<<<<<<<<<
@@ -4665,11 +4772,11 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_16 = ((1.267 * __pyx_v_delmsq31) * __pyx_v_L);
   if (unlikely(__pyx_v_E == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 228, __pyx_L1_error)
+    __PYX_ERR(0, 376, __pyx_L1_error)
   }
   __pyx_v_delta = (__pyx_t_16 / __pyx_v_E);
 
-  /* "pytrino/three_flavor_matter.pyx":230
+  /* "pytrino/three_flavor_matter.pyx":378
  *         cdef double delta = (1.267 * delmsq31 * L)/E
  * 
  *         cdef int[3][2] pairs = [[2, 1], [3, 1], [3, 2]]             # <<<<<<<<<<<<<<
@@ -4687,7 +4794,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   memcpy(&(__pyx_t_30[2]), __pyx_t_29, sizeof(__pyx_t_30[0]));
   memcpy(&(__pyx_v_pairs[0]), __pyx_t_30, sizeof(__pyx_v_pairs[0]) * (3));
 
-  /* "pytrino/three_flavor_matter.pyx":231
+  /* "pytrino/three_flavor_matter.pyx":379
  * 
  *         cdef int[3][2] pairs = [[2, 1], [3, 1], [3, 2]]
  *         cdef double[3] msqsmat = [delmsq21mat, delmsq31mat, delmsq32mat]             # <<<<<<<<<<<<<<
@@ -4699,7 +4806,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_31[2] = __pyx_v_delmsq32mat;
   memcpy(&(__pyx_v_msqsmat[0]), __pyx_t_31, sizeof(__pyx_v_msqsmat[0]) * (3));
 
-  /* "pytrino/three_flavor_matter.pyx":235
+  /* "pytrino/three_flavor_matter.pyx":383
  *         cdef int i, ind, k, j, a, b, kd
  *         cdef double summation, firstsum, secondsum
  *         if alpha == beta:             # <<<<<<<<<<<<<<
@@ -4709,7 +4816,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   __pyx_t_32 = ((__pyx_v_alpha == __pyx_v_beta) != 0);
   if (__pyx_t_32) {
 
-    /* "pytrino/three_flavor_matter.pyx":236
+    /* "pytrino/three_flavor_matter.pyx":384
  *         cdef double summation, firstsum, secondsum
  *         if alpha == beta:
  *             i = alpha - 1             # <<<<<<<<<<<<<<
@@ -4718,7 +4825,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     __pyx_v_i = (__pyx_v_alpha - 1);
 
-    /* "pytrino/three_flavor_matter.pyx":238
+    /* "pytrino/three_flavor_matter.pyx":386
  *             i = alpha - 1
  * 
  *             ind = 0             # <<<<<<<<<<<<<<
@@ -4727,7 +4834,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     __pyx_v_ind = 0;
 
-    /* "pytrino/three_flavor_matter.pyx":239
+    /* "pytrino/three_flavor_matter.pyx":387
  * 
  *             ind = 0
  *             summation = 0             # <<<<<<<<<<<<<<
@@ -4736,7 +4843,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     __pyx_v_summation = 0.0;
 
-    /* "pytrino/three_flavor_matter.pyx":241
+    /* "pytrino/three_flavor_matter.pyx":389
  *             summation = 0
  * 
  *             for ind in range(3):             # <<<<<<<<<<<<<<
@@ -4746,7 +4853,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
     for (__pyx_t_11 = 0; __pyx_t_11 < 3; __pyx_t_11+=1) {
       __pyx_v_ind = __pyx_t_11;
 
-      /* "pytrino/three_flavor_matter.pyx":242
+      /* "pytrino/three_flavor_matter.pyx":390
  * 
  *             for ind in range(3):
  *                 k = pairs[ind][0] - 1             # <<<<<<<<<<<<<<
@@ -4755,7 +4862,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
       __pyx_v_k = (((__pyx_v_pairs[__pyx_v_ind])[0]) - 1);
 
-      /* "pytrino/three_flavor_matter.pyx":243
+      /* "pytrino/three_flavor_matter.pyx":391
  *             for ind in range(3):
  *                 k = pairs[ind][0] - 1
  *                 j = pairs[ind][1] - 1             # <<<<<<<<<<<<<<
@@ -4764,7 +4871,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
       __pyx_v_j = (((__pyx_v_pairs[__pyx_v_ind])[1]) - 1);
 
-      /* "pytrino/three_flavor_matter.pyx":245
+      /* "pytrino/three_flavor_matter.pyx":393
  *                 j = pairs[ind][1] - 1
  * 
  *                 summation += abs(Umat[i][k])**2 * abs(Umat[i][j])**2 * sin(msqsmat[ind] * delta)**2             # <<<<<<<<<<<<<<
@@ -4774,7 +4881,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
       __pyx_v_summation = (__pyx_v_summation + ((pow(__Pyx_c_abs_double(((__pyx_v_Umat[__pyx_v_i])[__pyx_v_k])), 2.0) * pow(__Pyx_c_abs_double(((__pyx_v_Umat[__pyx_v_i])[__pyx_v_j])), 2.0)) * pow(sin(((__pyx_v_msqsmat[__pyx_v_ind]) * __pyx_v_delta)), 2.0)));
     }
 
-    /* "pytrino/three_flavor_matter.pyx":247
+    /* "pytrino/three_flavor_matter.pyx":395
  *                 summation += abs(Umat[i][k])**2 * abs(Umat[i][j])**2 * sin(msqsmat[ind] * delta)**2
  * 
  *             return 1 - 4 * summation             # <<<<<<<<<<<<<<
@@ -4784,7 +4891,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
     __pyx_r = (1.0 - (4.0 * __pyx_v_summation));
     goto __pyx_L0;
 
-    /* "pytrino/three_flavor_matter.pyx":235
+    /* "pytrino/three_flavor_matter.pyx":383
  *         cdef int i, ind, k, j, a, b, kd
  *         cdef double summation, firstsum, secondsum
  *         if alpha == beta:             # <<<<<<<<<<<<<<
@@ -4793,7 +4900,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
   }
 
-  /* "pytrino/three_flavor_matter.pyx":249
+  /* "pytrino/three_flavor_matter.pyx":397
  *             return 1 - 4 * summation
  *         else:
  *             a = alpha - 1             # <<<<<<<<<<<<<<
@@ -4803,7 +4910,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
   /*else*/ {
     __pyx_v_a = (__pyx_v_alpha - 1);
 
-    /* "pytrino/three_flavor_matter.pyx":250
+    /* "pytrino/three_flavor_matter.pyx":398
  *         else:
  *             a = alpha - 1
  *             b = beta - 1             # <<<<<<<<<<<<<<
@@ -4812,7 +4919,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     __pyx_v_b = (__pyx_v_beta - 1);
 
-    /* "pytrino/three_flavor_matter.pyx":252
+    /* "pytrino/three_flavor_matter.pyx":400
  *             b = beta - 1
  * 
  *             kd = 0             # <<<<<<<<<<<<<<
@@ -4821,7 +4928,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     __pyx_v_kd = 0;
 
-    /* "pytrino/three_flavor_matter.pyx":253
+    /* "pytrino/three_flavor_matter.pyx":401
  * 
  *             kd = 0
  *             if a == b:             # <<<<<<<<<<<<<<
@@ -4831,7 +4938,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
     __pyx_t_32 = ((__pyx_v_a == __pyx_v_b) != 0);
     if (__pyx_t_32) {
 
-      /* "pytrino/three_flavor_matter.pyx":254
+      /* "pytrino/three_flavor_matter.pyx":402
  *             kd = 0
  *             if a == b:
  *                 kd = 1             # <<<<<<<<<<<<<<
@@ -4840,7 +4947,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
       __pyx_v_kd = 1;
 
-      /* "pytrino/three_flavor_matter.pyx":253
+      /* "pytrino/three_flavor_matter.pyx":401
  * 
  *             kd = 0
  *             if a == b:             # <<<<<<<<<<<<<<
@@ -4849,7 +4956,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     }
 
-    /* "pytrino/three_flavor_matter.pyx":256
+    /* "pytrino/three_flavor_matter.pyx":404
  *                 kd = 1
  * 
  *             firstsum = 0.0             # <<<<<<<<<<<<<<
@@ -4858,7 +4965,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     __pyx_v_firstsum = 0.0;
 
-    /* "pytrino/three_flavor_matter.pyx":257
+    /* "pytrino/three_flavor_matter.pyx":405
  * 
  *             firstsum = 0.0
  *             secondsum = 0.0             # <<<<<<<<<<<<<<
@@ -4867,7 +4974,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     __pyx_v_secondsum = 0.0;
 
-    /* "pytrino/three_flavor_matter.pyx":259
+    /* "pytrino/three_flavor_matter.pyx":407
  *             secondsum = 0.0
  * 
  *             ind = 0             # <<<<<<<<<<<<<<
@@ -4876,7 +4983,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
     __pyx_v_ind = 0;
 
-    /* "pytrino/three_flavor_matter.pyx":260
+    /* "pytrino/three_flavor_matter.pyx":408
  * 
  *             ind = 0
  *             for ind in range(3):             # <<<<<<<<<<<<<<
@@ -4886,7 +4993,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
     for (__pyx_t_11 = 0; __pyx_t_11 < 3; __pyx_t_11+=1) {
       __pyx_v_ind = __pyx_t_11;
 
-      /* "pytrino/three_flavor_matter.pyx":261
+      /* "pytrino/three_flavor_matter.pyx":409
  *             ind = 0
  *             for ind in range(3):
  *                 k = pairs[ind][0] - 1             # <<<<<<<<<<<<<<
@@ -4895,7 +5002,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
       __pyx_v_k = (((__pyx_v_pairs[__pyx_v_ind])[0]) - 1);
 
-      /* "pytrino/three_flavor_matter.pyx":262
+      /* "pytrino/three_flavor_matter.pyx":410
  *             for ind in range(3):
  *                 k = pairs[ind][0] - 1
  *                 j = pairs[ind][1] - 1             # <<<<<<<<<<<<<<
@@ -4904,7 +5011,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
       __pyx_v_j = (((__pyx_v_pairs[__pyx_v_ind])[1]) - 1);
 
-      /* "pytrino/three_flavor_matter.pyx":264
+      /* "pytrino/three_flavor_matter.pyx":412
  *                 j = pairs[ind][1] - 1
  * 
  *                 firstsum += ((Umat[a][k]).conjugate() * Umat[b][k] * Umat[a][j] * (Umat[b][j]).conjugate()).real * sin(msqsmat[ind] * delta)**2             # <<<<<<<<<<<<<<
@@ -4913,7 +5020,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
  */
       __pyx_v_firstsum = (__pyx_v_firstsum + (__Pyx_CREAL(__Pyx_c_prod_double(__Pyx_c_prod_double(__Pyx_c_prod_double(__Pyx_c_conj_double(((__pyx_v_Umat[__pyx_v_a])[__pyx_v_k])), ((__pyx_v_Umat[__pyx_v_b])[__pyx_v_k])), ((__pyx_v_Umat[__pyx_v_a])[__pyx_v_j])), __Pyx_c_conj_double(((__pyx_v_Umat[__pyx_v_b])[__pyx_v_j])))) * pow(sin(((__pyx_v_msqsmat[__pyx_v_ind]) * __pyx_v_delta)), 2.0)));
 
-      /* "pytrino/three_flavor_matter.pyx":265
+      /* "pytrino/three_flavor_matter.pyx":413
  * 
  *                 firstsum += ((Umat[a][k]).conjugate() * Umat[b][k] * Umat[a][j] * (Umat[b][j]).conjugate()).real * sin(msqsmat[ind] * delta)**2
  *                 secondsum += ((Umat[a][k]).conjugate() * Umat[b][k] * Umat[a][j] * (Umat[b][j]).conjugate()).imag * sin(2 * msqsmat[ind] * delta)             # <<<<<<<<<<<<<<
@@ -4923,7 +5030,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
       __pyx_v_secondsum = (__pyx_v_secondsum + (__Pyx_CIMAG(__Pyx_c_prod_double(__Pyx_c_prod_double(__Pyx_c_prod_double(__Pyx_c_conj_double(((__pyx_v_Umat[__pyx_v_a])[__pyx_v_k])), ((__pyx_v_Umat[__pyx_v_b])[__pyx_v_k])), ((__pyx_v_Umat[__pyx_v_a])[__pyx_v_j])), __Pyx_c_conj_double(((__pyx_v_Umat[__pyx_v_b])[__pyx_v_j])))) * sin(((2.0 * (__pyx_v_msqsmat[__pyx_v_ind])) * __pyx_v_delta))));
     }
 
-    /* "pytrino/three_flavor_matter.pyx":267
+    /* "pytrino/three_flavor_matter.pyx":415
  *                 secondsum += ((Umat[a][k]).conjugate() * Umat[b][k] * Umat[a][j] * (Umat[b][j]).conjugate()).imag * sin(2 * msqsmat[ind] * delta)
  * 
  *             return kd - 4 * firstsum + 2 * secondsum             # <<<<<<<<<<<<<<
@@ -4934,12 +5041,12 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
     goto __pyx_L0;
   }
 
-  /* "pytrino/three_flavor_matter.pyx":197
+  /* "pytrino/three_flavor_matter.pyx":333
  * 
  * 
  *     cpdef double probability(self, int alpha, int beta, double L, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         cdef double delmsq31 = self.delmsq31
- * 
+ *         """
+ *         Compute transition and survival probabilities.
  */
 
   /* function exit code */
@@ -4964,6 +5071,7 @@ static double __pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability(s
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probability(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7pytrino_19three_flavor_matter_11ThreeFlavor_6probability[] = "\n        Compute transition and survival probabilities.\n\n        :param int alpha: Initial neutrino flavor (1, 2, or 3).\n        :param int beta: Final neutrino flavor (1, 2, or 3).\n        :param float L: Neutrino propagation distance in km.\n        :param float E: Neutrino energy in GeV.\n        :param float V: Matter potential in eV.\n        :param bool antineutrinos: Flag indicating whether the neutrinos are antineutrinos (default is False).\n        :returns: The transition probability.\n        :rtype: float\n        ";
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probability(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   int __pyx_v_alpha;
   int __pyx_v_beta;
@@ -5008,25 +5116,25 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probabil
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_beta)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, 1); __PYX_ERR(0, 197, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, 1); __PYX_ERR(0, 333, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_L)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, 2); __PYX_ERR(0, 197, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, 2); __PYX_ERR(0, 333, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_E)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, 3); __PYX_ERR(0, 197, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, 3); __PYX_ERR(0, 333, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_V)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, 4); __PYX_ERR(0, 197, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, 4); __PYX_ERR(0, 333, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
@@ -5036,7 +5144,7 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probabil
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "probability") < 0)) __PYX_ERR(0, 197, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "probability") < 0)) __PYX_ERR(0, 333, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5051,20 +5159,20 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probabil
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_alpha = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_alpha == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L3_error)
-    __pyx_v_beta = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_beta == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L3_error)
-    __pyx_v_L = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_L == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L3_error)
-    __pyx_v_E = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L3_error)
-    __pyx_v_V = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L3_error)
+    __pyx_v_alpha = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_alpha == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L3_error)
+    __pyx_v_beta = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_beta == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L3_error)
+    __pyx_v_L = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_L == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L3_error)
+    __pyx_v_E = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L3_error)
+    __pyx_v_V = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L3_error)
     if (values[5]) {
-      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 197, __pyx_L3_error)
+      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 333, __pyx_L3_error)
     } else {
       __pyx_v_antineutrinos = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 197, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("probability", 0, 5, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 333, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pytrino.three_flavor_matter.ThreeFlavor.probability", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5091,7 +5199,7 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_6probabil
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.antineutrinos = __pyx_v_antineutrinos;
   __pyx_t_1 = __pyx_vtabptr_7pytrino_19three_flavor_matter_ThreeFlavor->probability(__pyx_v_self, __pyx_v_alpha, __pyx_v_beta, __pyx_v_L, __pyx_v_E, __pyx_v_V, 1, &__pyx_t_2); 
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
@@ -5108,16 +5216,17 @@ static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_6probabil
   return __pyx_r;
 }
 
-/* "pytrino/three_flavor_matter.pyx":269
+/* "pytrino/three_flavor_matter.pyx":417
  *             return kd - 4 * firstsum + 2 * secondsum
  * 
  *     def probmatrix(self, double L, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         cdef double[3][3] probarray
- * 
+ *         """
+ *         Compute the oscillation probability matrix.
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_9probmatrix(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7pytrino_19three_flavor_matter_11ThreeFlavor_8probmatrix[] = "\n        Compute the oscillation probability matrix.\n\n        :param float L: Neutrino propagation distance in km.\n        :param float E: Neutrino energy in GeV.\n        :param float V: Matter potential in eV.\n        :param bool antineutrinos: Flag indicating whether the neutrinos are antineutrinos (default is False).\n        :returns: The neutrino oscillation probability matrix.\n        :rtype: List[List[float]]\n        ";
 static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_9probmatrix(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   double __pyx_v_L;
   double __pyx_v_E;
@@ -5156,13 +5265,13 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_9probmatr
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_E)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("probmatrix", 0, 3, 4, 1); __PYX_ERR(0, 269, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("probmatrix", 0, 3, 4, 1); __PYX_ERR(0, 417, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_V)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("probmatrix", 0, 3, 4, 2); __PYX_ERR(0, 269, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("probmatrix", 0, 3, 4, 2); __PYX_ERR(0, 417, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -5172,7 +5281,7 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_9probmatr
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "probmatrix") < 0)) __PYX_ERR(0, 269, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "probmatrix") < 0)) __PYX_ERR(0, 417, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5185,18 +5294,18 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_9probmatr
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_L = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_L == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 269, __pyx_L3_error)
-    __pyx_v_E = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 269, __pyx_L3_error)
-    __pyx_v_V = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 269, __pyx_L3_error)
+    __pyx_v_L = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_L == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 417, __pyx_L3_error)
+    __pyx_v_E = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_E == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 417, __pyx_L3_error)
+    __pyx_v_V = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_V == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 417, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 269, __pyx_L3_error)
+      __pyx_v_antineutrinos = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_antineutrinos == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 417, __pyx_L3_error)
     } else {
       __pyx_v_antineutrinos = ((int)0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("probmatrix", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 269, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("probmatrix", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 417, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pytrino.three_flavor_matter.ThreeFlavor.probmatrix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5211,78 +5320,225 @@ static PyObject *__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_9probmatr
 
 static PyObject *__pyx_pf_7pytrino_19three_flavor_matter_11ThreeFlavor_8probmatrix(struct __pyx_obj_7pytrino_19three_flavor_matter_ThreeFlavor *__pyx_v_self, double __pyx_v_L, double __pyx_v_E, double __pyx_v_V, int __pyx_v_antineutrinos) {
   double __pyx_v_probarray[3][3];
-  int __pyx_v_i;
-  int __pyx_v_j;
+  double __pyx_v_Pemu;
+  double __pyx_v_Pmutau;
+  double __pyx_v__Pemu;
+  double __pyx_v__Pmutau;
+  double __pyx_v_Pee;
+  double __pyx_v_Petau;
+  double __pyx_v_Pmue;
+  double __pyx_v_Pmumu;
+  double __pyx_v_Ptaue;
+  double __pyx_v_Ptaumu;
+  double __pyx_v_Ptautau;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  int __pyx_t_2;
-  double __pyx_t_3;
-  struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_probability __pyx_t_4;
+  double __pyx_t_1;
+  struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_probability __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
+  double __pyx_t_6[3];
+  double __pyx_t_7[3];
+  double __pyx_t_8[3];
+  double __pyx_t_9[3][3];
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("probmatrix", 0);
 
-  /* "pytrino/three_flavor_matter.pyx":275
+  /* "pytrino/three_flavor_matter.pyx":431
+ *         cdef double[3][3] probarray
  * 
- *         cdef int i, j
- *         for i in range(0, 3):             # <<<<<<<<<<<<<<
- *             for j in range(0, 3):
- *                 probarray[i][j] = self.probability(i + 1, j + 1, L, E, V, antineutrinos)
- */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 3; __pyx_t_1+=1) {
-    __pyx_v_i = __pyx_t_1;
-
-    /* "pytrino/three_flavor_matter.pyx":276
- *         cdef int i, j
- *         for i in range(0, 3):
- *             for j in range(0, 3):             # <<<<<<<<<<<<<<
- *                 probarray[i][j] = self.probability(i + 1, j + 1, L, E, V, antineutrinos)
+ *         cdef double Pemu = self.probability(1, 2, L, E, V, antineutrinos)             # <<<<<<<<<<<<<<
+ *         cdef double Pmutau = self.probability(2, 3, L, E, V, antineutrinos)
  * 
  */
-    for (__pyx_t_2 = 0; __pyx_t_2 < 3; __pyx_t_2+=1) {
-      __pyx_v_j = __pyx_t_2;
+  __pyx_t_2.__pyx_n = 1;
+  __pyx_t_2.antineutrinos = __pyx_v_antineutrinos;
+  __pyx_t_1 = ((struct __pyx_vtabstruct_7pytrino_19three_flavor_matter_ThreeFlavor *)__pyx_v_self->__pyx_vtab)->probability(__pyx_v_self, 1, 2, __pyx_v_L, __pyx_v_E, __pyx_v_V, 0, &__pyx_t_2); 
+  __pyx_v_Pemu = __pyx_t_1;
 
-      /* "pytrino/three_flavor_matter.pyx":277
- *         for i in range(0, 3):
- *             for j in range(0, 3):
- *                 probarray[i][j] = self.probability(i + 1, j + 1, L, E, V, antineutrinos)             # <<<<<<<<<<<<<<
+  /* "pytrino/three_flavor_matter.pyx":432
  * 
- *         return probarray
+ *         cdef double Pemu = self.probability(1, 2, L, E, V, antineutrinos)
+ *         cdef double Pmutau = self.probability(2, 3, L, E, V, antineutrinos)             # <<<<<<<<<<<<<<
+ * 
+ *         self.theta23 = self.theta23 + pi/2
  */
-      __pyx_t_4.__pyx_n = 1;
-      __pyx_t_4.antineutrinos = __pyx_v_antineutrinos;
-      __pyx_t_3 = ((struct __pyx_vtabstruct_7pytrino_19three_flavor_matter_ThreeFlavor *)__pyx_v_self->__pyx_vtab)->probability(__pyx_v_self, (__pyx_v_i + 1), (__pyx_v_j + 1), __pyx_v_L, __pyx_v_E, __pyx_v_V, 0, &__pyx_t_4); 
-      ((__pyx_v_probarray[__pyx_v_i])[__pyx_v_j]) = __pyx_t_3;
-    }
-  }
+  __pyx_t_2.__pyx_n = 1;
+  __pyx_t_2.antineutrinos = __pyx_v_antineutrinos;
+  __pyx_t_1 = ((struct __pyx_vtabstruct_7pytrino_19three_flavor_matter_ThreeFlavor *)__pyx_v_self->__pyx_vtab)->probability(__pyx_v_self, 2, 3, __pyx_v_L, __pyx_v_E, __pyx_v_V, 0, &__pyx_t_2); 
+  __pyx_v_Pmutau = __pyx_t_1;
 
-  /* "pytrino/three_flavor_matter.pyx":279
- *                 probarray[i][j] = self.probability(i + 1, j + 1, L, E, V, antineutrinos)
+  /* "pytrino/three_flavor_matter.pyx":434
+ *         cdef double Pmutau = self.probability(2, 3, L, E, V, antineutrinos)
+ * 
+ *         self.theta23 = self.theta23 + pi/2             # <<<<<<<<<<<<<<
+ *         cdef double _Pemu = self.probability(1, 2, L, E, V, antineutrinos)
+ *         cdef double _Pmutau = self.probability(2, 3, L, E, V, antineutrinos)
+ */
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_theta23); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 434, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = PyFloat_FromDouble((((double)M_PI) / 2.0)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 434, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 434, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__Pyx_PyObject_SetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_theta23, __pyx_t_5) < 0) __PYX_ERR(0, 434, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "pytrino/three_flavor_matter.pyx":435
+ * 
+ *         self.theta23 = self.theta23 + pi/2
+ *         cdef double _Pemu = self.probability(1, 2, L, E, V, antineutrinos)             # <<<<<<<<<<<<<<
+ *         cdef double _Pmutau = self.probability(2, 3, L, E, V, antineutrinos)
+ *         self.theta23 = self.theta23 - pi/2
+ */
+  __pyx_t_2.__pyx_n = 1;
+  __pyx_t_2.antineutrinos = __pyx_v_antineutrinos;
+  __pyx_t_1 = ((struct __pyx_vtabstruct_7pytrino_19three_flavor_matter_ThreeFlavor *)__pyx_v_self->__pyx_vtab)->probability(__pyx_v_self, 1, 2, __pyx_v_L, __pyx_v_E, __pyx_v_V, 0, &__pyx_t_2); 
+  __pyx_v__Pemu = __pyx_t_1;
+
+  /* "pytrino/three_flavor_matter.pyx":436
+ *         self.theta23 = self.theta23 + pi/2
+ *         cdef double _Pemu = self.probability(1, 2, L, E, V, antineutrinos)
+ *         cdef double _Pmutau = self.probability(2, 3, L, E, V, antineutrinos)             # <<<<<<<<<<<<<<
+ *         self.theta23 = self.theta23 - pi/2
+ * 
+ */
+  __pyx_t_2.__pyx_n = 1;
+  __pyx_t_2.antineutrinos = __pyx_v_antineutrinos;
+  __pyx_t_1 = ((struct __pyx_vtabstruct_7pytrino_19three_flavor_matter_ThreeFlavor *)__pyx_v_self->__pyx_vtab)->probability(__pyx_v_self, 2, 3, __pyx_v_L, __pyx_v_E, __pyx_v_V, 0, &__pyx_t_2); 
+  __pyx_v__Pmutau = __pyx_t_1;
+
+  /* "pytrino/three_flavor_matter.pyx":437
+ *         cdef double _Pemu = self.probability(1, 2, L, E, V, antineutrinos)
+ *         cdef double _Pmutau = self.probability(2, 3, L, E, V, antineutrinos)
+ *         self.theta23 = self.theta23 - pi/2             # <<<<<<<<<<<<<<
+ * 
+ *         cdef double Pee = 1 - (Pemu + _Pemu)
+ */
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_theta23); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 437, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_4 = PyFloat_FromDouble((((double)M_PI) / 2.0)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 437, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_3 = PyNumber_Subtract(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 437, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__Pyx_PyObject_SetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_theta23, __pyx_t_3) < 0) __PYX_ERR(0, 437, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "pytrino/three_flavor_matter.pyx":439
+ *         self.theta23 = self.theta23 - pi/2
+ * 
+ *         cdef double Pee = 1 - (Pemu + _Pemu)             # <<<<<<<<<<<<<<
+ *         cdef double Petau = _Pemu
+ *         cdef double Pmue = Pemu - Pmutau + _Pmutau
+ */
+  __pyx_v_Pee = (1.0 - (__pyx_v_Pemu + __pyx_v__Pemu));
+
+  /* "pytrino/three_flavor_matter.pyx":440
+ * 
+ *         cdef double Pee = 1 - (Pemu + _Pemu)
+ *         cdef double Petau = _Pemu             # <<<<<<<<<<<<<<
+ *         cdef double Pmue = Pemu - Pmutau + _Pmutau
+ *         cdef double Pmumu = 1 - Pemu - _Pmutau
+ */
+  __pyx_v_Petau = __pyx_v__Pemu;
+
+  /* "pytrino/three_flavor_matter.pyx":441
+ *         cdef double Pee = 1 - (Pemu + _Pemu)
+ *         cdef double Petau = _Pemu
+ *         cdef double Pmue = Pemu - Pmutau + _Pmutau             # <<<<<<<<<<<<<<
+ *         cdef double Pmumu = 1 - Pemu - _Pmutau
+ *         cdef double Ptaue = _Pemu + Pmutau - _Pmutau
+ */
+  __pyx_v_Pmue = ((__pyx_v_Pemu - __pyx_v_Pmutau) + __pyx_v__Pmutau);
+
+  /* "pytrino/three_flavor_matter.pyx":442
+ *         cdef double Petau = _Pemu
+ *         cdef double Pmue = Pemu - Pmutau + _Pmutau
+ *         cdef double Pmumu = 1 - Pemu - _Pmutau             # <<<<<<<<<<<<<<
+ *         cdef double Ptaue = _Pemu + Pmutau - _Pmutau
+ *         cdef double Ptaumu = _Pmutau
+ */
+  __pyx_v_Pmumu = ((1.0 - __pyx_v_Pemu) - __pyx_v__Pmutau);
+
+  /* "pytrino/three_flavor_matter.pyx":443
+ *         cdef double Pmue = Pemu - Pmutau + _Pmutau
+ *         cdef double Pmumu = 1 - Pemu - _Pmutau
+ *         cdef double Ptaue = _Pemu + Pmutau - _Pmutau             # <<<<<<<<<<<<<<
+ *         cdef double Ptaumu = _Pmutau
+ *         cdef double Ptautau = 1 - (_Pemu + Pmutau)
+ */
+  __pyx_v_Ptaue = ((__pyx_v__Pemu + __pyx_v_Pmutau) - __pyx_v__Pmutau);
+
+  /* "pytrino/three_flavor_matter.pyx":444
+ *         cdef double Pmumu = 1 - Pemu - _Pmutau
+ *         cdef double Ptaue = _Pemu + Pmutau - _Pmutau
+ *         cdef double Ptaumu = _Pmutau             # <<<<<<<<<<<<<<
+ *         cdef double Ptautau = 1 - (_Pemu + Pmutau)
+ * 
+ */
+  __pyx_v_Ptaumu = __pyx_v__Pmutau;
+
+  /* "pytrino/three_flavor_matter.pyx":445
+ *         cdef double Ptaue = _Pemu + Pmutau - _Pmutau
+ *         cdef double Ptaumu = _Pmutau
+ *         cdef double Ptautau = 1 - (_Pemu + Pmutau)             # <<<<<<<<<<<<<<
+ * 
+ *         probarray = [[Pee, Pemu, Petau], [Pmue, Pmumu, Pmutau], [Ptaue, Ptaumu, Ptautau]]
+ */
+  __pyx_v_Ptautau = (1.0 - (__pyx_v__Pemu + __pyx_v_Pmutau));
+
+  /* "pytrino/three_flavor_matter.pyx":447
+ *         cdef double Ptautau = 1 - (_Pemu + Pmutau)
+ * 
+ *         probarray = [[Pee, Pemu, Petau], [Pmue, Pmumu, Pmutau], [Ptaue, Ptaumu, Ptautau]]             # <<<<<<<<<<<<<<
+ * 
+ *         '''
+ */
+  __pyx_t_6[0] = __pyx_v_Pee;
+  __pyx_t_6[1] = __pyx_v_Pemu;
+  __pyx_t_6[2] = __pyx_v_Petau;
+  __pyx_t_7[0] = __pyx_v_Pmue;
+  __pyx_t_7[1] = __pyx_v_Pmumu;
+  __pyx_t_7[2] = __pyx_v_Pmutau;
+  __pyx_t_8[0] = __pyx_v_Ptaue;
+  __pyx_t_8[1] = __pyx_v_Ptaumu;
+  __pyx_t_8[2] = __pyx_v_Ptautau;
+  memcpy(&(__pyx_t_9[0]), __pyx_t_6, sizeof(__pyx_t_9[0]));
+  memcpy(&(__pyx_t_9[1]), __pyx_t_7, sizeof(__pyx_t_9[0]));
+  memcpy(&(__pyx_t_9[2]), __pyx_t_8, sizeof(__pyx_t_9[0]));
+  memcpy(&(__pyx_v_probarray[0]), __pyx_t_9, sizeof(__pyx_v_probarray[0]) * (3));
+
+  /* "pytrino/three_flavor_matter.pyx":457
+ *         '''
  * 
  *         return probarray             # <<<<<<<<<<<<<<
- * 
- * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = __Pyx_carray_to_py_double___5b_3_5d_(__pyx_v_probarray, 3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 279, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_r = __pyx_t_5;
-  __pyx_t_5 = 0;
+  __pyx_t_3 = __Pyx_carray_to_py_double___5b_3_5d_(__pyx_v_probarray, 3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 457, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_r = __pyx_t_3;
+  __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "pytrino/three_flavor_matter.pyx":269
+  /* "pytrino/three_flavor_matter.pyx":417
  *             return kd - 4 * firstsum + 2 * secondsum
  * 
  *     def probmatrix(self, double L, double E, double V, bint antineutrinos = False):             # <<<<<<<<<<<<<<
- *         cdef double[3][3] probarray
- * 
+ *         """
+ *         Compute the oscillation probability matrix.
  */
 
   /* function exit code */
   __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_AddTraceback("pytrino.three_flavor_matter.ThreeFlavor.probmatrix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
@@ -5956,22 +6212,22 @@ static int __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta23(Py
 }
 
 static PyMethodDef __pyx_methods_7pytrino_19three_flavor_matter_ThreeFlavor[] = {
-  {"deltamsq_matter", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq_matter, METH_VARARGS|METH_KEYWORDS, 0},
-  {"angles_phase_matter", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_phase_matter, METH_VARARGS|METH_KEYWORDS, 0},
-  {"probability", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probability, METH_VARARGS|METH_KEYWORDS, 0},
-  {"probmatrix", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_9probmatrix, METH_VARARGS|METH_KEYWORDS, 0},
+  {"deltamsq_matter", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_3deltamsq_matter, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7pytrino_19three_flavor_matter_11ThreeFlavor_2deltamsq_matter},
+  {"angles_phase_matter", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_5angles_phase_matter, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7pytrino_19three_flavor_matter_11ThreeFlavor_4angles_phase_matter},
+  {"probability", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_7probability, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7pytrino_19three_flavor_matter_11ThreeFlavor_6probability},
+  {"probmatrix", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_9probmatrix, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7pytrino_19three_flavor_matter_11ThreeFlavor_8probmatrix},
   {"__reduce_cython__", (PyCFunction)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_11__reduce_cython__, METH_NOARGS, 0},
   {"__setstate_cython__", (PyCFunction)__pyx_pw_7pytrino_19three_flavor_matter_11ThreeFlavor_13__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
 static struct PyGetSetDef __pyx_getsets_7pytrino_19three_flavor_matter_ThreeFlavor[] = {
-  {(char *)"delmsq21", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_delmsq21, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_delmsq21, (char *)0, 0},
-  {(char *)"delmsq31", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_delmsq31, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_delmsq31, (char *)0, 0},
-  {(char *)"deltacp", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_deltacp, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_deltacp, (char *)0, 0},
-  {(char *)"theta12", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta12, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta12, (char *)0, 0},
-  {(char *)"theta13", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta13, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta13, (char *)0, 0},
-  {(char *)"theta23", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta23, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta23, (char *)0, 0},
+  {(char *)"delmsq21", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_delmsq21, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_delmsq21, (char *)"\n        Getter for the mass-squared difference between the second and first neutrino mass eigenstates in eV^2.\n\n        :returns: The value of delmsq21.\n        :rtype: float\n        ", 0},
+  {(char *)"delmsq31", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_delmsq31, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_delmsq31, (char *)"\n        Getter for the mass-squared difference between the third and first neutrino mass eigenstates in eV^2.\n\n        :returns: The value of delmsq31.\n        :rtype: float\n        ", 0},
+  {(char *)"deltacp", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_deltacp, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_deltacp, (char *)"\n        Getter for the CP-violating phase in the neutrino mixing matrix.\n\n        :returns: The value of deltacp.\n        :rtype: float\n        ", 0},
+  {(char *)"theta12", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta12, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta12, (char *)"\n        Getter for the mixing angle between the first and second neutrino flavor states in radians.\n\n        :returns: The value of theta12.\n        :rtype: float\n        ", 0},
+  {(char *)"theta13", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta13, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta13, (char *)"\n        Getter for the mixing angle between the first and third neutrino flavor states in radians.\n\n        :returns: The value of theta13.\n        :rtype: float\n        ", 0},
+  {(char *)"theta23", __pyx_getprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta23, __pyx_setprop_7pytrino_19three_flavor_matter_11ThreeFlavor_theta23, (char *)"\n        Getter for the mixing angle between the second and third neutrino flavor states in radians.\n\n        :returns: The value of theta23.\n        :rtype: float\n        ", 0},
   {0, 0, 0, 0, 0}
 };
 
@@ -6006,7 +6262,7 @@ static PyTypeObject __pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor = {
   0, /*tp_setattro*/
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
-  0, /*tp_doc*/
+  "\n    Cython solver class to compute properties of the three-flavor neutrino oscillation model in vacuum/matter.\n    ", /*tp_doc*/
   0, /*tp_traverse*/
   0, /*tp_clear*/
   0, /*tp_richcompare*/
@@ -6130,7 +6386,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 389, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -6218,16 +6474,16 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtable_7pytrino_19three_flavor_matter_ThreeFlavor.deltamsq_matter = (__pyx_ctuple_double__and_double__and_double (*)(struct __pyx_obj_7pytrino_19three_flavor_matter_ThreeFlavor *, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_deltamsq_matter *__pyx_optional_args))__pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_deltamsq_matter;
   __pyx_vtable_7pytrino_19three_flavor_matter_ThreeFlavor.angles_phase_matter = (__pyx_ctuple_double__and_double__and_double__and_double (*)(struct __pyx_obj_7pytrino_19three_flavor_matter_ThreeFlavor *, double, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_angles_phase_matter *__pyx_optional_args))__pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_angles_phase_matter;
   __pyx_vtable_7pytrino_19three_flavor_matter_ThreeFlavor.probability = (double (*)(struct __pyx_obj_7pytrino_19three_flavor_matter_ThreeFlavor *, int, int, double, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_7pytrino_19three_flavor_matter_11ThreeFlavor_probability *__pyx_optional_args))__pyx_f_7pytrino_19three_flavor_matter_11ThreeFlavor_probability;
-  if (PyType_Ready(&__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor.tp_dictoffset && __pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor.tp_dict, __pyx_vtabptr_7pytrino_19three_flavor_matter_ThreeFlavor) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_ThreeFlavor, (PyObject *)&__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor.tp_dict, __pyx_vtabptr_7pytrino_19three_flavor_matter_ThreeFlavor) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_ThreeFlavor, (PyObject *)&__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
   __pyx_ptype_7pytrino_19three_flavor_matter_ThreeFlavor = &__pyx_type_7pytrino_19three_flavor_matter_ThreeFlavor;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -7106,6 +7362,20 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
     result = __Pyx_PyObject_Call(func, args, NULL);
     Py_DECREF(args);
     return result;
+}
+#endif
+
+/* PyObjectSetAttrStr */
+#if CYTHON_USE_TYPE_SLOTS
+static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_setattro))
+        return tp->tp_setattro(obj, attr_name, value);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_setattr))
+        return tp->tp_setattr(obj, PyString_AS_STRING(attr_name), value);
+#endif
+    return PyObject_SetAttr(obj, attr_name, value);
 }
 #endif
 

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pytrino.demo.pysolvers &mdash; pytrino  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            pytrino
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../pytrino.html">Pytrino</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pytrino</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pytrino.demo.pysolvers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pytrino.demo.pysolvers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">diag</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">arcsin</span><span class="p">,</span> <span class="n">arctan2</span><span class="p">,</span> <span class="n">prod</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="nb">abs</span> <span class="k">as</span> <span class="n">nabs</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">eigvalsh</span><span class="p">,</span> <span class="n">eigh</span>
+
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">kroneckerdelta</span><span class="p">,</span> <span class="n">crct</span><span class="p">,</span> <span class="n">submatrix</span><span class="p">,</span> <span class="n">adjugate</span>
+
+<div class="viewcode-block" id="Solver"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Solver">[docs]</a><span class="k">class</span> <span class="nc">Solver</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solver superclass for neutrino oscillation calculations.</span>
+
+<span class="sd">    :param delmsq21: Mass squared difference between the second and first neutrino mass eigenstates in eV^2</span>
+<span class="sd">    :type delmsq21: float</span>
+
+<span class="sd">    :param delmsq31: Mass squared difference between the third and first neutrino mass eigenstates in eV^2</span>
+<span class="sd">    :type delmsq31: float</span>
+
+<span class="sd">    :param deltacp: The Dirac CP-violating phase in vacuum in radians</span>
+<span class="sd">    :type deltacp: float</span>
+
+<span class="sd">    :param theta12: Mixing angle θ12 in radians</span>
+<span class="sd">    :type theta12: float</span>
+
+<span class="sd">    :param theta13: Mixing angle θ13 in radians</span>
+<span class="sd">    :type theta13: float</span>
+
+<span class="sd">    :param theta23: Mixing angle θ23 in radians</span>
+<span class="sd">    :type theta23: float</span>
+
+<span class="sd">    :param _O12: theta12 rotation matrix.</span>
+<span class="sd">    :type numpy.matrix:</span>
+<span class="sd">    </span>
+<span class="sd">    :param _O13: theta13 rotation matrix.</span>
+<span class="sd">    :type numpy.matrix:</span>
+
+<span class="sd">    :param _O23: theta23 rotation matrix</span>
+<span class="sd">    :type numpy.matrix:</span>
+
+<span class="sd">    :param _Udelta: Unitary CP phase matrix.</span>
+<span class="sd">    :type numpy.matrix:</span>
+
+<span class="sd">    :param _H: Hamiltonian in matter</span>
+<span class="sd">    :type numpy.matrix:</span>
+
+<span class="sd">    :param baseline: The baseline length in km</span>
+<span class="sd">    :type float: </span>
+
+<span class="sd">    :param energy: The neutrino beam energy in GeV</span>
+<span class="sd">    :type float:</span>
+<span class="sd">    </span>
+<span class="sd">    :param V: The effective (constant) matter potential in eV</span>
+<span class="sd">    :type float:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delmsq21</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delmsq31</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">deltacp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">theta12</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">theta13</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">theta23</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the Solver instance.</span>
+
+<span class="sd">        :param delmsq21: Mass squared difference between the second and first neutrino mass eigenstates in eV^2</span>
+<span class="sd">        :type delmsq21: float</span>
+
+<span class="sd">        :param delmsq31: Mass squared difference between the third and first neutrino mass eigenstates in eV^2</span>
+<span class="sd">        :type delmsq31: float</span>
+
+<span class="sd">        :param deltacp: CP-violating phase in radians</span>
+<span class="sd">        :type deltacp: float</span>
+
+<span class="sd">        :param theta12: Mixing angle θ12 in radians</span>
+<span class="sd">        :type theta12: float</span>
+
+<span class="sd">        :param theta13: Mixing angle θ13 in radians</span>
+<span class="sd">        :type theta13: float</span>
+
+<span class="sd">        :param theta23: Mixing angle θ23 in radians</span>
+<span class="sd">        :type theta23: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">deltacp</span> <span class="o">=</span> <span class="n">deltacp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theta12</span> <span class="o">=</span> <span class="n">theta12</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theta13</span> <span class="o">=</span> <span class="n">theta13</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theta23</span> <span class="o">=</span> <span class="n">theta23</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">delmsq21</span> <span class="o">=</span> <span class="n">delmsq21</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delmsq31</span> <span class="o">=</span> <span class="n">delmsq31</span>
+
+<div class="viewcode-block" id="Solver.alpha"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Solver.alpha">[docs]</a>    <span class="k">def</span> <span class="nf">alpha</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the mass-hierarchy parameter α.</span>
+
+<span class="sd">        :return: The value of α.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delmsq21</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">delmsq31</span></div>
+
+    <span class="k">def</span> <span class="nf">_PMNS_subrotations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the PMNS sub-rotation matrices.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">theta12</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta12</span>
+        <span class="n">theta13</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta13</span>
+        <span class="n">theta23</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta23</span>
+        <span class="n">deltacp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deltacp</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_O12</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="n">cos</span><span class="p">(</span><span class="n">theta12</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta12</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">theta12</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta12</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_O13</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="n">cos</span><span class="p">(</span><span class="n">theta13</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta13</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">theta13</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta13</span><span class="p">)]])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_O23</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta23</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta23</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">theta23</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta23</span><span class="p">)]])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Udelta</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">deltacp</span><span class="p">)]))</span>
+
+    <span class="k">def</span> <span class="nf">_hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the Hamiltonian matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">O12</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_O12</span>
+        <span class="n">O13</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_O13</span>
+        <span class="n">O23</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_O23</span>
+        <span class="n">Udelta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Udelta</span>
+
+        <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span>
+        <span class="n">delmsq31</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delmsq31</span>
+
+        <span class="n">energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span>
+
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">energy</span> <span class="o">*</span> <span class="mf">1e+9</span> <span class="o">*</span> <span class="n">V</span><span class="p">)</span><span class="o">/</span><span class="n">delmsq31</span>
+
+        <span class="c1"># PMNS = O23 @ Udelta @ O13 @ Udelta.H @ O12</span>
+
+        <span class="n">M</span> <span class="o">=</span> <span class="n">O13</span> <span class="o">@</span> <span class="n">O12</span> <span class="o">@</span> <span class="n">diag</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">@</span> <span class="n">O12</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">O13</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">diag</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_H</span> <span class="o">=</span> <span class="n">O23</span> <span class="o">@</span> <span class="n">Udelta</span> <span class="o">@</span> <span class="n">M</span> <span class="o">@</span> <span class="n">Udelta</span><span class="o">.</span><span class="n">H</span> <span class="o">@</span> <span class="n">O23</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">def</span> <span class="nf">_Hevals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the eigenvalues of the Hamiltonian matrix.</span>
+
+<span class="sd">        :return: The eigenvalues of the Hamiltonian.</span>
+<span class="sd">        :rtype: numpy.ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">eigvalsh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_H</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_computeH</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the Hamiltonian matrix.</span>
+
+<span class="sd">        :param baseline: The baseline length in km</span>
+<span class="sd">        :type baseline: float</span>
+<span class="sd">        :param energy: The neutrino beam energy in GeV</span>
+<span class="sd">        :type energy: float</span>
+<span class="sd">        :param V: The effective (constant) matter potential in eV</span>
+<span class="sd">        :type V: float</span>
+<span class="sd">        :param antineutrinos: Flag indicating whether to compute for antineutrinos (True) or neutrinos (False).</span>
+<span class="sd">        :type antineutrinos: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">antineutrinos</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deltacp</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">deltacp</span>
+            <span class="n">V</span> <span class="o">=</span> <span class="o">-</span><span class="n">V</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_PMNS_subrotations</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span> <span class="o">=</span> <span class="n">baseline</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">V</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hamiltonian</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">antineutrinos</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deltacp</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">deltacp</span>
+            <span class="n">V</span> <span class="o">=</span> <span class="o">-</span><span class="n">V</span>
+    
+<div class="viewcode-block" id="Solver.probability"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Solver.probability">[docs]</a>    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">baseline</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the neutrino oscillation probability from flavor i to flavor j.</span>
+
+<span class="sd">        :param i: Initial flavor index (e = 1, mu = 2, tau = 3).</span>
+<span class="sd">        :type i: int</span>
+<span class="sd">        :param j: Final flavor index (e = 1, mu = 2, tau = 3).</span>
+<span class="sd">        :type j: int</span>
+<span class="sd">        :param baseline: The baseline length in km</span>
+<span class="sd">        :type baseline: float</span>
+<span class="sd">        :param energy: The neutrino beam energy in GeV</span>
+<span class="sd">        :type energy: float</span>
+<span class="sd">        :param V: The effective (constant) matter potential in eV</span>
+<span class="sd">        :type V: float</span>
+<span class="sd">        :param antineutrinos: Flag indicating whether to compute for antineutrinos (True) or neutrinos (False).</span>
+<span class="sd">        :type antineutrinos: bool</span>
+<span class="sd">        :return: The oscillation probability.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">crct</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_computeH</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evolution_matrix</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">nabs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span></div>
+    
+<div class="viewcode-block" id="Solver.probmatrix"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Solver.probmatrix">[docs]</a>    <span class="k">def</span> <span class="nf">probmatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the neutrino oscillation probability matrix.</span>
+
+<span class="sd">        :param baseline: The baseline length in km</span>
+<span class="sd">        :type baseline: float</span>
+<span class="sd">        :param energy: The neutrino beam energy in GeV</span>
+<span class="sd">        :type energy: float</span>
+<span class="sd">        :param V: The effective (constant) matter potential in eV</span>
+<span class="sd">        :type V: float</span>
+<span class="sd">        :param antineutrinos: Flag indicating whether to compute for antineutrinos (True) or neutrinos (False).</span>
+<span class="sd">        :type antineutrinos: bool</span>
+<span class="sd">        :param labels: Flag indicating whether to include labels in the output matrix.</span>
+<span class="sd">        :type labels: bool</span>
+<span class="sd">        :return: The neutrino/antineutrino oscillation probability matrix.</span>
+<span class="sd">        :rtype: numpy.ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Pemu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+        <span class="n">Pmutau</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">theta23</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta23</span> <span class="o">+</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">_Pemu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+        <span class="n">_Pmutau</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theta23</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta23</span> <span class="o">-</span> <span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+
+        <span class="n">Pee</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">Pemu</span> <span class="o">+</span> <span class="n">_Pemu</span><span class="p">)</span>
+        <span class="n">Petau</span> <span class="o">=</span> <span class="n">_Pemu</span>
+        <span class="n">Pmue</span> <span class="o">=</span> <span class="n">Pemu</span> <span class="o">-</span> <span class="n">Pmutau</span> <span class="o">+</span> <span class="n">_Pmutau</span>
+        <span class="n">Pmumu</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">Pemu</span> <span class="o">-</span> <span class="n">_Pmutau</span>
+        <span class="n">Ptaue</span> <span class="o">=</span> <span class="n">_Pemu</span> <span class="o">+</span> <span class="n">Pmutau</span> <span class="o">-</span> <span class="n">_Pmutau</span>
+        <span class="n">Ptaumu</span> <span class="o">=</span> <span class="n">_Pmutau</span>
+        <span class="n">Ptautau</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">_Pemu</span> <span class="o">+</span> <span class="n">Pmutau</span><span class="p">)</span>
+
+        <span class="n">pmat</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="n">Pee</span><span class="p">,</span> <span class="n">Pemu</span><span class="p">,</span> <span class="n">Petau</span><span class="p">],</span> <span class="p">[</span><span class="n">Pmue</span><span class="p">,</span> <span class="n">Pmumu</span><span class="p">,</span> <span class="n">Pmutau</span><span class="p">],</span> <span class="p">[</span><span class="n">Ptaue</span><span class="p">,</span> <span class="n">Ptaumu</span><span class="p">,</span> <span class="n">Ptautau</span><span class="p">]])</span>
+
+        <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="n">labelmatrix</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="s2">&quot;Pee&quot;</span><span class="p">,</span> <span class="s2">&quot;Pemu&quot;</span><span class="p">,</span> <span class="s2">&quot;Petau&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Pmue&quot;</span><span class="p">,</span> <span class="s2">&quot;Pmumu&quot;</span><span class="p">,</span> <span class="s2">&quot;Pmutau&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Ptaue&quot;</span><span class="p">,</span> <span class="s2">&quot;Ptaumu&quot;</span><span class="p">,</span> <span class="s2">&quot;Ptautau&quot;</span><span class="p">]])</span>
+            <span class="k">if</span> <span class="n">antineutrinos</span><span class="p">:</span>
+                <span class="n">labelmatrix</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="s1">&#39;~&#39;</span> <span class="o">+</span> <span class="n">labelmatrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+            
+            <span class="n">labeledpmat</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">labelmatrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="n">pmat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+            <span class="n">pmat</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">labeledpmat</span><span class="p">)</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        # labelmatrix = matrix([[&quot;Pee&quot;, &quot;Pemu&quot;, &quot;Petau&quot;], [&quot;Pmue&quot;, &quot;Pmumu&quot;, &quot;Pmutau&quot;], [&quot;Ptaue&quot;, &quot;Ptaumu&quot;, &quot;Ptautau&quot;]])</span>
+<span class="sd">        pmat = np.zeros((3, 3))</span>
+
+<span class="sd">        for i in range(1, 4):</span>
+<span class="sd">            for j in range(1, 4):</span>
+<span class="sd">                # label = labelmatrix[i - 1, j - 1]</span>
+<span class="sd">                prob = self.probability(i, j, baseline, energy, V, antineutrinos)</span>
+
+<span class="sd">                # print(f&quot;{label}: {prob}&quot;)</span>
+<span class="sd">                </span>
+<span class="sd">                pmat[i - 1, j - 1] = prob</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="n">pmat</span></div></div>
+
+<div class="viewcode-block" id="Eigen"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Eigen">[docs]</a><span class="k">class</span> <span class="nc">Eigen</span><span class="p">(</span><span class="n">Solver</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solver subclass to compute oscillation probabilities by </span>
+<span class="sd">        1. Calculating eigenvalues and eigenvectors of Hamiltonian in matter (thereby diagonalizing said Hamiltonian).</span>
+<span class="sd">        2. Computing evolution matrix using said eigenvalues and eigenvectors</span>
+<span class="sd">        3. Compute oscillation probabilites using evolution matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the Eigen solver instance.</span>
+
+<span class="sd">        :param args: Arguments passed to the Solver superclass.</span>
+<span class="sd">        :type args: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_Hevecs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the eigenvectors of the Hamiltonian matrix.</span>
+
+<span class="sd">        :return: The eigenvectors of the Hamiltonian matrix.</span>
+<span class="sd">        :rtype: numpy.ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">eigh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_H</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">_evolution_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the evolution matrix S.</span>
+
+<span class="sd">        :return: The evolution matrix S.</span>
+<span class="sd">        :rtype: numpy.ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lda1</span><span class="p">,</span> <span class="n">lda2</span><span class="p">,</span> <span class="n">lda3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Hevals</span><span class="p">()</span>
+        <span class="n">evecs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Hevecs</span><span class="p">()</span>
+
+        <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span>
+        <span class="n">En</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span>
+        <span class="n">delmsq31</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delmsq31</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.267</span> <span class="o">*</span> <span class="n">delmsq31</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="n">En</span>
+
+        <span class="n">PMNSmat</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">evecs</span><span class="p">)</span>
+
+        <span class="n">S</span> <span class="o">=</span> <span class="n">PMNSmat</span> <span class="o">@</span> <span class="n">diag</span><span class="p">([</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">lda1</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">delta</span><span class="p">),</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">lda2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">delta</span><span class="p">),</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">lda3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)])</span> <span class="o">@</span> <span class="n">PMNSmat</span><span class="o">.</span><span class="n">H</span>
+        <span class="k">return</span> <span class="n">S</span></div>
+    
+<div class="viewcode-block" id="CayleyHamilton"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.CayleyHamilton">[docs]</a><span class="k">class</span> <span class="nc">CayleyHamilton</span><span class="p">(</span><span class="n">Solver</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solver subclass to compute oscillation probabilities by </span>
+<span class="sd">        1. Calculating eigenvalues of Hamiltonian in matter.</span>
+<span class="sd">        2. Computing evolution matrix using the Cayley-Hamilton formalism (See https://arxiv.org/abs/hep-ph/0402175 for more info)</span>
+<span class="sd">        3. Compute oscillation probabilites using evolution matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the CayleyHamilton solver instance.</span>
+
+<span class="sd">        :param args: Arguments passed to the Solver superclass.</span>
+<span class="sd">        :type args: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_evolution_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the evolution matrix S.</span>
+
+<span class="sd">        :return: The evolution matrix S.</span>
+<span class="sd">        :rtype: numpy.ndarray</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_H</span>
+        <span class="n">lda1</span><span class="p">,</span> <span class="n">lda2</span><span class="p">,</span> <span class="n">lda3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Hevals</span><span class="p">()</span>
+
+        <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span>
+        <span class="n">En</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span>
+        <span class="n">delmsq31</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delmsq31</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.267</span> <span class="o">*</span> <span class="n">delmsq31</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="n">En</span>
+
+        <span class="n">S</span> <span class="o">=</span> <span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">lda1</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">lda1</span> <span class="o">-</span> <span class="n">lda2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda1</span> <span class="o">-</span> <span class="n">lda3</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda2</span> <span class="o">*</span> <span class="n">lda3</span> <span class="o">*</span> <span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">lda2</span> <span class="o">+</span> <span class="n">lda3</span><span class="p">)</span> <span class="o">*</span> <span class="n">H</span> <span class="o">+</span> <span class="n">H</span> <span class="o">@</span> <span class="n">H</span><span class="p">)</span> <span class="o">+</span>\
+        <span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">lda2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">lda2</span> <span class="o">-</span> <span class="n">lda1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda2</span> <span class="o">-</span> <span class="n">lda3</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda1</span> <span class="o">*</span> <span class="n">lda3</span> <span class="o">*</span> <span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">lda1</span> <span class="o">+</span> <span class="n">lda3</span><span class="p">)</span> <span class="o">*</span> <span class="n">H</span> <span class="o">+</span> <span class="n">H</span> <span class="o">@</span> <span class="n">H</span><span class="p">)</span> <span class="o">+</span>\
+        <span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">lda3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">lda3</span> <span class="o">-</span> <span class="n">lda1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda3</span> <span class="o">-</span> <span class="n">lda2</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda1</span> <span class="o">*</span> <span class="n">lda2</span> <span class="o">*</span> <span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">lda1</span> <span class="o">+</span> <span class="n">lda2</span><span class="p">)</span> <span class="o">*</span> <span class="n">H</span> <span class="o">+</span> <span class="n">H</span> <span class="o">@</span> <span class="n">H</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">S</span></div>
+
+<div class="viewcode-block" id="Identities"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Identities">[docs]</a><span class="k">class</span> <span class="nc">Identities</span><span class="p">(</span><span class="n">Solver</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solver subclass to compute matter oscillation properties by </span>
+<span class="sd">        1. Calculating eigenvalues of submatrices of the Hamiltonian in matter.</span>
+<span class="sd">        2. Computing modulus squared of the elements of the PMNS matrix in matter using the Eigenvalue-Eigenvector identity (See https://arxiv.org/abs/1907.02534 for more info).</span>
+<span class="sd">        3. Computing quartic products of the elements of the PMNS matrix in matter using the Adjugate identity (See https://arxiv.org/abs/2212.12565 for more info).</span>
+<span class="sd">        4. Using these quantities to compute probabilities for appearance and disappearance channels.</span>
+<span class="sd">        5. Implementing subroutines to explicitly compute mass squared differences, mixing angles + CP phase, and PMNS matrix in matter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the Identities solver instance.</span>
+
+<span class="sd">        :param args: Arguments passed to the Solver superclass.</span>
+<span class="sd">        :type args: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_submatrix_evals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the eigenvalues of submatrices of the Hamiltonian.</span>
+<span class="sd">        </span>
+<span class="sd">        See https://arxiv.org/abs/1907.02534 for more info.</span>
+
+<span class="sd">        :return: The eigenvalues of submatrices.</span>
+<span class="sd">        :rtype: List[List[float]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_H</span>
+
+        <span class="n">He</span> <span class="o">=</span> <span class="n">submatrix</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">Hmu</span> <span class="o">=</span> <span class="n">submatrix</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">Htau</span> <span class="o">=</span> <span class="n">submatrix</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">Xie</span><span class="p">,</span> <span class="n">Chie</span> <span class="o">=</span> <span class="n">eigvalsh</span><span class="p">(</span><span class="n">He</span><span class="p">)</span>
+        <span class="n">Ximu</span><span class="p">,</span> <span class="n">Chimu</span> <span class="o">=</span> <span class="n">eigvalsh</span><span class="p">(</span><span class="n">Hmu</span><span class="p">)</span>
+        <span class="n">Xitau</span><span class="p">,</span> <span class="n">Chitau</span> <span class="o">=</span> <span class="n">eigvalsh</span><span class="p">(</span><span class="n">Htau</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[[</span><span class="n">Xie</span><span class="p">,</span> <span class="n">Chie</span><span class="p">],</span> <span class="p">[</span><span class="n">Ximu</span><span class="p">,</span> <span class="n">Chimu</span><span class="p">],</span> <span class="p">[</span><span class="n">Xitau</span><span class="p">,</span> <span class="n">Chitau</span><span class="p">]]</span>
+
+    <span class="k">def</span> <span class="nf">_quartic_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">complex</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the quartic product using the Adjugate Identity.</span>
+<span class="sd">        </span>
+<span class="sd">        See https://arxiv.org/abs/2212.12565 for more info.</span>
+
+<span class="sd">        :param i: Index i.</span>
+<span class="sd">        :type i: int</span>
+<span class="sd">        :param alpha: Flavor index alpha.</span>
+<span class="sd">        :type alpha: int</span>
+<span class="sd">        :param beta: Flavor index beta.</span>
+<span class="sd">        :type beta: int</span>
+<span class="sd">        :return: The value of the quartic product.</span>
+<span class="sd">        :rtype: complex</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">i</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">crct</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_H</span>
+        <span class="n">lda</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Hevals</span><span class="p">()</span>
+
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">adjugate</span><span class="p">(</span><span class="n">lda</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">H</span><span class="p">)[</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">]</span>
+        <span class="n">denom</span> <span class="o">=</span> <span class="n">prod</span><span class="p">([</span><span class="n">lda</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">lda</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">i</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+
+        <span class="n">qprod</span> <span class="o">=</span> <span class="n">adj</span> <span class="o">/</span> <span class="n">denom</span>
+
+        <span class="k">return</span> <span class="n">qprod</span>
+    
+    <span class="k">def</span> <span class="nf">_PMNS_matter_modsq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the modulus squared of the elements of the PMNS matrix in matter using the Eigenvalue-Eigenvector Identity.</span>
+
+<span class="sd">        See https://arxiv.org/abs/1907.02534 for more info.</span>
+
+<span class="sd">        :param alpha: Flavor index alpha.</span>
+<span class="sd">        :type alpha: int</span>
+<span class="sd">        :param i: Index i.</span>
+<span class="sd">        :type i: int</span>
+<span class="sd">        :return: The value of the squared modulus.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">alpha</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">crct</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="n">lda</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Hevals</span><span class="p">()</span>
+        <span class="n">subeigs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_submatrix_evals</span><span class="p">()</span>
+
+        <span class="n">sublda</span> <span class="o">=</span> <span class="n">subeigs</span><span class="p">[</span><span class="n">alpha</span><span class="p">]</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="n">prod</span><span class="p">([</span><span class="n">lda</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">sublda</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sublda</span><span class="p">))])</span>
+        <span class="n">denom</span> <span class="o">=</span> <span class="n">prod</span><span class="p">([</span><span class="n">lda</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">lda</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">i</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+
+        <span class="n">modsq</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">denom</span>
+
+        <span class="k">return</span> <span class="n">modsq</span>
+    
+    <span class="k">def</span> <span class="nf">_phase_mat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the oscillation phase in matter.</span>
+
+<span class="sd">        :param k: Index k.</span>
+<span class="sd">        :type k: int</span>
+<span class="sd">        :param j: Index j.</span>
+<span class="sd">        :type j: int</span>
+<span class="sd">        :param n: multiplier</span>
+<span class="sd">        :type n: int</span>
+<span class="sd">        :return: The oscillation phase in matter.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">k</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">crct</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+        <span class="n">lda</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Hevals</span><span class="p">()</span>
+
+        <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span>
+        <span class="n">En</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">energy</span>
+        <span class="n">delmsq31</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delmsq31</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.267</span> <span class="o">*</span> <span class="n">delmsq31</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="n">En</span>
+
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">lda</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="n">delta</span>
+    
+    <span class="k">def</span> <span class="nf">_disappearance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the disappearance probability using the modulus squared of the elements of the PMNS matrix in matter, obtained using the Eigenvalue-Eigenvector identity.</span>
+
+<span class="sd">        See https://arxiv.org/abs/1907.02534 for more info.</span>
+
+<span class="sd">        :param i: Flavor index i.</span>
+<span class="sd">        :type i: int</span>
+<span class="sd">        :return: The disappearance probability.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">summation</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+                <span class="n">term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_PMNS_matter_modsq</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_PMNS_matter_modsq</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phase_mat</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>                
+                <span class="n">summation</span> <span class="o">+=</span> <span class="n">term</span>
+
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">summation</span>
+    
+    <span class="k">def</span> <span class="nf">_appearance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the appearance probability using the adjugate of the Hamiltonian in matter, obtained using the Adjugate identity.</span>
+
+<span class="sd">        See https://arxiv.org/abs/2212.12565 for more info.</span>
+
+<span class="sd">        :param a: Flavor index a.</span>
+<span class="sd">        :type a: int</span>
+<span class="sd">        :param b: Flavor index b.</span>
+<span class="sd">        :type b: int</span>
+<span class="sd">        :return: The appearance probability.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">firstsum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">secondsum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+                <span class="n">firstsum</span> <span class="o">+=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_quartic_product</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quartic_product</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phase_mat</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">secondsum</span> <span class="o">+=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_quartic_product</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quartic_product</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">imag</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phase_mat</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">kroneckerdelta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">firstsum</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">secondsum</span>
+    
+    <span class="c1"># @override</span>
+<div class="viewcode-block" id="Identities.probability"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Identities.probability">[docs]</a>    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">baseline</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">antineutrinos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the neutrino oscillation probability for a given channel.</span>
+
+<span class="sd">        :param i: Flavor index i.</span>
+<span class="sd">        :type i: int</span>
+<span class="sd">        :param j: Flavor index j.</span>
+<span class="sd">        :type j: int</span>
+<span class="sd">        :param baseline: Baseline length in km.</span>
+<span class="sd">        :type baseline: float</span>
+<span class="sd">        :param energy: Neutrino energy in GeV.</span>
+<span class="sd">        :type energy: float</span>
+<span class="sd">        :param V: Effective (constant) matter potential in eV.</span>
+<span class="sd">        :type V: float</span>
+<span class="sd">        :param antineutrinos: Flag indicating whether to compute for antineutrinos (default is False).</span>
+<span class="sd">        :type antineutrinos: bool</span>
+<span class="sd">        :return: The neutrino/antineutrino oscillation probability.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_computeH</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disappearance</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_appearance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span></div>
+    
+    <span class="k">def</span> <span class="nf">_mixing_angles_mat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the mixing angles in matter.</span>
+
+<span class="sd">        :return: The mixing angles in matter (theta12mat, theta13mat, theta23mat).</span>
+<span class="sd">        :rtype: Tuple[float, float, float]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">s13matsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_PMNS_matter_modsq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+        <span class="n">c13matsq</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">s13matsq</span>
+
+        <span class="n">s12matsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_PMNS_matter_modsq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">c13matsq</span>
+        <span class="n">s23matsq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_PMNS_matter_modsq</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">c13matsq</span>
+
+        <span class="n">s12mat</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">s12matsq</span><span class="p">)</span>
+        <span class="n">s13mat</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">s13matsq</span><span class="p">)</span> 
+        <span class="n">s23mat</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">s23matsq</span><span class="p">)</span>
+
+        <span class="n">theta12mat</span> <span class="o">=</span> <span class="n">arcsin</span><span class="p">(</span><span class="n">s12mat</span><span class="p">)</span>
+        <span class="n">theta13mat</span> <span class="o">=</span> <span class="n">arcsin</span><span class="p">(</span><span class="n">s13mat</span><span class="p">)</span>
+        <span class="n">theta23mat</span> <span class="o">=</span> <span class="n">arcsin</span><span class="p">(</span><span class="n">s23mat</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">theta12mat</span><span class="p">,</span> <span class="n">theta13mat</span><span class="p">,</span> <span class="n">theta23mat</span>
+    
+    <span class="k">def</span> <span class="nf">_toshev_identity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span> <span class="c1"># DOESNT WORK LOL EDIT: no it does TODO</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implements the Toshev identity to compute sine of the CP phase in matter.</span>
+
+<span class="sd">        :return: The sine of the CP phase in matter.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">theta23mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mixing_angles_mat</span><span class="p">()</span>
+
+        <span class="n">deltacp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deltacp</span>
+        <span class="n">theta23</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta23</span>
+
+        <span class="n">sindeltacpmat</span> <span class="o">=</span> <span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">theta23</span><span class="p">)</span><span class="o">/</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">theta23mat</span><span class="p">))</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">deltacp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sindeltacpmat</span>
+    
+    <span class="k">def</span> <span class="nf">_cpphase_mat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the CP phase in matter using the Eigenvalue-Eigenvector and Toshev identities.</span>
+
+<span class="sd">        Note: The CP phase being 2 pi bla bla this is outliend in eq. bla bla TODO</span>
+
+<span class="sd">        See https://arxiv.org/abs/1907.02534 for more info.</span>
+
+<span class="sd">        :return: The value of the CP phase in matter in radians.</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lda1</span><span class="p">,</span> <span class="n">lda2</span><span class="p">,</span> <span class="n">lda3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Hevals</span><span class="p">()</span>
+        <span class="n">Ximu</span><span class="p">,</span> <span class="n">Chimu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_submatrix_evals</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">s12</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta12</span><span class="p">)</span>
+        <span class="n">c12</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta12</span><span class="p">)</span>
+        <span class="n">s23</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta23</span><span class="p">)</span>
+        <span class="n">c23</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta23</span><span class="p">)</span>
+        <span class="n">s13</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta13</span><span class="p">)</span>
+
+        <span class="n">Umu1modsq</span> <span class="o">=</span> <span class="p">((</span><span class="n">lda1</span> <span class="o">-</span> <span class="n">Ximu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda1</span> <span class="o">-</span> <span class="n">Chimu</span><span class="p">))</span><span class="o">/</span><span class="p">((</span><span class="n">lda1</span> <span class="o">-</span> <span class="n">lda2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda1</span> <span class="o">-</span> <span class="n">lda3</span><span class="p">))</span>
+
+        <span class="n">sdcp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_toshev_identity</span><span class="p">()</span>
+        <span class="n">cdcp</span> <span class="o">=</span> <span class="p">(</span><span class="n">Umu1modsq</span> <span class="o">-</span> <span class="n">s12</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c23</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">c12</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">s13</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">s23</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">s12</span> <span class="o">*</span> <span class="n">c12</span> <span class="o">*</span> <span class="n">s13</span> <span class="o">*</span> <span class="n">s23</span> <span class="o">*</span> <span class="n">c23</span><span class="p">)</span>
+
+        <span class="n">deltacpmat</span> <span class="o">=</span> <span class="n">arctan2</span><span class="p">(</span><span class="n">sdcp</span><span class="p">,</span> <span class="n">cdcp</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">deltacpmat</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">deltacpmat</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span>
+
+        <span class="k">return</span> <span class="n">deltacpmat</span>
+    
+    <span class="c1"># mass squared differences in matter</span>
+<div class="viewcode-block" id="Identities.deltamsq_matter"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Identities.deltamsq_matter">[docs]</a>    <span class="k">def</span> <span class="nf">deltamsq_matter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the mass squared differences in matter for the given parameters.</span>
+
+<span class="sd">        :param baseline: The baseline length in km.</span>
+<span class="sd">        :type baseline: float</span>
+<span class="sd">        :param energy: The neutrino beam energy in GeV.</span>
+<span class="sd">        :type energy: float</span>
+<span class="sd">        :param V: The effective (constant) matter potential in eV.</span>
+<span class="sd">        :type V: float</span>
+<span class="sd">        :param antineutrinos: Flag indicating whether to compute for antineutrinos. Defaults to False.</span>
+<span class="sd">        :type antineutrinos: bool, optional</span>
+<span class="sd">        :return: The mass squared differences in matter in eV^2.</span>
+<span class="sd">        :rtype: Tuple[float, float, float]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_computeH</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+
+        <span class="n">lda</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Hevals</span><span class="p">()</span>
+        <span class="n">delmsq31</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delmsq31</span>
+        
+        <span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+        <span class="n">msqsmat</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="n">msqsmat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">delmsq31</span> <span class="o">*</span> <span class="p">(</span><span class="n">lda</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">lda</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">msqsmat</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Identities.angles_phase_matter"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Identities.angles_phase_matter">[docs]</a>    <span class="k">def</span> <span class="nf">angles_phase_matter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the mixing angles and CP-violating phase in matter for the given parameters.</span>
+
+<span class="sd">        See https://arxiv.org/abs/1907.02534 for more info.</span>
+
+<span class="sd">        :param baseline: The baseline length in km.</span>
+<span class="sd">        :type baseline: float</span>
+<span class="sd">        :param energy: The neutrino beam energy in GeV.</span>
+<span class="sd">        :type energy: float</span>
+<span class="sd">        :param V: The effective (constant) matter potential in eV.</span>
+<span class="sd">        :type V: float</span>
+<span class="sd">        :param antineutrinos: Flag indicating whether to compute for antineutrinos. Defaults to False.</span>
+<span class="sd">        :type antineutrinos: bool, optional</span>
+<span class="sd">        :return: The CP phase and mixing angles in matter in radians.</span>
+<span class="sd">        :rtype: Tuple[float, float, float, float]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_computeH</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+
+        <span class="n">theta12mat</span><span class="p">,</span> <span class="n">theta13mat</span><span class="p">,</span> <span class="n">theta23mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mixing_angles_mat</span><span class="p">()</span>
+        <span class="n">deltacpmat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cpphase_mat</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">deltacpmat</span><span class="p">,</span> <span class="n">theta12mat</span><span class="p">,</span> <span class="n">theta13mat</span><span class="p">,</span> <span class="n">theta23mat</span></div>
+    
+<div class="viewcode-block" id="Identities.PMNS_matter"><a class="viewcode-back" href="../../../pytrino.demo.html#pytrino.demo.pysolvers.Identities.PMNS_matter">[docs]</a>    <span class="k">def</span> <span class="nf">PMNS_matter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">baseline</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">matrix</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the PMNS matrix in matter for the given parameters.</span>
+
+<span class="sd">        See https://arxiv.org/abs/1907.02534 for more info.</span>
+
+<span class="sd">        :param baseline: The baseline length in km.</span>
+<span class="sd">        :type baseline: float</span>
+<span class="sd">        :param energy: The neutrino beam energy in GeV.</span>
+<span class="sd">        :type energy: float</span>
+<span class="sd">        :param V: The effective (constant) matter potential in eV.</span>
+<span class="sd">        :type V: float</span>
+<span class="sd">        :param antineutrinos: Flag indicating whether to compute for antineutrinos. Defaults to False.</span>
+<span class="sd">        :type antineutrinos: bool, optional</span>
+<span class="sd">        :return: The PMNS matrix in matter.</span>
+<span class="sd">        :rtype: matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_computeH</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">antineutrinos</span><span class="p">)</span>
+    
+        <span class="n">theta12mat</span><span class="p">,</span> <span class="n">theta13mat</span><span class="p">,</span> <span class="n">theta23mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mixing_angles_mat</span><span class="p">()</span>
+        <span class="n">deltacpmat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cpphase_mat</span><span class="p">()</span>
+        
+        <span class="n">O12mat</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="n">cos</span><span class="p">(</span><span class="n">theta12mat</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta12mat</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">theta12mat</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta12mat</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+        <span class="n">O13mat</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="n">cos</span><span class="p">(</span><span class="n">theta13mat</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta13mat</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">theta13mat</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta13mat</span><span class="p">)]])</span>
+        <span class="n">O23mat</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta23mat</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta23mat</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">theta23mat</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta23mat</span><span class="p">)]])</span>
+        <span class="n">Udeltamat</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">deltacpmat</span><span class="p">)]))</span>
+
+        <span class="n">PMNSmat</span> <span class="o">=</span> <span class="n">O23mat</span> <span class="o">@</span> <span class="n">Udeltamat</span> <span class="o">@</span> <span class="n">O13mat</span> <span class="o">@</span> <span class="n">Udeltamat</span><span class="o">.</span><span class="n">H</span> <span class="o">@</span> <span class="n">O12mat</span>
+
+        <span class="k">return</span> <span class="n">PMNSmat</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, BKModding.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

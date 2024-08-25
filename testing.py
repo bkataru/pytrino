@@ -36,11 +36,11 @@ def cython_example():
     from pytrino import ThreeFlavor
     import numpy as np
 
-    delmsq31 = 2.5e-3
     delmsq21 = 7.55e-5 
+    delmsq31 = 2.5e-3
     deltacp = 1.32 * np.pi
-    theta13 = np.radians(4.4)
     theta12 = np.radians(33.2)
+    theta13 = np.radians(4.4)
     theta23 = np.radians(46.1)
 
     constants = [delmsq21, delmsq31, deltacp, theta12, theta13, theta23]
@@ -64,7 +64,6 @@ def example1():
     theta23 = np.radians(46.1)
 
     constants = [delmsq21, delmsq31, deltacp, theta12, theta13, theta23]
-    _constants = [delmsq21, delmsq31, deltacp, theta12, theta13, theta23 + np.pi/2]
 
     baseline = 1000
     energy = 0.001

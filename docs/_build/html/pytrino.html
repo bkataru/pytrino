@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pytrino &mdash; pytrino  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pytrino.demo" href="pytrino.demo.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pytrino
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pytrino</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#demo-submodule">Demo Submodule</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html">pytrino.demo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pytrino.three_flavor_matter">pytrino.three_flavor_matter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.angles_phase_matter"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.angles_phase_matter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.delmsq21"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.delmsq21</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.delmsq31"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.delmsq31</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.deltacp"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.deltacp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.deltamsq_matter"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.deltamsq_matter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.probability"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.probability()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.probmatrix"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.probmatrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.theta12"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.theta12</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.theta13"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.theta13</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.three_flavor_matter.ThreeFlavor.theta23"><code class="docutils literal notranslate"><span class="pre">ThreeFlavor.theta23</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pytrino.two_flavor_matter">pytrino.two_flavor_matter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pytrino.two_flavor_matter.TwoFlavor"><code class="docutils literal notranslate"><span class="pre">TwoFlavor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.two_flavor_matter.TwoFlavor.delmsq"><code class="docutils literal notranslate"><span class="pre">TwoFlavor.delmsq</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.two_flavor_matter.TwoFlavor.probability"><code class="docutils literal notranslate"><span class="pre">TwoFlavor.probability()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytrino.two_flavor_matter.TwoFlavor.theta"><code class="docutils literal notranslate"><span class="pre">TwoFlavor.theta</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pytrino</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pytrino</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pytrino.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pytrino">
+<h1>Pytrino<a class="headerlink" href="#pytrino" title="Permalink to this heading"></a></h1>
+<section id="demo-submodule">
+<h2>Demo Submodule<a class="headerlink" href="#demo-submodule" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pytrino.demo.html">pytrino.demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pytrino.demo.html#module-pytrino.demo.pysolvers">pytrino.demo.pysolvers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.CayleyHamilton"><code class="docutils literal notranslate"><span class="pre">CayleyHamilton</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Eigen"><code class="docutils literal notranslate"><span class="pre">Eigen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Identities"><code class="docutils literal notranslate"><span class="pre">Identities</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Identities.PMNS_matter"><code class="docutils literal notranslate"><span class="pre">Identities.PMNS_matter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Identities.angles_phase_matter"><code class="docutils literal notranslate"><span class="pre">Identities.angles_phase_matter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Identities.deltamsq_matter"><code class="docutils literal notranslate"><span class="pre">Identities.deltamsq_matter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Identities.probability"><code class="docutils literal notranslate"><span class="pre">Identities.probability()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Solver"><code class="docutils literal notranslate"><span class="pre">Solver</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Solver.alpha"><code class="docutils literal notranslate"><span class="pre">Solver.alpha()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Solver.probability"><code class="docutils literal notranslate"><span class="pre">Solver.probability()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.pysolvers.Solver.probmatrix"><code class="docutils literal notranslate"><span class="pre">Solver.probmatrix()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pytrino.demo.html#module-pytrino.demo.utils">pytrino.demo.utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.utils.adjugate"><code class="docutils literal notranslate"><span class="pre">adjugate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.utils.crct"><code class="docutils literal notranslate"><span class="pre">crct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.utils.kroneckerdelta"><code class="docutils literal notranslate"><span class="pre">kroneckerdelta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytrino.demo.html#pytrino.demo.utils.submatrix"><code class="docutils literal notranslate"><span class="pre">submatrix()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-pytrino.three_flavor_matter">
+<span id="pytrino-three-flavor-matter"></span><h2>pytrino.three_flavor_matter<a class="headerlink" href="#module-pytrino.three_flavor_matter" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytrino.three_flavor_matter.</span></span><span class="sig-name descname"><span class="pre">ThreeFlavor</span></span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cython solver class to compute properties of the three-flavor neutrino oscillation model in vacuum/matter.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.angles_phase_matter">
+<span class="sig-name descname"><span class="pre">angles_phase_matter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.angles_phase_matter" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the mixing angles and CP-violating phase in matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>float</em>) – Neutrino propagation distance in km.</p></li>
+<li><p><strong>E</strong> (<em>float</em>) – Neutrino energy in GeV.</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – Matter potential in eV.</p></li>
+<li><p><strong>antineutrinos</strong> (<em>bool</em>) – Flag indicating whether the neutrinos are antineutrinos (default is False).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The mixing angles and CP-violating phase in matter.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[float, float, float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.delmsq21">
+<span class="sig-name descname"><span class="pre">delmsq21</span></span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.delmsq21" title="Permalink to this definition"></a></dt>
+<dd><p>Getter for the mass-squared difference between the second and first neutrino mass eigenstates in eV^2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of delmsq21.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.delmsq31">
+<span class="sig-name descname"><span class="pre">delmsq31</span></span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.delmsq31" title="Permalink to this definition"></a></dt>
+<dd><p>Getter for the mass-squared difference between the third and first neutrino mass eigenstates in eV^2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of delmsq31.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.deltacp">
+<span class="sig-name descname"><span class="pre">deltacp</span></span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.deltacp" title="Permalink to this definition"></a></dt>
+<dd><p>Getter for the CP-violating phase in the neutrino mixing matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of deltacp.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.deltamsq_matter">
+<span class="sig-name descname"><span class="pre">deltamsq_matter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.deltamsq_matter" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the effective mass-squared differences of the neutrinos in matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>E</strong> (<em>float</em>) – Neutrino energy in GeV.</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – Matter potential in eV.</p></li>
+<li><p><strong>antineutrinos</strong> (<em>bool</em>) – Flag indicating whether the neutrinos are antineutrinos (default is False).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The effective mass-squared differences of the neutrinos in matter.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[float, float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.probability">
+<span class="sig-name descname"><span class="pre">probability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.probability" title="Permalink to this definition"></a></dt>
+<dd><p>Compute transition and survival probabilities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>int</em>) – Initial neutrino flavor (1, 2, or 3).</p></li>
+<li><p><strong>beta</strong> (<em>int</em>) – Final neutrino flavor (1, 2, or 3).</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Neutrino propagation distance in km.</p></li>
+<li><p><strong>E</strong> (<em>float</em>) – Neutrino energy in GeV.</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – Matter potential in eV.</p></li>
+<li><p><strong>antineutrinos</strong> (<em>bool</em>) – Flag indicating whether the neutrinos are antineutrinos (default is False).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transition probability.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.probmatrix">
+<span class="sig-name descname"><span class="pre">probmatrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.probmatrix" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the oscillation probability matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>float</em>) – Neutrino propagation distance in km.</p></li>
+<li><p><strong>E</strong> (<em>float</em>) – Neutrino energy in GeV.</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – Matter potential in eV.</p></li>
+<li><p><strong>antineutrinos</strong> (<em>bool</em>) – Flag indicating whether the neutrinos are antineutrinos (default is False).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The neutrino oscillation probability matrix.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[List[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.theta12">
+<span class="sig-name descname"><span class="pre">theta12</span></span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.theta12" title="Permalink to this definition"></a></dt>
+<dd><p>Getter for the mixing angle between the first and second neutrino flavor states in radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of theta12.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.theta13">
+<span class="sig-name descname"><span class="pre">theta13</span></span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.theta13" title="Permalink to this definition"></a></dt>
+<dd><p>Getter for the mixing angle between the first and third neutrino flavor states in radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of theta13.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytrino.three_flavor_matter.ThreeFlavor.theta23">
+<span class="sig-name descname"><span class="pre">theta23</span></span><a class="headerlink" href="#pytrino.three_flavor_matter.ThreeFlavor.theta23" title="Permalink to this definition"></a></dt>
+<dd><p>Getter for the mixing angle between the second and third neutrino flavor states in radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of theta23.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pytrino.two_flavor_matter">
+<span id="pytrino-two-flavor-matter"></span><h2>pytrino.two_flavor_matter<a class="headerlink" href="#module-pytrino.two_flavor_matter" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pytrino.two_flavor_matter.TwoFlavor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pytrino.two_flavor_matter.</span></span><span class="sig-name descname"><span class="pre">TwoFlavor</span></span><a class="headerlink" href="#pytrino.two_flavor_matter.TwoFlavor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cython solver class to compute properties of a two-flavor neutrino oscillation model.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytrino.two_flavor_matter.TwoFlavor.delmsq">
+<span class="sig-name descname"><span class="pre">delmsq</span></span><a class="headerlink" href="#pytrino.two_flavor_matter.TwoFlavor.delmsq" title="Permalink to this definition"></a></dt>
+<dd><p>Get the value of delmsq in eV^2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of delmsq.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pytrino.two_flavor_matter.TwoFlavor.probability">
+<span class="sig-name descname"><span class="pre">probability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pytrino.two_flavor_matter.TwoFlavor.probability" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the two flavor neutrino oscillation probability in vacuum/matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> (<em>float</em>) – The distance traveled by the neutrino in km.</p></li>
+<li><p><strong>E</strong> (<em>float</em>) – The neutrino beam energy in GeV.</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – The effective (constant) matter potential in eV. Default is 0.</p></li>
+<li><p><strong>antineutrinos</strong> (<em>bool</em>) – Whether to compute for antineutrinos (True) or neutrinos (False). Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The probabilities (Pee, Pemu) of oscillations. Note that the other two probabilities can be computed using these as Pmue = Pemu and Pmumu = Pee</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[float, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pytrino.two_flavor_matter.TwoFlavor.theta">
+<span class="sig-name descname"><span class="pre">theta</span></span><a class="headerlink" href="#pytrino.two_flavor_matter.TwoFlavor.theta" title="Permalink to this definition"></a></dt>
+<dd><p>Get the value of theta in radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The value of theta.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pytrino.demo.html" class="btn btn-neutral float-right" title="pytrino.demo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, BKModding.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

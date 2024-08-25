@@ -9,11 +9,55 @@ We use the recently discovered Eigenvalue-Eigenvector and Adjugate Identities to
 
 # Installation
 
+Pytrino is published on PyPI and condaforge.
+
+## Using pip
+
 ```console
 pip install pytrino
 ```
+or
+```console
+pip3 install pytrino
+```
+or
+```console
+python -m pip install pytrino
+```
+
+## Using conda
+
+```console
+conda install pytrino
+```
+
+## Building from source
+
+
+### Method one
+
+```console
+python setup.py build
+python setup.py install
+```
+
+### Method two
+
+```console
+python -m build
+```
+
+```console
+pip install dist/pytrino-[version-no].tar.gz
+```
+
+
+
+Build wheels
+
 
 # Usage
+
 ## Imports
 ```Python
 from pytrino import oscprobs
@@ -80,3 +124,12 @@ print(prob.probabilities()) # prints all 9 probabilities
  [0.015 0.749 0.236]]
 """
 ```
+
+
+# Contributions
+
+Please open a pull request if you have any improvements/changes that might benefit the package.
+
+Please open an issue if there is any difficulty installing/using the package.
+
+# Contact me

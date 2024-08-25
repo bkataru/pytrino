@@ -1,7 +1,6 @@
 
 [demo]
 numpy
-matplotlib
 
 [dev]
 numpy

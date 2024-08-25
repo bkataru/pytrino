@@ -1,6 +1,5 @@
 from setuptools import setup, find_packages, Extension
 from pathlib import Path
-
 try:
     from Cython.Build import cythonize
 except ImportError:
@@ -11,8 +10,6 @@ else:
 VERSION = '0.0.1'
 DESCRIPTION = 'Pytrino: A new way to numerically compute neutrino oscillations'
 LONG_DESCRIPTION = (Path(__file__).parent / "README.md").read_text()
-
-USE_CYTHON = False # remove TODO
 
 ext = '.pyx' if USE_CYTHON else '.c'
 names = ["two_flavor_matter", "three_flavor_matter"]
@@ -49,10 +46,7 @@ setup(
                 'matplotlib'
                 'Cython'
             ],
-            'demo': [
-                'numpy',
-                'matplotlib'
-            ]
+            'demo': 'numpy'
         },
         ext_modules = extensions,
         keywords = [
